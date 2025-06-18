@@ -9,15 +9,16 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            ShoppeeSeeder::class,
-            ShoppeeCartSeeder::class,
-            ShoppeeCategorySeeder::class,
-            ShoppeeOrdersSeeder::class,
-            ShoppeOrderItemsSeeder::class,
-            ShoppeePaymentsSeeder::class,
-            ShoppeeReviewsSeeder::class,
-            ShoppeeShippingSeeder::class,
-            ShoppeeUsersSeeder::class,
+         UserSeeder::class,
+         CategorySeeder::class,
+         ProductSeeder::class,
+         OrderSeeder::class,
+         OrderItemsSeeder::class,
+         cartsSeeder::class,
+         paymentsSeeder::class,
+         product_imagesSeeder::class,
+         reviewsSeeder::class,
+         shippingSeeder::class,
         ]);
     }
 }

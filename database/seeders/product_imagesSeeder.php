@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\product_images;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ShoppeeCategorySeeder extends Seeder
+class product_imagesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,5 +14,6 @@ class ShoppeeCategorySeeder extends Seeder
     public function run(): void
     {
         //
+        product_images::factory()->count(10)->create();
     }
 }
