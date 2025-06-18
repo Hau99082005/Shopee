@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 18, 2025 lúc 07:11 PM
+-- Thời gian đã tạo: Th6 18, 2025 lúc 07:17 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -296,7 +296,7 @@ CREATE TABLE `products` (
   `name` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
   `description` text DEFAULT NULL,
-  `price` decimal(10,2) NOT NULL,
+  `price` decimal(10,3) NOT NULL,
   `stock` int(11) NOT NULL,
   `seller_id` bigint(20) UNSIGNED NOT NULL,
   `category_id` bigint(20) UNSIGNED NOT NULL,
@@ -309,16 +309,16 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `image`, `description`, `price`, `stock`, `seller_id`, `category_id`, `created_at`, `updated_at`) VALUES
-(1, 'dolor', 'https://via.placeholder.com/640x480.png/008899?text=hic', 'She said this she looked at the sudden change, but she knew she had caught the flamingo and.', 317.30, 92, 1, 1, '2025-06-18 10:10:54', '2025-06-18 10:10:54'),
-(2, 'quia', 'https://via.placeholder.com/640x480.png/00aaff?text=qui', 'Alice thought to herself, \'because of his shrill little voice, the name of the hall: in fact she.', 485.40, 71, 1, 1, '2025-06-18 10:10:54', '2025-06-18 10:10:54'),
-(3, 'corporis', 'https://via.placeholder.com/640x480.png/00bb11?text=nam', 'Go on!\' \'I\'m a poor man, your Majesty,\' said Two, in a shrill, passionate voice. \'Would YOU like.', 636.69, 49, 1, 1, '2025-06-18 10:10:54', '2025-06-18 10:10:54'),
-(4, 'perferendis', 'https://via.placeholder.com/640x480.png/006633?text=ducimus', 'They all returned from him to you, Though they were gardeners, or soldiers, or courtiers, or three.', 630.19, 86, 1, 1, '2025-06-18 10:10:54', '2025-06-18 10:10:54'),
-(5, 'et', 'https://via.placeholder.com/640x480.png/00bb77?text=eum', 'I do it again and again.\' \'You are all dry, he is gay as a cushion, resting their elbows on it, or.', 924.57, 45, 1, 1, '2025-06-18 10:10:54', '2025-06-18 10:10:54'),
-(6, 'dolor', 'https://via.placeholder.com/640x480.png/0000ee?text=dolor', 'Alice said to herself. \'I dare say you\'re wondering why I don\'t remember where.\' \'Well, it must be.', 698.48, 4, 1, 1, '2025-06-18 10:10:54', '2025-06-18 10:10:54'),
-(7, 'minus', 'https://via.placeholder.com/640x480.png/00dd66?text=totam', 'Duchess said in a melancholy tone: \'it doesn\'t seem to have him with them,\' the Mock Turtle sang.', 98.34, 98, 1, 1, '2025-06-18 10:10:54', '2025-06-18 10:10:54'),
-(8, 'reprehenderit', 'https://via.placeholder.com/640x480.png/0022dd?text=necessitatibus', 'March Hare and his friends shared their never-ending meal, and the jury consider their verdict,\'.', 499.05, 96, 1, 1, '2025-06-18 10:10:54', '2025-06-18 10:10:54'),
-(9, 'est', 'https://via.placeholder.com/640x480.png/00dd99?text=doloremque', 'Quick, now!\' And Alice was silent. The Dormouse shook itself, and was a dead silence instantly.', 697.12, 90, 1, 1, '2025-06-18 10:10:54', '2025-06-18 10:10:54'),
-(10, 'a', 'https://via.placeholder.com/640x480.png/00ff33?text=assumenda', 'I almost wish I\'d gone to see the Hatter and the party were placed along the sea-shore--\' \'Two.', 239.10, 11, 1, 1, '2025-06-18 10:10:54', '2025-06-18 10:10:54');
+(1, 'dolor', 'https://via.placeholder.com/640x480.png/008899?text=hic', 'She said this she looked at the sudden change, but she knew she had caught the flamingo and.', 317.300, 92, 1, 1, '2025-06-18 10:10:54', '2025-06-18 10:10:54'),
+(2, 'quia', 'https://via.placeholder.com/640x480.png/00aaff?text=qui', 'Alice thought to herself, \'because of his shrill little voice, the name of the hall: in fact she.', 485.400, 71, 1, 1, '2025-06-18 10:10:54', '2025-06-18 10:10:54'),
+(3, 'corporis', 'https://via.placeholder.com/640x480.png/00bb11?text=nam', 'Go on!\' \'I\'m a poor man, your Majesty,\' said Two, in a shrill, passionate voice. \'Would YOU like.', 636.690, 49, 1, 1, '2025-06-18 10:10:54', '2025-06-18 10:10:54'),
+(4, 'perferendis', 'https://via.placeholder.com/640x480.png/006633?text=ducimus', 'They all returned from him to you, Though they were gardeners, or soldiers, or courtiers, or three.', 630.190, 86, 1, 1, '2025-06-18 10:10:54', '2025-06-18 10:10:54'),
+(5, 'et', 'https://via.placeholder.com/640x480.png/00bb77?text=eum', 'I do it again and again.\' \'You are all dry, he is gay as a cushion, resting their elbows on it, or.', 924.570, 45, 1, 1, '2025-06-18 10:10:54', '2025-06-18 10:10:54'),
+(6, 'dolor', 'https://via.placeholder.com/640x480.png/0000ee?text=dolor', 'Alice said to herself. \'I dare say you\'re wondering why I don\'t remember where.\' \'Well, it must be.', 698.480, 4, 1, 1, '2025-06-18 10:10:54', '2025-06-18 10:10:54'),
+(7, 'minus', 'https://via.placeholder.com/640x480.png/00dd66?text=totam', 'Duchess said in a melancholy tone: \'it doesn\'t seem to have him with them,\' the Mock Turtle sang.', 98.340, 98, 1, 1, '2025-06-18 10:10:54', '2025-06-18 10:10:54'),
+(8, 'reprehenderit', 'https://via.placeholder.com/640x480.png/0022dd?text=necessitatibus', 'March Hare and his friends shared their never-ending meal, and the jury consider their verdict,\'.', 499.050, 96, 1, 1, '2025-06-18 10:10:54', '2025-06-18 10:10:54'),
+(9, 'est', 'https://via.placeholder.com/640x480.png/00dd99?text=doloremque', 'Quick, now!\' And Alice was silent. The Dormouse shook itself, and was a dead silence instantly.', 697.120, 90, 1, 1, '2025-06-18 10:10:54', '2025-06-18 10:10:54'),
+(10, 'a', 'https://via.placeholder.com/640x480.png/00ff33?text=assumenda', 'I almost wish I\'d gone to see the Hatter and the party were placed along the sea-shore--\' \'Two.', 239.100, 11, 1, 1, '2025-06-18 10:10:54', '2025-06-18 10:10:54');
 
 -- --------------------------------------------------------
 
