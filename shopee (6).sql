@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 18, 2025 lúc 07:17 PM
+-- Thời gian đã tạo: Th6 18, 2025 lúc 07:22 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -187,7 +187,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (9, '2025_06_18_142556_create_carts_table', 1),
 (10, '2025_06_18_142642_create_payments_table', 1),
 (11, '2025_06_18_142737_create_product_images_table', 1),
-(12, '2025_06_18_143133_create_shipping_table', 1);
+(12, '2025_06_18_143133_create_shipping_table', 1),
+(13, '2025_06_18_172142_create_sessions_table', 2);
 
 -- --------------------------------------------------------
 
@@ -385,6 +386,28 @@ INSERT INTO `reviews` (`id`, `user_id`, `product_id`, `rating`, `comment`, `crea
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `sessions`
+--
+
+CREATE TABLE `sessions` (
+  `id` varchar(255) NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `ip_address` varchar(45) DEFAULT NULL,
+  `user_agent` text DEFAULT NULL,
+  `payload` longtext NOT NULL,
+  `last_activity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `sessions`
+--
+
+INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
+('negT2bDe9S0sQvt2jNLefkFQFimLRGIkajU4Tn8w', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiWHd6aW9tTG1kQlQwYmFsVzZNTkJxOUNDbzd6RllCTWFiTjFIQWh4eCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1750267308);
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `shipping`
 --
 
@@ -551,6 +574,14 @@ ALTER TABLE `reviews`
   ADD KEY `reviews_product_id_foreign` (`product_id`);
 
 --
+-- Chỉ mục cho bảng `sessions`
+--
+ALTER TABLE `sessions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sessions_user_id_index` (`user_id`),
+  ADD KEY `sessions_last_activity_index` (`last_activity`);
+
+--
 -- Chỉ mục cho bảng `shipping`
 --
 ALTER TABLE `shipping`
@@ -596,7 +627,7 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT cho bảng `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT cho bảng `orders`
