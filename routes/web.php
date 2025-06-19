@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome'); // Trả về view welcome.blade.php
+    return "Page Home";
 });
 
 Route::get('/cart', function () {
@@ -28,6 +28,14 @@ Route::get('/products', function () {
 
 Route::get('/product-details', function () {
     return "Page product-details";
+});
+
+Route::get('/login', function() {
+    return 'Page Login';
+});
+
+Route::get('/register', function() {
+    return "Page Register";
 });
 
 Route::post('/post', function () {
