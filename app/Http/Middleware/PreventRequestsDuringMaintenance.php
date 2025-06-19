@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class CheckAge
+class PreventRequestsDuringMaintenance
 {
     /**
      * Handle an incoming request.
@@ -15,9 +15,6 @@ class CheckAge
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if($request->age<= 200) {
-            return redirect('/');
-        }
         return $next($request);
     }
 }
