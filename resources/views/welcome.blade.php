@@ -52,11 +52,11 @@
                             <li><a class="dropdown-item" href="#" style="color: black;">English</a></li>
                         </ul>
                     </div>
-                    <a href="#" class="px-2 fw-bold text-white text-decoration-none"
-                        style="font-family: 'Lato';font-size: 16px; font-weight: lighter;">Đăng Ký</a>
+                    <a href="{{ route('login') }}" class="px-2 fw-bold text-white text-decoration-none"
+                        style="font-family: 'Lato';font-size: 16px; font-weight: lighter;">Đăng nhập</a>
                     |
-                    <a href="#" class="ps-2 fw-bold text-white text-decoration-none"
-                        style="font-family: 'Lato';font-size: 16px; font-weight: lighter;">Đăng Nhập</a>
+                    <a href="{{ route('register') }}" class="ps-2 fw-bold text-white text-decoration-none"
+                        style="font-family: 'Lato';font-size: 16px; font-weight: lighter;">Đăng ký</a>
                 </div>
             </div>
         </div>

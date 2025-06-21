@@ -12,6 +12,7 @@ use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckAge;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -37,13 +38,11 @@ Route::get('/product-details', function () {
     return "Page product-details";
 });
 
-Route::get('/login', function() {
-    return 'Page Login';
-});
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
 
-Route::get('/register', function() {
-    return "Page Register";
-});
+Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
 
 Route::put('/put', function() {
     return 'Method PUT';
@@ -63,8 +62,6 @@ Route::prefix('admin')->group(function() {
     });
 })->middleware(CheckAge::class);
 
-
-Route::resource('users', UserController::class);
 Route::resource('categories', CategoryController::class);
 Route::resource('carts', CartsController::class);
 Route::resource('orders', OrderController::class);

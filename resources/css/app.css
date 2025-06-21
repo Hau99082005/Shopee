@@ -4,6 +4,107 @@
 @tailwind components;
 @tailwind utilities;
 
+html, .login-page-body {
+    height: 100%;
+}
+
+.login-page-body {
+    background-color: #f5f5f5;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.login-bg-left {
+    background-color: #ee4d2d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.login-bg-left h2 {
+    font-weight: 500;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.login-bg-left p {
+    font-size: 1.25rem;
+}
+
+.login-form-container {
+    background: #fff;
+    padding: 2.5rem 2rem;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.form-control {
+    height: 40px;
+    border: 1px solid #dbdbdb;
+    border-radius: 2px;
+}
+
+.form-control:focus {
+    border-color: #999;
+    box-shadow: none;
+}
+
+.btn-login {
+    background-color: #ee4d2d;
+    border: none;
+    height: 40px;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.btn-login:hover {
+    background-color: #d73210;
+}
+
+.small-link {
+    color: #0055aa;
+    font-size: 0.75rem;
+}
+
+.divider-or {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.divider-or hr {
+    flex: 1;
+    border-color: #dbdbdb;
+}
+
+.divider-or span {
+    padding: 0 1rem;
+    color: #ccc;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+
+.social-btn {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: 1px solid #dbdbdb !important;
+    color: #555 !important;
+}
+
+.social-icon {
+    width: 22px;
+    height: 22px;
+}
+
+.social-icon-fa {
+    font-size: 22px;
+}
+
 /*
   Custom Shopee Styles
   Author: Gemini AI
@@ -458,6 +559,160 @@ body {
 }
 
 .suggestion-card__sold {
-    font-size: 0.7rem;
-    color: #757575;
+    font-size: 0.8rem;
+    color: #999;
+}
+
+/* Auth Pages V2 (based on screenshot) */
+
+.shopee-auth-header-alt {
+    background-color: #fff;
+    padding: 1rem 0;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    height: 84px;
+    display: flex;
+    align-items: center;
+}
+
+.shopee-logo-link {
+    display: inline-block;
+}
+
+.shopee-logo-img {
+    height: 42px;
+    width: auto;
+    color: var(--shopee-orange);
+}
+
+.shopee-auth-header-alt .header-title {
+    font-size: 1.5rem;
+    color: #222;
+    margin-left: 1rem;
+    position: relative;
+    top: 2px;
+}
+
+.text-primary-link {
+    color: var(--shopee-orange) !important;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.text-primary-link:hover {
+    text-decoration: underline;
+}
+
+
+.shopee-login-main {
+    background: var(--shopee-orange);
+    padding: 4rem 0;
+    min-height: 600px;
+}
+
+.shopee-login-main .auth-form-container {
+    background-color: #fff;
+    padding: 2rem 1.8rem;
+    border-radius: 4px;
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, .14);
+}
+
+.qr-login-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: var(--shopee-orange);
+    font-size: 0.9rem;
+    border-left: 1px dotted #efefef;
+    padding-left: 1rem;
+    text-align: center;
+}
+.qr-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.shopee-login-main .auth-form-header h3 {
+    font-size: 1.375rem;
+    color: #333;
+}
+
+.shopee-login-main .form-control {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #dbdbdb;
+    border-radius: 2px;
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+
+.shopee-login-main .form-control:focus {
+    border-color: #888;
+    outline: none;
+}
+.shopee-login-main form > .form-control {
+    margin-bottom: 1.25rem;
+}
+
+
+.shopee-login-main .btn-primary {
+    width: 100%;
+    padding: 0.8rem;
+    text-transform: uppercase;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    background-color: #fb5533;
+    border-color: #fb5533;
+}
+
+.shopee-login-main .btn-primary:hover {
+    background-color: #e84a25;
+    border-color: #e84a25;
+}
+
+.shopee-login-main .social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: #333;
+    border: 1px solid rgba(0,0,0,.26);
+    padding: 0.5rem 1rem;
+    border-radius: 2px;
+    font-size: 0.9rem;
+}
+
+.shopee-login-main .social-btn i {
+    font-size: 1.2rem;
+}
+
+.shopee-login-main .auth-switch-link {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+.shopee-login-main .auth-switch-link a {
+    color: var(--shopee-orange);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.form-control.is-invalid {
+    border-color: #dc3545;
+    padding-right: calc(1.5em + .75rem);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(.375em + .1875rem) center;
+    background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+}
+
+.invalid-feedback {
+    display: block;
+    width: 100%;
+    margin-top: .25rem;
+    font-size: .875em;
+    color: #dc3545;
 }
