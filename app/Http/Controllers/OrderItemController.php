@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OrderItems;
 use Illuminate\Http\Request;
 
 class OrderItemController extends Controller
@@ -12,6 +13,7 @@ class OrderItemController extends Controller
     public function index()
     {
         //
+        return OrderItems::all();
     }
 
     /**

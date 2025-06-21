@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\carts;
 use Illuminate\Http\Request;
 
 class CartsController extends Controller
@@ -12,6 +13,7 @@ class CartsController extends Controller
     public function index()
     {
         //
+       return carts::all();
     }
 
     /**

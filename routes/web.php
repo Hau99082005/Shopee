@@ -1,5 +1,14 @@
 <?php
 
+use App\Http\Controllers\CartsController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderItemController;
+use App\Http\Controllers\paymentsController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\productImagesController;
+use App\Http\Controllers\ReviewsController;
+use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckAge;
 use Illuminate\Support\Facades\Route;
@@ -56,3 +65,12 @@ Route::prefix('admin')->group(function() {
 
 
 Route::resource('users', UserController::class);
+Route::resource('categories', CategoryController::class);
+Route::resource('carts', CartsController::class);
+Route::resource('orders', OrderController::class);
+Route::resource('order_items', OrderItemController::class);
+Route::resource('payments', paymentsController::class);
+Route::resource('products', ProductController::class);
+Route::resource('product_images', productImagesController::class);
+Route::resource('reviews', ReviewsController::class);
+Route::resource('shipping', ShippingController::class);

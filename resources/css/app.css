@@ -1,5 +1,434 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
 @import '@fortawesome/fontawesome-free/css/all.min.css';
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Custom Shopee Styles
+  Author: Gemini AI
+  Description: Custom styles to match the Shopee look and feel.
+*/
+
+:root {
+    --shopee-orange: #ee4d2d;
+    --shopee-orange-dark: #d73210;
+    --shopee-text-light: #fff;
+    --shopee-text-dark: #333;
+    --shopee-background: #f5f5f5;
+    --link-color: #0055aa;
+}
+
+body {
+    background-color: var(--shopee-background) !important;
+}
+
+.bg-primary {
+    background-color: var(--shopee-orange) !important;
+}
+
+.btn-primary {
+     background-color: var(--shopee-orange) !important;
+     border-color: var(--shopee-orange) !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--shopee-orange-dark) !important;
+    border-color: var(--shopee-orange-dark) !important;
+}
+
+.text-primary {
+    color: var(--shopee-orange) !important;
+}
+
+.border-primary {
+     border-color: var(--shopee-orange) !important;
+}
+
+/* Header */
+.header-top-nav a {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.8rem;
+}
+.header-top-nav a:hover {
+    color: var(--shopee-text-light);
+}
+.header-main-nav a {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+.header-main-nav a:hover {
+    color: var(--shopee-text-light);
+}
+.header-search-btn {
+    background-color: var(--shopee-orange) !important;
+}
+
+.header-logo {
+    height: 45px;
+    width: auto;
+    /* This filter converts a colored SVG to white. */
+    filter: brightness(0) invert(1);
+}
+
+/* Section Wrapper */
+.shopee-section {
+    background-color: #fff;
+    border-radius: 0.25rem;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.05);
+    margin-top: 1.25rem;
+}
+
+.shopee-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid #efefef;
+}
+
+.shopee-section-title {
+    font-size: 1rem;
+    color: var(--shopee-orange);
+    text-transform: uppercase;
+    font-weight: 500;
+    margin: 0;
+}
+
+.shopee-view-all {
+    color: var(--shopee-orange);
+    text-decoration: none;
+    font-size: 0.875rem;
+}
+.shopee-view-all:hover {
+    text-decoration: underline;
+}
+
+/* Category Grid */
+.category-grid-container {
+    padding: 1rem 0;
+}
+.category-item {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: var(--shopee-text-dark);
+    padding: 0.75rem 0.25rem;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.category-item:hover {
+    border-color: #eee;
+    box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,.075);
+}
+.category-item img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    margin: 0 auto 0.5rem;
+}
+.category-item-title {
+    font-size: 0.8rem;
+    line-height: 1.2;
+}
+
+/* Product Card */
+.product-card {
+    display: block;
+    background-color: #fff;
+    border: 1px solid #eee;
+    text-decoration: none;
+    color: var(--shopee-text-dark);
+    transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+.product-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--shopee-orange);
+}
+.product-card__image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+.product-card__body {
+    padding: 0.75rem;
+}
+.product-card__title {
+    font-size: 0.875rem;
+    line-height: 1.4;
+    height: 39px; /* 2 lines */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0.25rem;
+}
+.product-card__price {
+    color: var(--shopee-orange);
+    font-weight: 600;
+    font-size: 1rem;
+}
+.product-card__price-currency {
+    font-size: 0.8rem;
+    text-decoration: underline;
+}
+.product-card__sold {
+    font-size: 0.75rem;
+    color: #757575;
+    margin-top: 0.5rem;
+}
+.product-card__discount-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: rgba(255, 212, 36, .9);
+    color: var(--shopee-orange);
+    padding: 0.25rem 0.3rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-align: center;
+    line-height: 1;
+    border-bottom-left-radius: 2px;
+}
+.product-card__discount-badge span {
+    display: block;
+}
+.product-card__top-badge {
+    position: absolute;
+    top: 10px;
+    left: -2px;
+    background-color: var(--shopee-orange);
+    color: white;
+    font-size: 0.75rem;
+    padding: 2px 6px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+.product-card__top-badge::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    border-top: 3px solid var(--shopee-orange-dark);
+    border-left: 2px solid transparent;
+}
+
+/* Custom Shopee Styles */
+
+.category-grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.category-item-wrapper {
+    flex: 0 0 10%;
+    /* 10 items per row */
+    max-width: 10%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.category-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease;
+}
+
+.category-link:hover {
+    transform: translateY(-4px);
+}
+
+.category-image-container {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+
+.category-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.category-name {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+/* Swiper Navigation */
+.swiper-button-prev,
+.swiper-button-next {
+    background-color: rgba(0,0,0,0.3);
+    color: #fff !important;
+    width: 30px !important;
+    height: 50px !important;
+    border-radius: 4px;
+    top: 45% !important;
+}
+.swiper-button-prev:after,
+.swiper-button-next:after {
+    font-size: 16px !important;
+    font-weight: bold;
+}
+.swiper-button-prev {
+    left: -5px !important;
+}
+.swiper-button-next {
+    right: -5px !important;
+}
+.swiper-button-disabled {
+    display: none !important;
+}
+
+/* Flash Sale Card */
+.flash-sale-card__progress {
+    background-color: #ffbda6;
+    border-radius: 10px;
+    height: 18px;
+    position: relative;
+    overflow: hidden;
+}
+.flash-sale-card__progress-bar {
+    background-color: var(--shopee-orange);
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    border-radius: 10px;
+    background-image: linear-gradient(
+-45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+    background-size: 20px 20px;
+}
+.flash-sale-card__progress-text {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 18px;
+    text-transform: uppercase;
+}
+
+/* Shopee Mall Section */
+.shopee-mall__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: var(--shopee-text-dark);
+}
+.shopee-mall__item img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 0.5rem;
+}
+.shopee-mall__item-text {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--shopee-orange);
+}
+
+/* Today's Suggestion Card */
+.suggestion-card {
+    display: block;
+    background-color: #fff;
+    border: 1px solid transparent;
+    text-decoration: none;
+    color: var(--shopee-text-dark);
+    transition: all 0.2s ease;
+    box-shadow: 0 0 1px rgba(0,0,0,.1);
+}
+.suggestion-card:hover {
+    border-color: var(--shopee-orange);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,.1);
+}
+.suggestion-card__image-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+.suggestion-card__image {
+     width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+.suggestion-card__fav-badge {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background-color: var(--shopee-orange);
+    color: white;
+    padding: 1px 5px;
+    font-size: 0.7rem;
+    border-radius: 2px;
+}
+.suggestion-card__discount-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: rgba(255, 212, 36, .9);
+    color: var(--shopee-orange);
+    padding: 0.15rem 0.2rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-align: center;
+    line-height: 1;
+    border-bottom-left-radius: 2px;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    border: 2px solid var(--shopee-orange);
+    background-clip: padding-box;
+}
+.suggestion-card__discount-badge .percent {
+    font-size: 1rem;
+    color: var(--shopee-orange);
+}
+.suggestion-card__discount-badge .label {
+    color: white;
+    background-color: var(--shopee-orange);
+    width: 100%;
+    display: block;
+}
+
+.suggestion-card__body {
+     padding: 0.5rem;
+}
+.suggestion-card__title {
+    font-size: 0.8rem;
+    line-height: 1.3;
+    height: 3.9em; /* 3 lines */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0.25rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+.suggestion-card__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+.suggestion-card__price {
+     color: var(--shopee-orange);
+    font-weight: 500;
+    font-size: 1rem;
+}
+.suggestion-card__price-currency {
+    text-decoration: underline;
+    font-size: 0.75rem;
+}
+.suggestion-card__sold {
+    font-size: 0.7rem;
+    color: #757575;
+}

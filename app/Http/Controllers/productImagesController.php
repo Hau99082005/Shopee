@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\product_images;
 use Illuminate\Http\Request;
 
 class productImagesController extends Controller
@@ -12,6 +13,7 @@ class productImagesController extends Controller
     public function index()
     {
         //
+        return product_images::all();
     }
 
     /**
