@@ -1,8 +1,13 @@
 import './bootstrap';
 
-// Import Bootstrap's JS
-import 'bootstrap';
+import * as bootstrap from 'bootstrap';
 
-// Import Swiper
-import Swiper from 'swiper';
-import 'swiper/css'; 
+import 'swiper/css';
+
+const carouselElement = document.getElementById('shopeeBanner');
+if (carouselElement) {
+    new bootstrap.Carousel(carouselElement, {
+        interval: 3000,
+        wrap: true
+    });
+} 

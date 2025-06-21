@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckAge;
 use Illuminate\Support\Facades\Route;
 
@@ -52,3 +53,6 @@ Route::prefix('admin')->group(function() {
        return $name;
     });
 })->middleware(CheckAge::class);
+
+
+Route::resource('users', UserController::class);
