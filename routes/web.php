@@ -1,10 +1,11 @@
 <?php
 
+use App\Http\Middleware\CheckAge;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return "Page Home";
-})->name('/')->middleware('checkAge');
+})->name('/')->middleware(CheckAge::class);
 
 Route::get('/cart', function () {
     return "Page Cart";
@@ -50,4 +51,4 @@ Route::prefix('admin')->group(function() {
     Route::get('user/{name?}', function($name = 'Hau') {
        return $name;
     });
-})->middleware('checkAge');
+})->middleware(CheckAge::class);
