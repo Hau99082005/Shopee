@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Mua sắm trực tuyến trên Shopee Việt Nam - Nền tảng thương mại điện tử hàng đầu.">
     <meta name="keywords" content="Shopee, mua sắm, trực tuyến, thời trang, điện tử, gia dụng">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/favicon-16x16.png') }}">
-    <link rel="apple-touch-icon" href="{{ asset('assets/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
     <link rel="manifest" href="{{ asset('site.webmanifest') }}">
     <title>Shopee Việt Nam | Mua và Bán trên ứng dụng di động hoặc website</title>
     @vite(['resources/css/app.css', 'resources/js/app.ts'])
@@ -47,14 +47,16 @@
                             <i class="fa fa-globe"></i>
                             <span>Tiếng Việt</span>
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="#">Tiếng Việt</a></li>
-                            <li><a class="dropdown-item" href="#">English</a></li>
+                        <ul class="dropdown-menu dropdown-menu-end bg-transparent text-black">
+                            <li><a class="dropdown-item" href="#" style="color: black;">Tiếng Việt</a></li>
+                            <li><a class="dropdown-item" href="#" style="color: black;">English</a></li>
                         </ul>
                     </div>
-                    <a href="#" class="px-2 fw-bold text-white text-decoration-none">Đăng Ký</a>
-                    <div class="border-start border-white opacity-40 mx-2"></div>
-                    <a href="#" class="ps-2 fw-bold text-white text-decoration-none">Đăng Nhập</a>
+                    <a href="#" class="px-2 fw-bold text-white text-decoration-none"
+                        style="font-family: 'Lato';font-size: 16px; font-weight: lighter;">Đăng Ký</a>
+                    |
+                    <a href="#" class="ps-2 fw-bold text-white text-decoration-none"
+                        style="font-family: 'Lato';font-size: 16px; font-weight: lighter;">Đăng Nhập</a>
                 </div>
             </div>
         </div>
@@ -68,7 +70,8 @@
                 <div class="col">
                     <div class="bg-white rounded p-1 d-flex">
                         <input type="text" class="form-control form-control-lg border-0"
-                            placeholder="Shopee bao ship 0Đ - Đăng ký ngay!" style="box-shadow: none;">
+                            placeholder="Shopee bao ship 0Đ - Đăng ký ngay!"
+                            style="box-shadow: none; font-size: 16px; font-family: 'Lato';">
                         <button class="btn btn-primary px-4" type="button"
                             style="background-color: #fb5533; border-color: #fb5533;">
                             <i class="fa fa-search text-white"></i>
@@ -84,11 +87,11 @@
                     </nav>
                 </div>
                 <div class="col-auto">
-                    <a href="#" class="text-white fs-2 position-relative">
+                    <a href="#" class="text-white fs-3 position-relative">
                         <i class="fa fa-shopping-cart"></i>
                         <span
                             class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-white text-primary"
-                            style="font-size: 0.7rem;">
+                            style="font-size: 16px; font-family: 'Lato';">
                             3
                         </span>
                     </a>
@@ -135,7 +138,7 @@
                                 style="object-fit: cover" alt="Banner 5">
                         </div>
                         <div class="carousel-item h-100">
-                            <img src="{{ asset('assets/images/banner7.jpg') }}" class="d-block w-100 h-100"
+                            <img src="{{ asset('assets/images/banner7.png') }}" class="d-block w-100 h-100"
                                 style="object-fit: cover" alt="Banner 7">
                         </div>
                         <div class="carousel-item h-100">
@@ -558,10 +561,15 @@
         <div class="footer-bottom py-5">
             <div class="container-xl small text-center text-muted">
                 <div class="footer-policy-link-list mb-4" style="text-decoration: none;">
-                    <a href="#" style="text-decoration: none; color: black;">CHÍNH SÁCH BẢO MẬT</a>
-                    <a href="#" style="text-decoration: none; color: black;">QUY CHẾ HOẠT ĐỘNG</a>
-                    <a href="#" style="text-decoration: none; color: black;">CHÍNH SÁCH VẬN CHUYỂN</a>
-                    <a href="#" style="text-decoration: none; color: black;">CHÍNH SÁCH TRẢ HÀNG VÀ HOÀN TIỀN</a>
+                    <a href="#" style="text-decoration: none; color: black; font-size: 14px; font-family: 'Lato';
+                    font-weight: lighter;">CHÍNH
+                        SÁCH BẢO MẬT</a>
+                    <a href="#" style="text-decoration: none; color: black; font-size: 14px; font-family: 'Lato';
+                    font-weight: lighter;">QUY CHẾ HOẠT ĐỘNG</a>
+                    <a href="#" style="text-decoration: none; color: black; font-size: 14px; font-family: 'Lato';
+                    font-weight: lighter;">CHÍNH SÁCH VẬN CHUYỂN</a>
+                    <a href="#" style="text-decoration: none; color: black; font-size: 14px; font-family: 'Lato';
+                    font-weight: lighter;">CHÍNH SÁCH TRẢ HÀNG VÀ HOÀN TIỀN</a>
                 </div>
 
                 <div class="d-flex justify-content-center align-items-center mb-4">
