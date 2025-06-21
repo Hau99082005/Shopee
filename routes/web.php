@@ -4,8 +4,8 @@ use App\Http\Middleware\CheckAge;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return "Page Home";
-})->name('/')->middleware(CheckAge::class);
+    return view('welcome');
+});
 
 Route::get('/cart', function () {
     return "Page Cart";
