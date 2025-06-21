@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 18, 2025 lúc 08:47 PM
+-- Thời gian đã tạo: Th6 21, 2025 lúc 07:04 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -106,7 +106,8 @@ INSERT INTO `categories` (`id`, `name`, `image`, `desc`, `parent_id`, `created_a
 (7, 'excepturi', 'https://via.placeholder.com/640x480.png/003355?text=veniam', 'No, there were a Duck and a Canary called out in.', NULL, '2025-06-18 11:46:17', '2025-06-18 11:46:17'),
 (8, 'tenetur', 'https://via.placeholder.com/640x480.png/00bbaa?text=et', 'This did not answer, so Alice went on saying to.', NULL, '2025-06-18 11:46:17', '2025-06-18 11:46:17'),
 (9, 'nisi', 'https://via.placeholder.com/640x480.png/0099bb?text=porro', 'Ann, what ARE you doing out here? Run home this.', NULL, '2025-06-18 11:46:17', '2025-06-18 11:46:17'),
-(10, 'maxime', 'https://via.placeholder.com/640x480.png/003388?text=et', 'Gryphon, lying fast asleep in the trial one way.', NULL, '2025-06-18 11:46:17', '2025-06-18 11:46:17');
+(10, 'maxime', 'https://via.placeholder.com/640x480.png/003388?text=et', 'Gryphon, lying fast asleep in the trial one way.', NULL, '2025-06-18 11:46:17', '2025-06-18 11:46:17'),
+(11, 'SamSung3', '/images/samsung.jpg', 'Cong ty canon', NULL, '2025-06-18 16:41:02', '2025-06-18 16:44:12');
 
 -- --------------------------------------------------------
 
@@ -319,7 +320,17 @@ INSERT INTO `products` (`id`, `name`, `image`, `description`, `price`, `stock`, 
 (7, 'aut', 'https://via.placeholder.com/640x480.png/00eecc?text=velit', 'Caterpillar. \'I\'m afraid I don\'t know what \"it\" means well enough, when I sleep\" is the same size.', 546.400, 59, 1, 1, '2025-06-18 11:46:17', '2025-06-18 11:46:17'),
 (8, 'nobis', 'https://via.placeholder.com/640x480.png/001100?text=animi', 'March Hare. \'Yes, please do!\' but the Gryphon repeated impatiently: \'it begins \"I passed by his.', 339.620, 7, 1, 1, '2025-06-18 11:46:17', '2025-06-18 11:46:17'),
 (9, 'voluptatum', 'https://via.placeholder.com/640x480.png/0044cc?text=aliquam', 'Heads below!\' (a loud crash)--\'Now, who did that?--It was Bill, I fancy--Who\'s to go on till you.', 735.180, 10, 1, 1, '2025-06-18 11:46:17', '2025-06-18 11:46:17'),
-(10, 'eos', 'https://via.placeholder.com/640x480.png/00bbee?text=aspernatur', 'She was close behind us, and he\'s treading on my tail. See how eagerly the lobsters to the.', 193.740, 25, 1, 1, '2025-06-18 11:46:17', '2025-06-18 11:46:17');
+(10, 'eos', 'https://via.placeholder.com/640x480.png/00bbee?text=aspernatur', 'She was close behind us, and he\'s treading on my tail. See how eagerly the lobsters to the.', 193.740, 25, 1, 1, '2025-06-18 11:46:17', '2025-06-18 11:46:17'),
+(11, 'Bàn gaming Secretlab Titan', 'products/product-1.jpg', 'March Hare had just begun \'Well, of all the rest, Between yourself and me.\' \'That\'s the reason they\'re called lessons,\' the Gryphon as if she was beginning very angrily, but the Gryphon only.', 7215505.000, 158, 1, 2, '2025-06-21 09:46:37', '2025-06-21 09:46:37'),
+(12, 'Loa Bluetooth JBL Flip', 'products/product-2.jpg', 'Alice timidly. \'Would you tell me, Pat, what\'s that in some book, but I don\'t want to see if he would deny it too: but the three gardeners, oblong and flat, with their heads off?\' shouted the Queen.', 1457903.000, 459, 1, 2, '2025-06-21 09:46:37', '2025-06-21 09:46:37'),
+(13, 'Laptop Dell Inspiron 15', 'products/product-1.jpg', 'Cheshire Cat,\' said Alice: \'--where\'s the Duchess?\' \'Hush! Hush!\' said the Rabbit\'s voice; and the two creatures got so much contradicted in her hand, and a long breath, and said nothing. \'This here.', 4909382.000, 219, 1, 5, '2025-06-21 09:46:37', '2025-06-21 09:46:37'),
+(14, 'Bàn gaming Secretlab Titan', 'products/product-2.jpg', 'English coast you find a pleasure in all my life!\' Just as she wandered about for a minute, trying to explain it is right?\' \'In my youth,\' Father William replied to his son, \'I feared it might.', 9986799.000, 10, 1, 3, '2025-06-21 09:46:37', '2025-06-21 09:46:37'),
+(15, 'Ghế gaming DXRacer', 'products/product-5.jpg', 'Alice could only see her. She is such a subject! Our family always HATED cats: nasty, low, vulgar things! Don\'t let him know she liked them best, For this must be growing small again.\' She got up.', 1703474.000, 183, 1, 1, '2025-06-21 09:46:37', '2025-06-21 09:46:37'),
+(16, 'Tủ lạnh Samsung Side by Side', 'products/product-4.jpg', 'The Gryphon sat up and say \"How doth the little passage: and THEN--she found herself falling down a good deal: this fireplace is narrow, to be sure, she had succeeded in bringing herself down to the.', 7027027.000, 449, 1, 4, '2025-06-21 09:46:37', '2025-06-21 09:46:37'),
+(17, 'Loa Bluetooth JBL Flip', 'products/product-3.jpg', 'Queen shrieked out. \'Behead that Dormouse! Turn that Dormouse out of it, and then said, \'It was the White Rabbit cried out, \'Silence in the after-time, be herself a grown woman; and how she would.', 9710277.000, 411, 1, 1, '2025-06-21 09:46:37', '2025-06-21 09:46:37'),
+(18, 'Card đồ họa RTX 4080', 'products/product-2.jpg', 'VERY long claws and a great many teeth, so she turned away. \'Come back!\' the Caterpillar decidedly, and the reason is--\' here the Mock Turtle Soup is made from,\' said the Queen, pointing to Alice as.', 4947466.000, 308, 1, 5, '2025-06-21 09:46:37', '2025-06-21 09:46:37'),
+(19, 'Laptop Dell Inspiron 15', 'products/product-4.jpg', 'VERY deeply with a round face, and large eyes like a writing-desk?\' \'Come, we shall have somebody to talk to.\' \'How are you getting on now, my dear?\' it continued, turning to Alice, flinging the.', 5377722.000, 39, 1, 1, '2025-06-21 09:46:37', '2025-06-21 09:46:37'),
+(20, 'Camera Canon EOS R5', 'products/product-5.jpg', 'Come on!\' So they began moving about again, and that\'s very like having a game of croquet she was trying to put down yet, before the end of your nose-- What made you so awfully clever?\' \'I have.', 6866984.000, 83, 1, 4, '2025-06-21 09:46:37', '2025-06-21 09:46:37');
 
 -- --------------------------------------------------------
 
@@ -398,6 +409,13 @@ CREATE TABLE `sessions` (
   `last_activity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `sessions`
+--
+
+INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
+('SuGE2R0ApcpucQIiBCewQhxUkou4asQC6z1XqEpR', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiZndyeHFFaXNSVzBlczNadmNVeUxZQVNacnZqZ3NUSll1Skg5VGhxZiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wcm9kdWN0cyI7fX0=', 1750525426);
+
 -- --------------------------------------------------------
 
 --
@@ -462,7 +480,9 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `phone`, `address`, `rol
 (7, 'Kamren Abernathy', 'nico.collins@example.com', '$2y$12$PiYlHZzU8K4AYa/4X3cZm.B0.KFOdvglRvQ3jN/B4VtrBJbVbPf72', '+12673490265', '601 Schaefer Light Suite 423\nWest Maxwell, NV 38359-0838', 'admin', '2025-06-18 11:46:17', '2025-06-18 11:46:17'),
 (8, 'Austyn Vandervort MD', 'aglae23@example.org', '$2y$12$qc8ztPpDYqBIzrbfNARAhuV3cccJfS74mpjPdx.Lh8cVzWhhjMpoC', '+1 (435) 543-8349', '27432 Domenica Shore Suite 414\nBinsburgh, IA 13120-2743', 'customer', '2025-06-18 11:46:17', '2025-06-18 11:46:17'),
 (9, 'Rigoberto Wuckert', 'jaime63@example.org', '$2y$12$7Ri9LtbmQR8Czt7tdk6/n.NfRiz1ff.WsRao4jmtRYlTw2nRlQeDa', '+14195929813', '4163 Metz Valley Apt. 299\nWest Emmanuel, MD 05776', 'seller', '2025-06-18 11:46:17', '2025-06-18 11:46:17'),
-(10, 'Ms. Giovanna Stroman', 'nwintheiser@example.com', '$2y$12$IDuLsizC6kwqC/OXZ71IyuhkBKUwJ8RQClAKTTMwGJbAaXXteCzjC', '+1.239.603.5985', '971 Greenfelder Well\nPort Gregoriomouth, PA 84922', 'seller', '2025-06-18 11:46:17', '2025-06-18 11:46:17');
+(10, 'Ms. Giovanna Stroman', 'nwintheiser@example.com', '$2y$12$IDuLsizC6kwqC/OXZ71IyuhkBKUwJ8RQClAKTTMwGJbAaXXteCzjC', '+1.239.603.5985', '971 Greenfelder Well\nPort Gregoriomouth, PA 84922', 'seller', '2025-06-18 11:46:17', '2025-06-18 11:46:17'),
+(11, 'Le Hau', 'hau@gmail.com', '$2y$12$U/5a/a1/xrbFbWg3P3oSkuOuxFtfUpmMR1fv9EFkXKvsgKt7n2hPW', NULL, NULL, 'admin', '2025-06-21 06:59:35', '2025-06-21 06:59:35'),
+(12, 'Le Huong', 'huong@gmail.com', '$2y$12$dbKaN.iVpzftD4KYHUbHUuGTJKYYOBH67fZyMKbGv6Nvef.35kQ9O', NULL, NULL, 'admin', '2025-06-21 07:01:53', '2025-06-21 07:01:53');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -602,7 +622,7 @@ ALTER TABLE `carts`
 -- AUTO_INCREMENT cho bảng `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT cho bảng `failed_jobs`
@@ -644,7 +664,7 @@ ALTER TABLE `payments`
 -- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT cho bảng `product_images`
@@ -668,7 +688,7 @@ ALTER TABLE `shipping`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

@@ -3,8 +3,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-html, .login-page-body {
+html,
+.login-page-body {
     height: 100%;
 }
 
@@ -35,7 +35,7 @@ html, .login-page-body {
     background: #fff;
     padding: 2.5rem 2rem;
     border-radius: 4px;
-    box-shadow: 0 0 10px rgba(0,0,0,.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
     width: 100%;
     max-width: 400px;
 }
@@ -104,6 +104,7 @@ html, .login-page-body {
 .social-icon-fa {
     font-size: 22px;
 }
+
 
 /*
   Custom Shopee Styles
@@ -563,12 +564,13 @@ body {
     color: #999;
 }
 
+
 /* Auth Pages V2 (based on screenshot) */
 
 .shopee-auth-header-alt {
     background-color: #fff;
     padding: 1rem 0;
-    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
     height: 84px;
     display: flex;
     align-items: center;
@@ -602,7 +604,6 @@ body {
     text-decoration: underline;
 }
 
-
 .shopee-login-main {
     background: var(--shopee-orange);
     padding: 4rem 0;
@@ -627,6 +628,7 @@ body {
     padding-left: 1rem;
     text-align: center;
 }
+
 .qr-icon {
     width: 40px;
     height: 40px;
@@ -650,10 +652,10 @@ body {
     border-color: #888;
     outline: none;
 }
-.shopee-login-main form > .form-control {
+
+.shopee-login-main form>.form-control {
     margin-bottom: 1.25rem;
 }
-
 
 .shopee-login-main .btn-primary {
     width: 100%;
@@ -677,7 +679,7 @@ body {
     gap: 0.5rem;
     text-decoration: none;
     color: #333;
-    border: 1px solid rgba(0,0,0,.26);
+    border: 1px solid rgba(0, 0, 0, .26);
     padding: 0.5rem 1rem;
     border-radius: 2px;
     font-size: 0.9rem;
@@ -715,4 +717,306 @@ body {
     margin-top: .25rem;
     font-size: .875em;
     color: #dc3545;
+}
+
+header {
+    background-color: #ee4d2d;
+    color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+header ul {
+    display: flex;
+    gap: 15px;
+    list-style: none;
+    font-size: 14px;
+}
+
+header a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+header a:hover {
+    color: none;
+    text-decoration: none;
+}
+
+.bg-white {
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.search-bar {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    gap: 10px;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.search-bar input:focus {
+    border-color: #ee4d2d;
+}
+
+.search-bar button {
+    background-color: #ee4d2d;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover {
+    background-color: #f05d40;
+}
+
+.search-bar .cart-icon {
+    font-size: 24px;
+    color: #ee4d2d;
+    transition: color 0.3s ease;
+}
+
+.search-bar .cart-icon:hover {
+    color: #f05d40;
+}
+
+.cart-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+}
+
+.cart-item:hover {
+    transform: translateY(-2px);
+}
+
+.cart-item .product-details h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.cart-item .product-details .product-variant {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.quantity-btn {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #e5e7eb;
+    background-color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: background-color 0.3s ease;
+}
+
+.quantity-btn:hover {
+    background-color: #f3f4f6;
+}
+
+.quantity-input {
+    width: 50px;
+    text-align: center;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    height: 30px;
+    font-size: 14px;
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: #ef4444;
+    font-size: 16px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.delete-btn:hover {
+    color: #dc2626;
+}
+
+.voucher-section {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.voucher-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #ee4d2d;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.voucher-button i {
+    color: #ee4d2d;
+}
+
+.cart-summary {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.summary-total {
+    font-weight: 700;
+    padding-top: 15px;
+    border-top: 1px solid #e5e7eb;
+    font-size: 16px;
+    color: #1f2937;
+}
+
+.checkout-btn {
+    width: 100%;
+    background-color: #ee4d2d;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.checkout-btn:hover {
+    background-color: #f05d40;
+}
+
+.voucher-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.voucher-content {
+    background-color: #fff;
+    width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.voucher-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #e5e7eb;
+    transition: background-color 0.3s ease;
+}
+
+.voucher-item:hover {
+    background-color: #f3f4f6;
+}
+
+.voucher-item .voucher-logo i {
+    font-size: 24px;
+    color: #ee4d2d;
+}
+
+.voucher-item .voucher-info h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.voucher-item .voucher-info p {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+footer {
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid #e5e7eb;
+    font-size: 12px;
+    color: #6b7280;
+    margin-top: 30px;
+}
+
+@media (max-width: 768px) {
+    .cart-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    .cart-item .w-1/2 {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .search-bar {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .search-bar input {
+        width: 100%;
+    }
+    .voucher-content {
+        width: 90%;
+    }
 }

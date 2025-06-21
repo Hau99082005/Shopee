@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\carts;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class CartsController extends Controller
@@ -13,7 +14,7 @@ class CartsController extends Controller
     public function index()
     {
         //
-       return carts::all();
+       return view('cart');
     }
 
     /**
@@ -62,5 +63,30 @@ class CartsController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    /**
+     * Add product to cart via AJAX
+     */
+    public function addToCart(Request $request)
+    {
+        try {
+            $request->validate([
+                'product_id' => 'required|exists:products,id',
+                'quantity' => 'required|integer|min:1'
+            ]);
+
+            // For now, we'll just return success
+            // In a real application, you'd save to database or session
+            return response()->json([
+                'success' => true,
+                'message' => 'Sản phẩm đã được thêm vào giỏ hàng'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Có lỗi xảy ra khi thêm vào giỏ hàng'
+            ], 400);
+        }
     }
 }

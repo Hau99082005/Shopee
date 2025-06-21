@@ -64,7 +64,7 @@
             <div class="row align-items-center g-4">
                 <div class="col-auto">
                     <a href="/">
-                        <img src="{{ asset('assets/images/Shopee.svg') }}" alt="Shopee Logo" style="height: 48px;">
+                        <img src="{{ asset('assets/images/images.png') }}" alt="Shopee Logo" style="height: 48px;">
                     </a>
                 </div>
                 <div class="col">
@@ -72,10 +72,10 @@
                         <input type="text" class="form-control form-control-lg border-0"
                             placeholder="Shopee bao ship 0Đ - Đăng ký ngay!"
                             style="box-shadow: none; font-size: 16px; font-family: 'Lato';">
-                        <button class="btn btn-primary px-4" type="button"
+                        <a href='#' class="btn btn-primary px-4" type="button"
                             style="background-color: #fb5533; border-color: #fb5533;">
                             <i class="fa fa-search text-white"></i>
-                        </button>
+                        </a>
                     </div>
                     <nav class="d-flex gap-3 small mt-1 header-main-nav">
                         <a href="#" class="text-white text-decoration-none">Tất Tay Freeship</a>
@@ -87,7 +87,7 @@
                     </nav>
                 </div>
                 <div class="col-auto">
-                    <a href="#" class="text-white fs-3 position-relative">
+                    <a href="{{ route('cart') }}" class="text-white fs-3 position-relative">
                         <i class="fa fa-shopping-cart"></i>
                         <span
                             class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-white text-primary"
