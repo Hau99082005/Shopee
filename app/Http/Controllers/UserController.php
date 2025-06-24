@@ -4,89 +4,139 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): JsonResponse
     {
-        return User::all();
+        try {
+            $users = User::select(['id', 'name', 'email', 'role', 'status', 'created_at'])
+                         ->paginate(15);
+            
+            return response()->json($users);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to fetch users'], 500);
+        }
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): JsonResponse
     {
-        // Nếu bạn dùng API thì phần này thường không cần
         return response()->json(['message' => 'Not implemented'], 501);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|string|min:6',
-        ]);
+        try {
+            $validatedData = $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|string|min:8|confirmed',
+                'phone' => 'nullable|string|max:15|unique:users,phone',
+                'role' => 'sometimes|in:admin,customer,seller',
+            ]);
 
-        $validatedData['password'] = bcrypt($validatedData['password']);
+            $validatedData['password'] = Hash::make($validatedData['password']);
+            $validatedData['role'] = $validatedData['role'] ?? 'customer';
 
-        return User::create($validatedData);
+            $user = User::create($validatedData);
+            
+            return response()->json([
+                'message' => 'User created successfully',
+                'user' => $user->only(['id', 'name', 'email', 'role', 'status'])
+            ], 201);
+
+        } catch (ValidationException $e) {
+            return response()->json(['errors' => $e->errors()], 422);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to create user'], 500);
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(string $id): JsonResponse
     {
-        return User::findOrFail($id);
+        try {
+            $user = User::select(['id', 'name', 'email', 'phone', 'address', 'role', 'status', 'created_at'])
+                        ->findOrFail($id);
+            
+            return response()->json($user);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'User not found'], 404);
+        }
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(string $id): JsonResponse
     {
-        // Nếu bạn dùng API thì phần này thường không cần
         return response()->json(['message' => 'Not implemented'], 501);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, string $id): JsonResponse
     {
-        $user = User::findOrFail($id);
+        try {
+            $user = User::findOrFail($id);
 
-        $validatedData = $request->validate([
-            'name' => 'sometimes|required|string|max:255',
-            'email' => 'sometimes|required|email|unique:users,email,' . $id,
-            'password' => 'sometimes|required|string|min:6',
-        ]);
+            $validatedData = $request->validate([
+                'name' => 'sometimes|required|string|max:255',
+                'email' => 'sometimes|required|email|unique:users,email,' . $id,
+                'password' => 'sometimes|required|string|min:8|confirmed',
+                'phone' => 'sometimes|nullable|string|max:15|unique:users,phone,' . $id,
+                'address' => 'sometimes|nullable|string|max:500',
+                'role' => 'sometimes|in:admin,customer,seller',
+                'status' => 'sometimes|in:active,inactive,suspended',
+            ]);
 
-        if (isset($validatedData['password'])) {
-            $validatedData['password'] = bcrypt($validatedData['password']);
+            if (isset($validatedData['password'])) {
+                $validatedData['password'] = Hash::make($validatedData['password']);
+            }
+
+            $user->update($validatedData);
+
+            return response()->json([
+                'message' => 'User updated successfully',
+                'user' => $user->only(['id', 'name', 'email', 'role', 'status'])
+            ]);
+
+        } catch (ValidationException $e) {
+            return response()->json(['errors' => $e->errors()], 422);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to update user'], 500);
         }
-
-        $user->update($validatedData);
-
-        return $user;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(string $id): JsonResponse
     {
-        $user = User::findOrFail($id);
-        $user->delete();
-
-        return response()->json(['message' => 'User deleted successfully']);
+        try {
+            $user = User::findOrFail($id);
+            
+            // Soft delete thay vì hard delete
+            $user->update(['status' => 'inactive']);
+            
+            return response()->json(['message' => 'User deactivated successfully']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to delete user'], 404);
+        }
     }
 }
