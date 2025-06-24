@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\SearchController;
 
 Route::get('/', function () {
     $productList = DB::table('products')->get();
@@ -70,3 +71,4 @@ Route::resource('payments', paymentsController::class);
 Route::resource('product_images', productImagesController::class);
 Route::resource('shipping', ShippingController::class);
 Route::resource('categories', CategoryController::class);
+Route::get('/search', [SearchController::class, 'search'])->name('search');

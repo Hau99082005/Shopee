@@ -68,14 +68,16 @@
                     </a>
                 </div>
                 <div class="col">
-                    <div class="bg-white rounded p-1 d-flex">
+                    <div class="bg-white rounded p-1 d-flex position-relative">
                         <input type="text" class="form-control form-control-lg border-0"
                             placeholder="Shopee bao ship 0Đ - Đăng ký ngay!"
-                            style="box-shadow: none; font-size: 16px; font-family: 'Lato';">
+                            style="box-shadow: none; font-size: 16px; font-family: 'Lato';"
+                            id="search-input">
                         <a href='#' class="btn btn-primary px-4" type="button"
                             style="background-color: #fb5533; border-color: #fb5533;">
                             <i class="fa fa-search text-white"></i>
                         </a>
+                        <div id="search-results" style="position:absolute; top:100%; left:0; right:0; background:white; z-index:1000; border-radius:0 0 8px 8px; box-shadow:0 4px 16px rgba(0,0,0,0.08);"></div>
                     </div>
                     <nav class="d-flex gap-3 small mt-1 header-main-nav">
                         <a href="#" class="text-white text-decoration-none">Tất Tay Freeship</a>
@@ -557,6 +559,39 @@
             </div>
         </div>
     </footer>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('search-input');
+        const resultsDiv = document.getElementById('search-results');
+        function showResults(keyword) {
+            if (keyword.length < 1) {
+                resultsDiv.innerHTML = '';
+                resultsDiv.style.display = 'none';
+                return;
+            }
+            fetch(`/search?q=${encodeURIComponent(keyword)}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (!Array.isArray(data) || data.length === 0) {
+                        resultsDiv.innerHTML = '<p style="padding:8px">Không tìm thấy sản phẩm.</p>';
+                    } else {
+                        resultsDiv.innerHTML = data.map(item => 
+                            `<div style=\"padding:8px; border-bottom:1px solid #eee; cursor:pointer;\" onclick=\"window.location='/products?search='+encodeURIComponent(item.name)\"><strong>${item.name}</strong><br><span>${item.description ? item.description.substring(0, 60) : ''}</span></div>`
+                        ).join('');
+                    }
+                    resultsDiv.style.display = 'block';
+                });
+        }
+        if (searchInput) {
+            searchInput.addEventListener('input', function() {
+                showResults(this.value.trim());
+            });
+            searchInput.addEventListener('blur', function() {
+                setTimeout(() => { resultsDiv.style.display = 'none'; }, 200);
+            });
+        }
+    });
+    </script>
 </body>
 
 </html>
