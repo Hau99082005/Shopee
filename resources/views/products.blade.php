@@ -165,6 +165,24 @@
         </div>
     </div>
 </div>
+
+<div class="shopee-category-section mb-4">
+    <div class="shopee-section-header">
+        <h2 class="shopee-section-title">Danh Mục</h2>
+    </div>
+    <div class="category-grid-container">
+        <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 row-cols-xl-8 g-2">
+            @foreach ($categories as $category)
+            <div class="col">
+                <a href="#" class="category-item d-block text-center">
+                    <img src="{{ asset('assets/images/' . $category->image) }}" alt="{{ $category->name }}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 50%; margin-bottom: 8px;">
+                    <div class="category-item-title small">{{ $category->name }}</div>
+                </a>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</div>
 @endsection
 
 @push('styles')

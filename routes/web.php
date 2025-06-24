@@ -12,9 +12,13 @@ use App\Http\Controllers\ShippingController;
 use App\Http\Middleware\CheckAge;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
+use App\Models\Category;
+use Illuminate\Support\Facades\DB;
 
 Route::get('/', function () {
-    return view('welcome');
+    $productList = DB::table('products')->get();
+    $categoryList = DB::table('categories')->get();
+    return view('welcome',compact('productList', 'categoryList'));
 })->name('welcome');
 
 
@@ -33,6 +37,7 @@ Route::get('/product-details', function () {
 
 Route::get('/products',[ProductController::class, 'products'])->name('products');
 Route::get('/cart',[CartsController::class, 'index'])->name('cart');
+Route::get('/reviews', [ReviewsController::class, 'reviews'])->name('reviews');
 Route::post('/cart/add',[CartsController::class, 'addToCart'])->name('cart.add');
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -57,12 +62,11 @@ Route::prefix('admin')->group(function() {
     Route::get('user/{name?}', function($name = 'Hau') {
        return $name;
     });
-})->middleware(CheckAge::class);
+})->middleware(CheckAge::class);    
 
-Route::resource('categories', CategoryController::class);
 Route::resource('orders', OrderController::class);
 Route::resource('order_items', OrderItemController::class);
 Route::resource('payments', paymentsController::class);
 Route::resource('product_images', productImagesController::class);
-Route::resource('reviews', ReviewsController::class);
 Route::resource('shipping', ShippingController::class);
+Route::resource('categories', CategoryController::class);

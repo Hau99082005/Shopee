@@ -64,7 +64,7 @@
             <div class="row align-items-center g-4">
                 <div class="col-auto">
                     <a href="/">
-                        <img src="{{ asset('assets/images/images.png') }}" alt="Shopee Logo" style="height: 48px;">
+                        <img src="{{ asset('assets/images/logo1.jpg') }}" alt="Shopee Logo" style="height: 48px;">
                     </a>
                 </div>
                 <div class="col">
@@ -193,36 +193,13 @@
                 <h2 class="shopee-section-title">Danh Mục</h2>
             </div>
             <div class="category-grid-container">
-                @php
-                $categories = [
-                ['img' => 'thời trang nam.webp', 'name' => 'Thời Trang Nam'],
-                ['img' => 'điện thoại.webp', 'name' => 'Điện Thoại & Phụ Kiện'],
-                ['img' => 'thiết bị điện tử.webp', 'name' => 'Thiết Bị Điện Tử'],
-                ['img' => 'máy tính và laptop.webp', 'name' => 'Máy Tính & Laptop'],
-                ['img' => 'máy ảnh và quay phim.webp', 'name' => 'Máy Ảnh & Máy Quay Phim'],
-                ['img' => 'đồng hồ.webp', 'name' => 'Đồng Hồ'],
-                ['img' => 'giaydepnam.webp', 'name' => 'Giày Dép Nam'],
-                ['img' => 'thietbigiadung.webp', 'name' => 'Thiết Bị Điện Gia Dụng'],
-                ['img' => 'thethaodulic.webp', 'name' => 'Thể Thao & Du Lịch'],
-                ['img' => 'otovaxedep.webp', 'name' => 'Ô Tô & Xe Máy & Xe Đạp'],
-                ['img' => 'thoitrangnu.webp', 'name' => 'Thời Trang Nữ'],
-                ['img' => 'samsung.jpg', 'name' => 'Mẹ & Bé'],
-                ['img' => 'suckhoe.webp', 'name' => 'Nhà Cửa & Đời Sống'],
-                ['img' => 'suckhoe.webp', 'name' => 'Sắc Đẹp'],
-                ['img' => 'giaydepnam.webp', 'name' => 'Giày Dép Nữ'],
-                ['img' => 'logo.jpg', 'name' => 'Túi Ví Nữ'],
-                ['img' => 'phukienvatrangsuc.webp', 'name' => 'Phụ Kiện & Trang Sức Nữ'],
-                ['img' => 'bachhoaonline.webp', 'name' => 'Bách Hóa Online'],
-                ['img' => 'nhasach.webp', 'name' => 'Nhà Sách Online'],
-                ['img' => 'voucher&dichvu.webp', 'name' => 'Voucher & Dịch vụ'],
-                ];
-                @endphp
                 <div class="row row-cols-10 g-0">
-                    @foreach ($categories as $category)
+                    @foreach ($categoryList as $category)
                     <div class="col">
                         <a href="#" class="category-item">
-                            <img src="{{ asset('assets/images/' . $category['img']) }}" alt="{{ $category['name'] }}">
-                            <div class="category-item-title">{{ $category['name'] }}</div>
+                            <img src="{{ asset('assets/images/' . $category->image) }}"
+                                alt="{{ $category->name }}">
+                            <div class="category-item-title">{{ $category->name }}</div>
                         </a>
                     </div>
                     @endforeach
@@ -351,42 +328,26 @@
         </div>
         <div class="p-3 bg-white">
             <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-2">
-                @php
-                $products = [
-                ['img' => 'anh2.jpg', 'title' => 'Set bộ áo thun chữ thêu kèm quần dài chất da cá form rộng oversize
-                ulzzang', 'price' => '7.900', 'sold' => '1k+', 'discount' => '40'],
-                ['img' => 'anh1.jpg', 'title' => 'Thùng 200 Chiếc Khẩu trang 5D MASK LOKA', 'price' => '38.500', 'sold'
-                => '12k+', 'discount' => '98'],
-                ['img' => 'thời trang nam.webp', 'title' => '1 túi màng bọc thực phẩm gấu PE', 'price' => '17.172',
-                'sold' => '12k+', 'discount' => '50'],
-                ['img' => 'thoitrangnu.webp', 'title' => 'Set Trà Sữa Tự Pha Trân Châu Đường Đen', 'price' => '19.000',
-                'sold' => '61k+', 'discount' => '30'],
-                ['img' => 'phukienvatrangsuc.webp', 'title' => 'Lược gội đầu massage da đầu silicon', 'price' =>
-                '39.000', 'sold' => '61k+', 'discount' => '56'],
-                ['img' => 'logo.jpg', 'title' => 'Set 50 kẹp tóc dễ thương màu hồng, màu vàng', 'price' => '47.299',
-                'sold' => '1k+', 'discount' => '7'],
-                ];
-                @endphp
-                @foreach ($products as $product)
+                @foreach ($productList as $products)
                 <div class="col mb-2">
                     <a href="#" class="suggestion-card h-100">
                         <div class="suggestion-card__image-wrapper">
                             <div class="suggestion-card__fav-badge">Yêu thích</div>
                             <div class="suggestion-card__discount-badge">
-                                <span class="percent">{{ $product['discount'] }}%</span>
+                                <span class="percent">{{ $products->discount ?? 0 }}%</span>
                                 <span class="label">GIẢM</span>
                             </div>
-                            <img src="{{ asset('assets/images/' . $product['img']) }}" class="suggestion-card__image"
-                                alt="{{ $product['title'] }}">
+                            <img src="{{ asset('assets/images/' . $products->image) }}" class="suggestion-card__image"
+                                alt="{{ $products->name }}">
                         </div>
                         <div class="suggestion-card__body">
-                            <h5 class="suggestion-card__title">{{ $product['title'] }}</h5>
+                            <h5 class="suggestion-card__title">{{ $products->name }}</h5>
                             <div class="suggestion-card__footer">
                                 <p class="suggestion-card__price mb-0">
-                                    <span class="suggestion-card__price-currency">₫</span>{{ $product['price'] }}
+                                    <span class="suggestion-card__price-currency">₫</span>{{ $products->price }}
                                 </p>
                                 <p class="suggestion-card__sold mb-0">
-                                    Đã bán {{ $product['sold'] }}
+                                    Đã bán {{ $products->stock }}
                                 </p>
                             </div>
                         </div>
