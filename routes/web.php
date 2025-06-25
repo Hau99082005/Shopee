@@ -15,6 +15,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\SearchController;
+use Symfony\Component\HttpKernel\Debug\VirtualRequestStack;
 
 Route::get('/', function () {
     $productList = DB::table('products')->get();
@@ -56,14 +57,29 @@ Route::post('/post', function () {
     return "Method post"; 
 });
 
-Route::prefix('admin')->group(function() {
-    Route::get('posts/{post}/comments/{comment}', function($postId, $commentId) {
-        return "postId: $postId - commentId: $commentId";
-    });
-    Route::get('user/{name?}', function($name = 'Hau') {
-       return $name;
-    });
-})->middleware(CheckAge::class);    
+Route::get('/admin', function() {
+    return view('admin.admin');
+});
+
+Route::get('/admin-analytics', function() {
+    return view('admin.analytics');
+});
+
+Route::get('/admin-customers', function() {
+    return view('admin.customers');
+});
+
+Route::get('/admin-login', function() {
+    return view('admin.login');
+});
+
+Route::get('/admin-orders', function() {
+    return view('admin.login');
+});
+
+Route::get('/admin-products', function() {
+    return view('admin.products');
+});
 
 Route::resource('orders', OrderController::class);
 Route::resource('order_items', OrderItemController::class);

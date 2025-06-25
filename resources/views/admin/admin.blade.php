@@ -22,14 +22,17 @@
                 <span class="logo_name">Shopee Admin</span>
             </div>
             <ul class="nav-links">
-                <li><a href="admin.html" class="active"><i class="uil uil-grid-alt"></i><span
+                <li><a href="/admin" class="active"><i class="uil uil-grid-alt"></i><span
                             class="links_name">Dashboard</span></a></li>
-                <li><a href="products.html"><i class="uil uil-box"></i><span class="links_name">Products</span></a></li>
-                <li><a href="orders.html"><i class="uil uil-shopping-bag"></i><span class="links_name">Orders</span></a>
+                <li><a href="/admin-products"><i class="uil uil-box"></i><span class="links_name">Products</span></a>
                 </li>
-                <li><a href="analytics.html"><i class="uil uil-chart"></i><span class="links_name">Analytics</span></a>
+                <li><a href="/admin-orders"><i class="uil uil-shopping-bag"></i><span
+                            class="links_name">Orders</span></a>
                 </li>
-                <li><a href="customers.html"><i class="uil uil-users-alt"></i><span
+                <li><a href="/admin-analytics"><i class="uil uil-chart"></i><span
+                            class="links_name">Analytics</span></a>
+                </li>
+                <li><a href="/admin-customers"><i class="uil uil-users-alt"></i><span
                             class="links_name">Customers</span></a></li>
                 <li><a href="#" onclick="openLogoutModal()"><i class="uil uil-signout"></i><span
                             class="links_name">Logout</span></a></li>
