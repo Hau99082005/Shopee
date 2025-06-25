@@ -1025,6 +1025,7 @@ footer {
 
 
 /* admin css */
+
 .container {
     display: flex;
     min-height: 100vh;
@@ -1035,11 +1036,11 @@ footer {
     background: linear-gradient(135deg, #ee4d2d 60%, #ffb199 100%);
     color: #fff;
     padding: 32px 0 0 0;
-    box-shadow: 2px 0 12px rgba(0,0,0,0.05);
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.05);
     min-height: 100vh;
     border-top-right-radius: 32px;
     border-bottom-right-radius: 32px;
-    box-shadow: 4px 0 24px rgba(238,77,45,0.08);
+    box-shadow: 4px 0 24px rgba(238, 77, 45, 0.08);
     position: relative;
     z-index: 2;
 }
@@ -1083,7 +1084,7 @@ footer {
 .nav-links a:hover {
     background: #fff;
     color: #ee4d2d;
-    box-shadow: 0 2px 12px rgba(238,77,45,0.08);
+    box-shadow: 0 2px 12px rgba(238, 77, 45, 0.08);
 }
 
 .main-content {
@@ -1092,7 +1093,7 @@ footer {
     padding: 32px 48px;
     border-radius: 32px;
     margin: 24px 0 24px 0;
-    box-shadow: 0 4px 32px rgba(0,0,0,0.04);
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.04);
     background: #f8f9fb;
     min-height: 90vh;
 }
@@ -1104,13 +1105,13 @@ footer {
     margin-bottom: 36px;
     background: #fff;
     border-radius: 18px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
     padding: 18px 32px;
 }
 
 .search input {
     border: none;
-    box-shadow: 0 2px 8px rgba(238,77,45,0.04);
+    box-shadow: 0 2px 8px rgba(238, 77, 45, 0.04);
     font-size: 1.1rem;
 }
 
@@ -1130,7 +1131,7 @@ footer {
     border: 2px solid #ee4d2d;
     width: 40px;
     height: 40px;
-    box-shadow: 0 2px 8px rgba(238,77,45,0.10);
+    box-shadow: 0 2px 8px rgba(238, 77, 45, 0.10);
 }
 
 .content h2 {
@@ -1149,7 +1150,7 @@ footer {
 .card {
     background: linear-gradient(135deg, #fff 80%, #ffe3d3 100%);
     border-radius: 18px;
-    box-shadow: 0 4px 24px rgba(238,77,45,0.10);
+    box-shadow: 0 4px 24px rgba(238, 77, 45, 0.10);
     flex: 1;
     padding: 32px 24px;
     text-align: center;
@@ -1159,7 +1160,7 @@ footer {
 
 .card:hover {
     transform: translateY(-8px) scale(1.05);
-    box-shadow: 0 8px 32px rgba(238,77,45,0.18);
+    box-shadow: 0 8px 32px rgba(238, 77, 45, 0.18);
 }
 
 .card h1 {
@@ -1188,12 +1189,13 @@ table.sortable {
     width: 100%;
     background: #fff;
     border-radius: 18px;
-    box-shadow: 0 2px 16px rgba(238,77,45,0.06);
+    box-shadow: 0 2px 16px rgba(238, 77, 45, 0.06);
     margin-bottom: 32px;
     overflow: hidden;
 }
 
-table.sortable th, table.sortable td {
+table.sortable th,
+table.sortable td {
     padding: 14px 18px;
     text-align: left;
     font-size: 1.05rem;
@@ -1217,24 +1219,43 @@ table.sortable tr:nth-child(even) {
     font-size: 1rem;
     font-weight: 600;
     letter-spacing: 0.5px;
-    box-shadow: 0 1px 4px rgba(238,77,45,0.08);
+    box-shadow: 0 1px 4px rgba(238, 77, 45, 0.08);
 }
 
-.status.pending { background: #fff3cd; color: #b8860b; }
-.status.shipped { background: #d1ecf1; color: #007b8a; }
+.status.pending {
+    background: #fff3cd;
+    color: #b8860b;
+}
+
+.status.shipped {
+    background: #d1ecf1;
+    color: #007b8a;
+}
 
 ::-webkit-scrollbar {
     width: 8px;
     background: #f5f6fa;
 }
+
 ::-webkit-scrollbar-thumb {
     background: linear-gradient(135deg, #ee4d2d 60%, #ffb199 100%);
     border-radius: 8px;
 }
 
 @media (max-width: 900px) {
-    .container { flex-direction: column; }
-    .sidebar { width: 100%; border-radius: 0 0 32px 32px; }
-    .main-content { padding: 16px; margin: 0; border-radius: 0 0 32px 32px; }
-    .cards { flex-direction: column; }
+    .container {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        border-radius: 0 0 32px 32px;
+    }
+    .main-content {
+        padding: 16px;
+        margin: 0;
+        border-radius: 0 0 32px 32px;
+    }
+    .cards {
+        flex-direction: column;
+    }
 }

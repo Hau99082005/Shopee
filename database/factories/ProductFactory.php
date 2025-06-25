@@ -46,6 +46,7 @@ class ProductFactory extends Factory
             'image' => 'products/product-' . $this->faker->numberBetween(1, 5) . '.jpg',
             'description' => $this->faker->realText(200),
             'price' => $this->faker->randomFloat(0, 10000, 9999999),
+            'price_old' => $this->faker->randomFloat(0,10000,9999999),
             'stock' => $this->faker->numberBetween(10, 500),
             'seller_id' => 1,
             'category_id' => $this->faker->randomElement($categories),

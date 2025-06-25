@@ -71,13 +71,14 @@
                     <div class="bg-white rounded p-1 d-flex position-relative">
                         <input type="text" class="form-control form-control-lg border-0"
                             placeholder="Shopee bao ship 0Đ - Đăng ký ngay!"
-                            style="box-shadow: none; font-size: 16px; font-family: 'Lato';"
-                            id="search-input">
+                            style="box-shadow: none; font-size: 16px; font-family: 'Lato';" id="search-input">
                         <a href='#' class="btn btn-primary px-4" type="button"
                             style="background-color: #fb5533; border-color: #fb5533;">
                             <i class="fa fa-search text-white"></i>
                         </a>
-                        <div id="search-results" style="position:absolute; top:100%; left:0; right:0; background:white; z-index:1000; border-radius:0 0 8px 8px; box-shadow:0 4px 16px rgba(0,0,0,0.08);"></div>
+                        <div id="search-results"
+                            style="position:absolute; top:100%; left:0; right:0; background:white; z-index:1000; border-radius:0 0 8px 8px; box-shadow:0 4px 16px rgba(0,0,0,0.08);">
+                        </div>
                     </div>
                     <nav class="d-flex gap-3 small mt-1 header-main-nav">
                         <a href="#" class="text-white text-decoration-none">Tất Tay Freeship</a>
@@ -171,21 +172,11 @@
         </section>
 
         <section class="bg-white rounded d-flex justify-content-around p-3 text-center">
-            @php
-            $services = [
-            ['icon' => 'mã giảm giá.jpg', 'title' => 'Mã Giảm Giá'],
-            ['icon' => 'suckhoe.webp', 'title' => 'Khách Hàng Thân Thiết'],
-            ['icon' => 'voucher&dichvu.webp', 'title' => 'Hàng Chọn Lọc'],
-            ['icon' => 'thời trang nam.webp', 'title' => 'Shopee Style Voucher 50%'],
-            ['icon' => 'thethaodulic.webp', 'title' => 'Deal Hot Giá Vàng'],
-            ['icon' => 'nhasach.webp', 'title' => 'Săn Ngay 100.000 Xu'],
-            ];
-            @endphp
-            @foreach($services as $service)
+            @foreach((collect($categoryList)->random(6, count($categoryList))) as $category)
             <a href="#" class="text-decoration-none text-dark">
-                <img src="{{ asset('assets/images/' . $service['icon']) }}" alt="{{$service['title']}}"
+                <img src="{{ asset('assets/images/' . $category->image) }}" alt="{{$category->name}}"
                     style="width: 45px; height: 45px; object-fit: contain;">
-                <div style="font-size: 0.8rem;" class="mt-2">{{ $service['title'] }}</div>
+                <div style="font-size: 0.8rem;" class="mt-2">{{ $category->name }}</div>
             </a>
             @endforeach
         </section>
@@ -199,8 +190,7 @@
                     @foreach ($categoryList as $category)
                     <div class="col">
                         <a href="#" class="category-item">
-                            <img src="{{ asset('assets/images/' . $category->image) }}"
-                                alt="{{ $category->name }}">
+                            <img src="{{ asset('assets/images/' . $category->image) }}" alt="{{ $category->name }}">
                             <div class="category-item-title">{{ $category->name }}</div>
                         </a>
                     </div>
@@ -226,44 +216,52 @@
                 </div>
                 <a href="#" class="shopee-view-all">Xem tất cả <i class="fas fa-chevron-right small"></i></a>
             </div>
+
             <div class="p-3 position-relative">
                 <div class="swiper flash-sale-swiper">
                     <div class="swiper-wrapper">
+                        @foreach((collect($productList)->random(min(10, count($productList)))) as $products)
                         @php
-                        $flash_products = [
-                        ['img' => 'anh1.jpg', 'price' => '719.100', 'sold' => 50],
-                        ['img' => 'anh2.jpg', 'price' => '659.948', 'sold' => 80],
-                        ['img' => 'bachhoaonline.webp', 'price' => '161.000', 'sold' => 30],
-                        ['img' => 'banner.jpg', 'price' => '199.000', 'sold' => 95],
-                        ['img' => 'banner1.png', 'price' => '629.000', 'sold' => 10],
-                        ['img' => 'banner3.jpg', 'price' => '139.000', 'sold' => 70],
-                        ['img' => 'banner4.jpg', 'price' => '250.000', 'sold' => 45],
-                        ];
+                        $discountPercent = 0;
+                        if (isset($products->price_old) && $products->price_old > $products->price) {
+                        $discountPercent = round((($products->price_old - $products->price) / $products->price_old) *
+                        100);
+                        }
                         @endphp
-                        @foreach($flash_products as $p)
-                        <div class="swiper-slide">
-                            <a href="#" class="product-card text-decoration-none">
-                                <div class="product-card__discount-badge"
-                                    style="background-color: rgba(255,212,36,.9);">
-                                    <span style="color: #ee4d2d; font-size: 0.8rem;">-{{ rand(10, 50) }}%</span>
-                                    <span style="color: white; background-color: #ee4d2d; padding: 1px 3px;">GIẢM</span>
+                        <div class="swiper-slide d-flex justify-content-center align-items-stretch">
+                            <a href="#"
+                                class="product-card text-decoration-none shadow-sm bg-white rounded-4 p-3 d-flex flex-column align-items-center"
+                                style="min-width:180px; max-width:210px; margin:0 auto; transition:box-shadow 0.2s;">
+
+                                @if($discountPercent > 0)
+                                <div class="product-card__discount-badge position-absolute top-0 end-0 m-2 px-2 py-1 rounded-2 fw-bold"
+                                    style="background:rgba(255,212,36,.95); color:#ee4d2d; font-size:0.9rem; z-index:2; box-shadow:0 2px 8px rgba(238,77,45,0.08);">
+                                    -{{ $discountPercent }}%
                                 </div>
-                                <img src="{{ asset('assets/images/' . $p['img']) }}" class="product-card__image"
-                                    alt="Product">
-                                <div class="product-card__body text-center">
-                                    <p class="product-card__price mb-2">
-                                        <span class="product-card__price-currency">₫</span>{{ $p['price'] }}
+                                @endif
+
+                                <img src="{{ asset('assets/images/' . $products->image) }}"
+                                    class="product-card__image mb-2 rounded-3" alt="Product"
+                                    style="width:120px; height:120px; object-fit:cover; box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+
+                                <div class="product-card__body text-center w-100">
+                                    <p class="product-card__price mb-2 fw-bold text-danger" style="font-size:1.2rem;">
+                                        <span class="product-card__price-currency">₫</span>{{ $products->price }}
                                     </p>
-                                    <div class="flash-sale-card__progress">
-                                        <div class="flash-sale-card__progress-bar" style="width: {{ $p['sold'] }}%">
-                                        </div>
-                                        <div class="flash-sale-card__progress-text">
-                                            @if($p['sold'] > 80)
-                                            <i class="fas fa-fire-alt"></i> ĐANG BÁN CHÁY
-                                            @else
-                                            ĐÃ BÁN {{ rand(100, 1000) }}
-                                            @endif
-                                        </div>
+
+                                    @if(isset($products->price_old) && $products->price_old > $products->price)
+                                    <p class="text-muted small mb-1" style="text-decoration: line-through;">
+                                        ₫{{ $products->price_old }}
+                                    </p>
+                                    @endif
+
+                                    <div
+                                        class="flash-sale-card__progress-text small text-secondary text-center align-items-center justify-center">
+                                        @if($products->stock > 80)
+                                        <i class="fas fa-fire-alt text-warning"></i> ĐANG BÁN CHÁY
+                                        @else
+                                        ĐÃ BÁN {{ rand(100, 1000) }}
+                                        @endif
                                     </div>
                                 </div>
                             </a>
@@ -271,10 +269,12 @@
                         @endforeach
                     </div>
                 </div>
+
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-button-next"></div>
             </div>
         </section>
+
         <section class="shopee-section">
             <div class="shopee-section-header">
                 <div class="d-flex align-items-center">
@@ -299,23 +299,12 @@
                     </div>
                     <div class="col-md-8">
                         <div class="row row-cols-4 g-0">
-                            @php
-                            $mall_items = [
-                            ['img' => 'samsung.jpg', 'text' => 'Ưu đãi đến 50%'],
-                            ['img' => 'logo.jpg', 'text' => 'Mua 1 tặng 1'],
-                            ['img' => 'giaydepnam.webp', 'text' => 'Mua 1 tặng 1'],
-                            ['img' => 'thời trang nam.webp', 'text' => 'COOL MATE'],
-                            ['img' => 'thoitrangnu.webp', 'text' => 'Mua 1 tặng 1'],
-                            ['img' => 'máy ảnh và quay phim.webp', 'text' => 'Mua là có quà'],
-                            ['img' => 'suckhoe.webp', 'text' => 'Quà mọi đơn'],
-                            ['img' => 'thethaodulic.webp', 'text' => 'Deal từ 99K'],
-                            ];
-                            @endphp
-                            @foreach ($mall_items as $item)
+                            @foreach ((collect($categoryList)->random(min(8,count($categoryList)))) as $category)
                             <div class="col">
                                 <a href="#" class="shopee-mall__item p-2">
-                                    <img src="{{ asset('assets/images/' . $item['img']) }}" alt="{{ $item['text'] }}">
-                                    <span class="shopee-mall__item-text">{{ $item['text'] }}</span>
+                                    <img src="{{ asset('assets/images/' . $category->image) }}"
+                                        alt="{{ $category->name }}">
+                                    <span class="shopee-mall__item-text">{{ $category->name }}</span>
                                 </a>
                             </div>
                             @endforeach
@@ -563,6 +552,7 @@
     document.addEventListener('DOMContentLoaded', function() {
         const searchInput = document.getElementById('search-input');
         const resultsDiv = document.getElementById('search-results');
+
         function showResults(keyword) {
             if (keyword.length < 1) {
                 resultsDiv.innerHTML = '';
@@ -575,7 +565,7 @@
                     if (!Array.isArray(data) || data.length === 0) {
                         resultsDiv.innerHTML = '<p style="padding:8px">Không tìm thấy sản phẩm.</p>';
                     } else {
-                        resultsDiv.innerHTML = data.map(item => 
+                        resultsDiv.innerHTML = data.map(item =>
                             `<div style=\"padding:8px; border-bottom:1px solid #eee; cursor:pointer;\" onclick=\"window.location='/products?search='+encodeURIComponent(item.name)\"><strong>${item.name}</strong><br><span>${item.description ? item.description.substring(0, 60) : ''}</span></div>`
                         ).join('');
                     }
@@ -587,7 +577,9 @@
                 showResults(this.value.trim());
             });
             searchInput.addEventListener('blur', function() {
-                setTimeout(() => { resultsDiv.style.display = 'none'; }, 200);
+                setTimeout(() => {
+                    resultsDiv.style.display = 'none';
+                }, 200);
             });
         }
     });
