@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 25, 2025 lúc 08:23 PM
--- Phiên bản máy phục vụ: 10.4.32-MariaDB
--- Phiên bản PHP: 8.2.12
+-- Host: 127.0.0.1
+-- Generation Time: Jun 28, 2025 at 06:00 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `shopee`
+-- Database: `shopee`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `cache`
+-- Table structure for table `cache`
 --
 
 CREATE TABLE `cache` (
@@ -36,7 +36,7 @@ CREATE TABLE `cache` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `cache_locks`
+-- Table structure for table `cache_locks`
 --
 
 CREATE TABLE `cache_locks` (
@@ -48,7 +48,7 @@ CREATE TABLE `cache_locks` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `carts`
+-- Table structure for table `carts`
 --
 
 CREATE TABLE `carts` (
@@ -63,7 +63,7 @@ CREATE TABLE `carts` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `categories`
+-- Table structure for table `categories`
 --
 
 CREATE TABLE `categories` (
@@ -77,35 +77,42 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `categories`
+-- Dumping data for table `categories`
 --
 
 INSERT INTO `categories` (`id`, `name`, `image`, `desc`, `parent_id`, `created_at`, `updated_at`) VALUES
 (1, 'Thời trang nam', 'thời trang nam.webp', 'Thời trang nam', NULL, '2025-06-23 19:15:08', '2025-06-23 19:15:08'),
 (2, 'Điện thoại & Phụ Kiện', 'điện thoại.webp', 'Điện thoại và phụ kiện', NULL, '2025-06-23 19:15:08', '2025-06-23 19:15:08'),
-(3, 'Thiết bị điện tử', 'thiết bị điện tử.webp', 'Thiết bị điện tử', NULL, '2025-06-23 19:15:08', '2025-06-23 19:15:08'),
+(3, 'Thiết Bị Điện Tử', 'dien tu.webp', 'Thiết Bị Điện Tử', NULL, '2025-06-27 18:05:05', '2025-06-27 18:05:05'),
 (4, 'Máy tính và laptop', 'máy tính và laptop.webp', 'Máy tính và laptop', NULL, '2025-06-23 19:15:08', '2025-06-23 19:15:08'),
 (5, 'Máy ảnh và quay phim', 'máy ảnh và quay phim.webp', 'Máy ảnh và quay phim', NULL, '2025-06-23 19:15:08', '2025-06-23 19:15:08'),
-(6, 'Đồng hồ ', 'đồng hồ.webp', 'Đồng Hồ', NULL, '2025-06-23 19:15:08', '2025-06-23 19:15:08'),
-(7, 'giày dép nam', 'giaydepnam.webp', 'giày dép nam', NULL, '2025-06-23 19:15:08', '2025-06-23 19:15:08'),
-(8, 'Thiết bị gia dụng', 'thietbigiadung.webp', 'Thiết bị gia dụng', NULL, '2025-06-23 19:15:08', '2025-06-23 19:15:08'),
-(9, 'Thể thao và du lịch', 'thethaodulic.webp', 'Thiết bị và du lịch', NULL, '2025-06-23 19:15:08', '2025-06-23 19:15:08'),
-(10, 'Ô tô và xe đạp', 'otovaxedep.webp', 'Ô tô và xe đạp', NULL, '2025-06-23 19:15:08', '2025-06-23 19:15:08'),
-(11, 'Thời trang nữ', 'thoitrangnu.webp', 'Thời trang nữ', NULL, '2025-06-27 12:55:17', '2025-06-27 12:55:17'),
-(12, 'Sức khoẻ', 'suckhoe.webp', 'Sức khoẻ', NULL, '2025-06-21 12:56:17', '2025-06-19 12:56:17'),
-(13, 'Mã giảm giá', 'mã giảm giá.jpg', 'mã giảm giá', NULL, '2025-06-19 12:57:15', '2025-06-25 12:57:15'),
-(14, 'Phụ kiện và trang sức', 'phukienvatrangsuc.webp', 'Phụ kiện và trang sức', NULL, '2025-06-27 13:00:12', '2025-06-27 13:00:12'),
-(15, 'Voucher và Dịch vụ', 'voucher&dichvu.webp', 'Voucher và dịch vụ', NULL, '2025-06-18 13:02:54', '2025-06-27 13:02:54'),
-(17, 'SamSung', 'samsung.jpg', 'SamSung', NULL, '2025-06-20 13:10:57', '2025-06-21 13:10:57'),
-(18, 'Nhà sách', 'nhasach.webp', 'Nhà sách', NULL, '2025-06-27 13:11:34', '2025-06-14 13:11:34'),
-(19, 'Bách hoá online', 'bachhoaonline.webp', 'Bách hoá online', NULL, '2025-06-12 13:12:32', '2025-06-20 13:12:32'),
-(20, 'Dịch vụ và thiết bị tiện ích', 'e4fbccba5e1189d1141b9d6188af79c0@resize_w640_nl.webp', 'Dịch vụ và thiết bị tiện ích', NULL, '2025-06-27 13:23:42', '2025-06-27 13:23:42'),
-(21, 'giày dép nữ', '48630b7c76a7b62bc070c9e227097847@resize_w640_nl.webp', 'giày dép nữ', NULL, '2025-06-06 13:24:35', '2025-06-20 13:24:35');
+(6, 'Đồng Hồ', 'dong ho.webp', 'Đồng Hồ', NULL, '2025-06-27 18:05:05', '2025-06-27 18:05:05'),
+(7, 'Giày Dép Nam', 'giay dep nam.webp', 'Giày Dép Nam', NULL, '2025-06-27 18:05:05', '2025-06-27 18:05:05'),
+(8, 'Thiết Bị Điện Gia Dụng', 'thiet bi.webp', 'Thiết Bị Điện Gia Dụng', NULL, '2025-06-27 18:05:05', '2025-06-27 18:05:05'),
+(9, 'Thể Thao & Du Lịch', 'the thao.webp', 'Thể Thao & Du Lịch', NULL, '2025-06-27 18:05:05', '2025-06-27 18:05:05'),
+(10, 'Ô Tô & Xe Máy & Xe Đạp', 'o to.webp', 'Ô Tô & Xe Máy & Xe Đạp', NULL, '2025-06-27 18:05:05', '2025-06-27 18:05:05'),
+(11, 'Balo & Túi Ví Nam', 'balo.webp', 'Balo & Túi Ví Nam', NULL, '2025-06-27 18:05:05', '2025-06-27 18:05:05'),
+(12, 'Đồ Chơi', 'do choi.webp', 'Đồ Chơi', NULL, '2025-06-27 18:05:05', '2025-06-27 18:05:05'),
+(13, 'Chăm Sóc Thú Cưng', 'cham soc.webp', 'Chăm Sóc Thú Cưng', NULL, '2025-06-27 18:05:05', '2025-06-27 18:05:05'),
+(14, 'Giặt Giũ & Chăm Sóc Nhà Cửa', 'giac giu.webp', 'Giặt Giũ & Chăm Sóc Nhà Cửa', NULL, '2025-06-27 18:05:05', '2025-06-27 18:05:05'),
+(15, 'Voucher & Dịch Vụ', 'voucher.webp', 'Voucher & Dịch Vụ', NULL, '2025-06-27 18:05:05', '2025-06-27 18:05:05'),
+(16, 'Thời Trang Nữ', 'thoi trang nu.webp', 'Thời Trang Nữ', NULL, '2025-06-27 18:05:05', '2025-06-27 18:05:05'),
+(17, 'Mẹ & Bé', 'me.webp', 'Mẹ & Bé', NULL, '2025-06-27 18:05:05', '2025-06-27 18:05:05'),
+(18, 'Nhà Cửa & Đời Sống', 'nha cua.webp', 'Nhà Cửa & Đời Sống', NULL, '2025-06-27 18:05:05', '2025-06-27 18:05:05'),
+(19, 'Sắc Đẹp', 'sac dep.webp', 'Sắc Đẹp', NULL, '2025-06-27 18:05:05', '2025-06-27 18:05:05'),
+(20, 'Sức Khỏe', 'suc khoe.webp', 'Sức Khỏe', NULL, '2025-06-27 18:05:05', '2025-06-27 18:05:05'),
+(21, 'Giày Dép Nữ', 'giay dep nu.webp', 'Giày Dép Nữ', NULL, '2025-06-27 18:05:05', '2025-06-27 18:05:05'),
+(22, 'Túi Ví Nữ', 'tui vi.webp', 'Túi Ví Nữ', NULL, '2025-06-27 18:05:05', '2025-06-27 18:05:05'),
+(23, 'Phụ Kiện & Trang Sức Nữ', 'phu kien.webp', 'Phụ Kiện & Trang Sức Nữ', NULL, '2025-06-27 18:05:05', '2025-06-27 18:05:05'),
+(24, 'Bách Hóa Online', 'bach hoa.webp', 'Bách Hóa Online', NULL, '2025-06-27 18:05:05', '2025-06-27 18:05:05'),
+(25, 'Nhà Sách Online', 'sach.webp', 'Nhà Sách Online', NULL, '2025-06-27 18:05:05', '2025-06-27 18:05:05'),
+(26, 'Thời Trang Trẻ Em', 'thoi trang tre em.webp', 'Thời Trang Trẻ Em', NULL, '2025-06-27 18:05:05', '2025-06-27 18:05:05'),
+(27, 'Dụng cụ và thiết bị tiện ích', 'dung cu.webp', 'Dụng cụ và thiết bị tiện ích', NULL, '2025-06-27 18:05:05', '2025-06-27 18:05:05');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `failed_jobs`
+-- Table structure for table `failed_jobs`
 --
 
 CREATE TABLE `failed_jobs` (
@@ -121,7 +128,7 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `jobs`
+-- Table structure for table `jobs`
 --
 
 CREATE TABLE `jobs` (
@@ -137,7 +144,7 @@ CREATE TABLE `jobs` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `job_batches`
+-- Table structure for table `job_batches`
 --
 
 CREATE TABLE `job_batches` (
@@ -156,7 +163,7 @@ CREATE TABLE `job_batches` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `migrations`
+-- Table structure for table `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -166,7 +173,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `migrations`
+-- Dumping data for table `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -187,7 +194,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `orders`
+-- Table structure for table `orders`
 --
 
 CREATE TABLE `orders` (
@@ -201,7 +208,7 @@ CREATE TABLE `orders` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `orders`
+-- Dumping data for table `orders`
 --
 
 INSERT INTO `orders` (`id`, `user_id`, `total_price`, `status`, `shipping_address`, `created_at`, `updated_at`) VALUES
@@ -219,7 +226,7 @@ INSERT INTO `orders` (`id`, `user_id`, `total_price`, `status`, `shipping_addres
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `order_items`
+-- Table structure for table `order_items`
 --
 
 CREATE TABLE `order_items` (
@@ -233,7 +240,7 @@ CREATE TABLE `order_items` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `order_items`
+-- Dumping data for table `order_items`
 --
 
 INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `quantity`, `price`, `created_at`, `updated_at`) VALUES
@@ -251,7 +258,7 @@ INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `quantity`, `price`, 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `payments`
+-- Table structure for table `payments`
 --
 
 CREATE TABLE `payments` (
@@ -265,7 +272,7 @@ CREATE TABLE `payments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `payments`
+-- Dumping data for table `payments`
 --
 
 INSERT INTO `payments` (`id`, `order_id`, `amount`, `method`, `status`, `created_at`, `updated_at`) VALUES
@@ -283,7 +290,7 @@ INSERT INTO `payments` (`id`, `order_id`, `amount`, `method`, `status`, `created
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `products`
+-- Table structure for table `products`
 --
 
 CREATE TABLE `products` (
@@ -301,7 +308,7 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `products`
+-- Dumping data for table `products`
 --
 
 INSERT INTO `products` (`id`, `name`, `image`, `description`, `price`, `price_old`, `stock`, `seller_id`, `category_id`, `created_at`, `updated_at`) VALUES
@@ -339,7 +346,7 @@ INSERT INTO `products` (`id`, `name`, `image`, `description`, `price`, `price_ol
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `product_images`
+-- Table structure for table `product_images`
 --
 
 CREATE TABLE `product_images` (
@@ -351,7 +358,7 @@ CREATE TABLE `product_images` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `product_images`
+-- Dumping data for table `product_images`
 --
 
 INSERT INTO `product_images` (`id`, `product_id`, `image_url`, `created_at`, `updated_at`) VALUES
@@ -369,7 +376,7 @@ INSERT INTO `product_images` (`id`, `product_id`, `image_url`, `created_at`, `up
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `reviews`
+-- Table structure for table `reviews`
 --
 
 CREATE TABLE `reviews` (
@@ -383,7 +390,7 @@ CREATE TABLE `reviews` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `reviews`
+-- Dumping data for table `reviews`
 --
 
 INSERT INTO `reviews` (`id`, `user_id`, `product_id`, `rating`, `comment`, `created_at`, `updated_at`) VALUES
@@ -401,7 +408,7 @@ INSERT INTO `reviews` (`id`, `user_id`, `product_id`, `rating`, `comment`, `crea
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `sessions`
+-- Table structure for table `sessions`
 --
 
 CREATE TABLE `sessions` (
@@ -414,18 +421,16 @@ CREATE TABLE `sessions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `sessions`
+-- Dumping data for table `sessions`
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('4GPtasWMrjcBiRJO7F1bYDfEJgGGwa8tsgS2aHz0', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoic3pMUEI5WEN5VmxGbzBkMnBadm1NMFM0SGFrNVlCZlpIbm1JT29yQSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1750859864),
-('Pj3zjy96IT8P0hs3LyfDfVLqH1HaD1JND7qboY6C', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiT0t2YVZyNjRDQzVGTkQ4MUR0VkFPMkVMVWtFVDNHTWtCMVhXUDhYdyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzY6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi1wcm9kdWN0cyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1750825922),
-('UnGzRgHDF7odQJWZIxAv02M0y5tzJIxP3Qi9fLle', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQm1JUENEdUtQdGVLVUJ6V2ZvdlV4VzZjcTJYMERld1ZaTUlSajFRcSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fX0=', 1750875599);
+('6VVAN6teXAx1KmHFFTEIFKwIILxoex8lYOixgQdo', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiaElPeGlvSnBkVjBONk9hSWU5R2lQM0R1MG1SV29qckN4R0U1TWgwMCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1751054348);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `shipping`
+-- Table structure for table `shipping`
 --
 
 CREATE TABLE `shipping` (
@@ -439,7 +444,7 @@ CREATE TABLE `shipping` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `shipping`
+-- Dumping data for table `shipping`
 --
 
 INSERT INTO `shipping` (`id`, `order_id`, `carrier`, `tracking_number`, `status`, `created_at`, `updated_at`) VALUES
@@ -457,7 +462,7 @@ INSERT INTO `shipping` (`id`, `order_id`, `carrier`, `tracking_number`, `status`
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -473,7 +478,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `phone`, `address`, `role`, `created_at`, `updated_at`) VALUES
@@ -489,23 +494,23 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `phone`, `address`, `rol
 (10, 'Prof. Gussie Bogan V', 'wiza.jessie@example.net', '$2y$12$F2G8BGYnPYjWw530zc1dBOG0Lg/8O4.z1hS4Y0XZkgcNiAkeoh.Qm', '1-806-378-4364', '5269 Boehm Circle\nNew Garlandhaven, IA 88299', 'admin', '2025-06-23 19:15:08', '2025-06-23 19:15:08');
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `cache`
+-- Indexes for table `cache`
 --
 ALTER TABLE `cache`
   ADD PRIMARY KEY (`key`);
 
 --
--- Chỉ mục cho bảng `cache_locks`
+-- Indexes for table `cache_locks`
 --
 ALTER TABLE `cache_locks`
   ADD PRIMARY KEY (`key`);
 
 --
--- Chỉ mục cho bảng `carts`
+-- Indexes for table `carts`
 --
 ALTER TABLE `carts`
   ADD PRIMARY KEY (`id`),
@@ -513,47 +518,47 @@ ALTER TABLE `carts`
   ADD KEY `carts_product_id_foreign` (`product_id`);
 
 --
--- Chỉ mục cho bảng `categories`
+-- Indexes for table `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`),
   ADD KEY `categories_parent_id_foreign` (`parent_id`);
 
 --
--- Chỉ mục cho bảng `failed_jobs`
+-- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
--- Chỉ mục cho bảng `jobs`
+-- Indexes for table `jobs`
 --
 ALTER TABLE `jobs`
   ADD PRIMARY KEY (`id`),
   ADD KEY `jobs_queue_index` (`queue`);
 
 --
--- Chỉ mục cho bảng `job_batches`
+-- Indexes for table `job_batches`
 --
 ALTER TABLE `job_batches`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `migrations`
+-- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `orders`
+-- Indexes for table `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`),
   ADD KEY `orders_user_id_foreign` (`user_id`);
 
 --
--- Chỉ mục cho bảng `order_items`
+-- Indexes for table `order_items`
 --
 ALTER TABLE `order_items`
   ADD PRIMARY KEY (`id`),
@@ -561,14 +566,14 @@ ALTER TABLE `order_items`
   ADD KEY `order_items_product_id_foreign` (`product_id`);
 
 --
--- Chỉ mục cho bảng `payments`
+-- Indexes for table `payments`
 --
 ALTER TABLE `payments`
   ADD PRIMARY KEY (`id`),
   ADD KEY `payments_order_id_foreign` (`order_id`);
 
 --
--- Chỉ mục cho bảng `products`
+-- Indexes for table `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
@@ -576,14 +581,14 @@ ALTER TABLE `products`
   ADD KEY `products_category_id_foreign` (`category_id`);
 
 --
--- Chỉ mục cho bảng `product_images`
+-- Indexes for table `product_images`
 --
 ALTER TABLE `product_images`
   ADD PRIMARY KEY (`id`),
   ADD KEY `product_images_product_id_foreign` (`product_id`);
 
 --
--- Chỉ mục cho bảng `reviews`
+-- Indexes for table `reviews`
 --
 ALTER TABLE `reviews`
   ADD PRIMARY KEY (`id`),
@@ -591,7 +596,7 @@ ALTER TABLE `reviews`
   ADD KEY `reviews_product_id_foreign` (`product_id`);
 
 --
--- Chỉ mục cho bảng `sessions`
+-- Indexes for table `sessions`
 --
 ALTER TABLE `sessions`
   ADD PRIMARY KEY (`id`),
@@ -599,159 +604,159 @@ ALTER TABLE `sessions`
   ADD KEY `sessions_last_activity_index` (`last_activity`);
 
 --
--- Chỉ mục cho bảng `shipping`
+-- Indexes for table `shipping`
 --
 ALTER TABLE `shipping`
   ADD PRIMARY KEY (`id`),
   ADD KEY `shipping_order_id_foreign` (`order_id`);
 
 --
--- Chỉ mục cho bảng `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `carts`
+-- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT cho bảng `categories`
+-- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
--- AUTO_INCREMENT cho bảng `failed_jobs`
+-- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `jobs`
+-- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `migrations`
+-- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT cho bảng `orders`
+-- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT cho bảng `order_items`
+-- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT cho bảng `payments`
+-- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT cho bảng `products`
+-- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
--- AUTO_INCREMENT cho bảng `product_images`
+-- AUTO_INCREMENT for table `product_images`
 --
 ALTER TABLE `product_images`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT cho bảng `reviews`
+-- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT cho bảng `shipping`
+-- AUTO_INCREMENT for table `shipping`
 --
 ALTER TABLE `shipping`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT cho bảng `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- Các ràng buộc cho các bảng đã đổ
+-- Constraints for dumped tables
 --
 
 --
--- Các ràng buộc cho bảng `carts`
+-- Constraints for table `carts`
 --
 ALTER TABLE `carts`
   ADD CONSTRAINT `carts_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
   ADD CONSTRAINT `carts_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Các ràng buộc cho bảng `categories`
+-- Constraints for table `categories`
 --
 ALTER TABLE `categories`
   ADD CONSTRAINT `categories_parent_id_foreign` FOREIGN KEY (`parent_id`) REFERENCES `categories` (`id`);
 
 --
--- Các ràng buộc cho bảng `orders`
+-- Constraints for table `orders`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `orders_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Các ràng buộc cho bảng `order_items`
+-- Constraints for table `order_items`
 --
 ALTER TABLE `order_items`
   ADD CONSTRAINT `order_items_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
   ADD CONSTRAINT `order_items_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 
 --
--- Các ràng buộc cho bảng `payments`
+-- Constraints for table `payments`
 --
 ALTER TABLE `payments`
   ADD CONSTRAINT `payments_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`);
 
 --
--- Các ràng buộc cho bảng `products`
+-- Constraints for table `products`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `products_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`),
   ADD CONSTRAINT `products_seller_id_foreign` FOREIGN KEY (`seller_id`) REFERENCES `users` (`id`);
 
 --
--- Các ràng buộc cho bảng `product_images`
+-- Constraints for table `product_images`
 --
 ALTER TABLE `product_images`
   ADD CONSTRAINT `product_images_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 
 --
--- Các ràng buộc cho bảng `reviews`
+-- Constraints for table `reviews`
 --
 ALTER TABLE `reviews`
   ADD CONSTRAINT `reviews_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
   ADD CONSTRAINT `reviews_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
--- Các ràng buộc cho bảng `shipping`
+-- Constraints for table `shipping`
 --
 ALTER TABLE `shipping`
   ADD CONSTRAINT `shipping_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`);

@@ -181,23 +181,68 @@
             @endforeach
         </section>
 
-        <section class="shopee-section">
-            <div class="shopee-section-header">
-                <h2 class="shopee-section-title">Danh Mục</h2>
+    <!-- danh mục -->
+        <section class="shopee-section bg-white py-4 rounded shadow-sm position-relative">
+            <div class="shopee-section-header mb-3 px-3">
+                <h2 class="shopee-section-title text-lg fw-semibold text-dark">Danh Mục</h2>
             </div>
-            <div class="category-grid-container">
-                <div class="row row-cols-10 g-0">
-                    @foreach ($categoryList as $category)
-                    <div class="col">
-                        <a href="#" class="category-item">
-                            <img src="{{ asset('assets/images/' . $category->image) }}" alt="{{ $category->name }}">
-                            <div class="category-item-title">{{ $category->name }}</div>
-                        </a>
+
+            <!-- Nút điều hướng trái -->
+            <button id="scrollLeft"
+                class="btn btn-outline-secondary rounded-circle position-absolute top-50 start-0 translate-middle-y z-3 d-flex align-items-center justify-content-center shadow-sm fs-5"
+                style="width: 40px; height: 40px; font-weight: bold;">
+                &lt;
+            </button>
+
+            <!-- Nút điều hướng phải -->
+            <button id="scrollRight"
+                class="btn btn-outline-secondary rounded-circle position-absolute top-50 end-0 translate-middle-y z-3 d-flex align-items-center justify-content-center shadow-sm fs-5"
+                style="width: 40px; height: 40px; font-weight: bold;">
+                &gt;
+            </button>
+
+            <!-- Danh mục chia 2 dòng trượt ngang -->
+            <div class="px-5">
+                <div id="categoryScrollContainer" class="d-flex flex-nowrap" style="scroll-behavior: smooth; overflow-x: auto; -ms-overflow-style: none; scrollbar-width: none;">
+                    <div class="d-flex flex-column flex-shrink-0" style="gap: 1rem;">
+                        @foreach ($categoryList->chunk(ceil($categoryList->count() / 2)) as $chunk)
+                            <div class="d-flex flex-nowrap" style="gap: 1rem;">
+                                @foreach ($chunk as $category)
+                                    <div class="text-center flex-shrink-0" style="width: 100px;">
+                                        <a href="#" class="category-item text-decoration-none">
+                                            <img src="{{ asset('assets/images/' . $category->image) }}"
+                                                class="img-fluid rounded-circle mx-auto d-block mb-1 border"
+                                                style="width:70px; height:70px; object-fit:cover;"
+                                                alt="{{ $category->name }}">
+                                            <div class="category-item-title small text-dark">{{ $category->name }}</div>
+                                        </a>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endforeach
                     </div>
-                    @endforeach
                 </div>
             </div>
         </section>
+
+        <!-- JavaScript để điều khiển scroll của phần danh mục -->
+        <script>
+            const container = document.getElementById('categoryScrollContainer');
+            document.getElementById('scrollLeft').addEventListener('click', () => {
+                container.scrollBy({
+                    left: -400,
+                    behavior: 'smooth'
+                });
+            });
+
+            document.getElementById('scrollRight').addEventListener('click', () => {
+                container.scrollBy({
+                    left: 400,
+                    behavior: 'smooth'
+                });
+            });
+        </script>
+
 
         <section class="shopee-section">
             <div class="shopee-section-header align-items-baseline">
