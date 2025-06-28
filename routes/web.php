@@ -12,15 +12,15 @@ use App\Http\Controllers\ShippingController;
 use App\Http\Middleware\CheckAge;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
-use App\Models\Category;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\SearchController;
 use Symfony\Component\HttpKernel\Debug\VirtualRequestStack;
+use App\Models\Category;
+use Illuminate\Support\Facades\DB;
 
 Route::get('/', function () {
     $productList = DB::table('products')->get();
     $categoryList = DB::table('categories')->get();
-    return view('welcome',compact('productList', 'categoryList'));
+    return view('welcome', compact('productList', 'categoryList'));
 })->name('welcome');
 
 
