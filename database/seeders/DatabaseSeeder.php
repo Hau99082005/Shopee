@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
          product_imagesSeeder::class,
          reviewsSeeder::class,
          shippingSeeder::class,
+         BannerSeeder::class,
         ]);
     }
 }

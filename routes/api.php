@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CartsController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
@@ -20,3 +21,8 @@ Route::resource('categories', CategoryController::class)->names([
     'create' => 'api.categories.create',
     'edit' => 'api.categories.edit',
 ]);
+
+// Banner routes
+Route::resource('banners', BannerController::class);
+Route::get('banners/active', [BannerController::class, 'active']);
+Route::post('banners/update-order', [BannerController::class, 'updateOrder']);
