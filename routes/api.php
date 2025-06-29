@@ -12,7 +12,6 @@ Route::resource('users', UserController::class);
 Route::resource('carts', CartsController::class);
 Route::resource('products', ProductController::class);
 Route::resource('reviews', ReviewsController::class);
-Route::resource('banners', BannerController::class);
 Route::resource('categories', CategoryController::class)->names([
     'index' => 'api.categories.index',
     'store' => 'api.categories.store',
@@ -22,3 +21,4 @@ Route::resource('categories', CategoryController::class)->names([
     'create' => 'api.categories.create',
     'edit' => 'api.categories.edit',
 ]);
+Route::resource('banners', BannerController::class);
