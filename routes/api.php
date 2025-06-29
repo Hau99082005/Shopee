@@ -16,3 +16,7 @@ Route::put('/cart-api/{id}', [CartsController::class, 'apiUpdate']);
 Route::delete('/cart-api/{id}', [CartsController::class, 'apiDestroy']);
 Route::post('/cart-api/cleanup', [CartsController::class, 'apiCleanup']);
 Route::delete('/cart-api/clear', [CartsController::class, 'apiClear']);
+
+// New smart cart API routes
+Route::post('/cart-api/add-or-replace', [CartsController::class, 'apiAddOrReplace']);
+Route::post('/cart-api/add-multiple', [CartsController::class, 'apiAddMultiple']);
