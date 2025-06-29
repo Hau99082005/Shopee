@@ -581,7 +581,13 @@
                         resultsDiv.innerHTML = '<p style="padding:8px">Không tìm thấy sản phẩm.</p>';
                     } else {
                         resultsDiv.innerHTML = data.map(item =>
-                            `<div style=\"padding:8px; border-bottom:1px solid #eee; cursor:pointer;\" onclick=\"window.location='/products?search='+encodeURIComponent(item.name)\"><strong>${item.name}</strong><br><span>${item.description ? item.description.substring(0, 60) : ''}</span></div>`
+                            `<div style="padding:8px; border-bottom:1px solid #eee; cursor:pointer; display:flex; align-items:center;" onclick="window.location='/products/${item.id}/detail'">
+                                <img src="/assets/images/${item.image}" alt="${item.name}" style="width:48px;height:48px;object-fit:cover;margin-right:12px;">
+                                <div>
+                                    <div style="font-weight:500; color:#222; font-family:'Lato',sans-serif; font-size:16px;">${item.name}</div>
+                                    <div style="font-size:13px;color:#888; font-family:'Lato',sans-serif;">${item.description ? item.description.substring(0, 60) : ''}</div>
+                                </div>
+                            </div>`
                         ).join('');
                     }
                     resultsDiv.style.display = 'block';
