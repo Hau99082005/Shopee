@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 
 Route::resource('users', UserController::class);
 Route::resource('carts', CartsController::class);
+Route::resource('products', ProductController::class);
 Route::resource('reviews', ReviewsController::class);
 Route::resource('categories', CategoryController::class)->names([
     'index' => 'api.categories.index',
@@ -19,3 +20,15 @@ Route::resource('categories', CategoryController::class)->names([
     'create' => 'api.categories.create',
     'edit' => 'api.categories.edit',
 ]);
+
+// Cart API routes
+Route::get('/cart-api', [CartsController::class, 'apiIndex']);
+Route::post('/cart-api', [CartsController::class, 'apiStore']);
+Route::put('/cart-api/{id}', [CartsController::class, 'apiUpdate']);
+Route::delete('/cart-api/{id}', [CartsController::class, 'apiDestroy']);
+Route::post('/cart-api/cleanup', [CartsController::class, 'apiCleanup']);
+Route::delete('/cart-api/clear', [CartsController::class, 'apiClear']);
+
+// New smart cart API routes
+Route::post('/cart-api/add-or-replace', [CartsController::class, 'apiAddOrReplace']);
+Route::post('/cart-api/add-multiple', [CartsController::class, 'apiAddMultiple']);
