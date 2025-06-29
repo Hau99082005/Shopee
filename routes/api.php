@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Api\BannerController;
 
-Route::resource('banners', BannerController::class);
 Route::resource('users', UserController::class);
 Route::resource('carts', CartsController::class);
 Route::resource('products', ProductController::class);
@@ -22,3 +21,4 @@ Route::resource('categories', CategoryController::class)->names([
     'create' => 'api.categories.create',
     'edit' => 'api.categories.edit',
 ]);
+Route::resource('banners', BannerController::class);
