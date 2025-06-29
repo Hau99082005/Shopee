@@ -30,8 +30,10 @@ Route::get('/account', function () {
 });
 
 Route::get('/checkout', function () {
-    return "Page Checkout";
-});
+    $categories = \DB::table('categories')->get();
+    $cartList = session('cartList') ?? collect(); // hoặc lấy từ DB nếu có user
+    return view('checkout', compact('categories', 'cartList'));
+})->name('checkout');
 
 
 Route::get('/product-details', function () {
