@@ -39,7 +39,7 @@ class ProductFactory extends Factory
             'Tủ lạnh Samsung Side by Side'
         ];
 
-        $categories = [1, 2, 3, 4, 5]; // Assuming we have 5 categories
+        $categories = [1, 2, 3, 4, 5]; 
 
         return [
             'name' => $this->faker->randomElement($productNames),

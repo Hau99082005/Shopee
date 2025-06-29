@@ -16,6 +16,7 @@ use App\Http\Controllers\SearchController;
 use Symfony\Component\HttpKernel\Debug\VirtualRequestStack;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\ProductDetailController;
 
 Route::get('/', function () {
     $productList = DB::table('products')->get();
@@ -88,3 +89,4 @@ Route::resource('product_images', productImagesController::class);
 Route::resource('shipping', ShippingController::class);
 Route::resource('categories', CategoryController::class);
 Route::get('/search', [SearchController::class, 'search'])->name('search');
+Route::get('/products/{id}/detail', [ProductDetailController::class, 'show'])->name('products.detail');
