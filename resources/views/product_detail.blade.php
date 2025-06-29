@@ -9,8 +9,8 @@
                     style="color: black; text-decoration: none; font-family: 'Lato', sans-serif;">Shopee</a></li>
             <li class="breadcrumb-item">
                 <a href="{{ route('products', ['categories[]' => $product->category->id ?? '']) }}"
-                   style="color: black; text-decoration: none; font-family: 'Lato', sans-serif;">
-                   {{ $product->category->name ?? 'Danh mục' }}
+                    style="color: black; text-decoration: none; font-family: 'Lato', sans-serif;">
+                    {{ $product->category->name ?? 'Danh mục' }}
                 </a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">{{ $product->name }}</li>
@@ -24,11 +24,17 @@
                         alt="{{ $product->name }}" class="img-fluid main-img"
                         style="max-height: 350px; object-fit: contain;">
                 </div>
-                <div class="d-flex flex-wrap gap-2 justify-content-center">
-                    @foreach($images as $img)
-                    <img src="{{ asset('assets/images/' . $img->image_url) }}" alt="thumb" class="img-thumbnail"
-                        style="width: 60px; height: 60px; object-fit: cover;">
-                    @endforeach
+                <div class="d-flex align-items-center justify-content-center pt-2" style="gap: 8px;">
+                    <button id="thumbLeft" class="btn btn-light p-1 border" style="height: 40px; width: 32px;"><i
+                            class="fa fa-chevron-left"></i></button>
+                    <div id="thumbsContainer" class="d-flex gap-2" style="overflow-x: auto; scroll-behavior: smooth; max-width: 320px; scrollbar-width: none; -ms-overflow-style: none;">
+                        @foreach($images as $img)
+                        <img src="{{ asset('assets/images/' . $img->image_url) }}" alt="thumb" class="img-thumbnail"
+                            style="width: 60px; height: 60px; object-fit: cover; cursor:pointer;">
+                        @endforeach
+                    </div>
+                    <button id="thumbRight" class="btn btn-light p-1 border" style="height: 40px; width: 32px;"><i
+                            class="fa fa-chevron-right"></i></button>
                 </div>
             </div>
         </div>
@@ -100,4 +106,26 @@
         </div>
     </div>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const container = document.getElementById('thumbsContainer');
+    document.getElementById('thumbLeft').onclick = function() {
+        container.scrollBy({
+            left: -120,
+            behavior: 'smooth'
+        });
+    };
+    document.getElementById('thumbRight').onclick = function() {
+        container.scrollBy({
+            left: 120,
+            behavior: 'smooth'
+        });
+    };
+});
+</script>
+<style>
+#thumbsContainer::-webkit-scrollbar {
+    display: none;
+}
+</style>
 @endsection

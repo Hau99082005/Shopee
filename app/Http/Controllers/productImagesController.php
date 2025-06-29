@@ -13,7 +13,8 @@ class productImagesController extends Controller
     public function index()
     {
         //
-        return product_images::all();
+        $product_images =  product_images::all();
+        return response()->json($product_images);
     }
 
     /**

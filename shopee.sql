@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 29, 2025 lúc 09:02 AM
+-- Thời gian đã tạo: Th6 29, 2025 lúc 10:27 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -451,16 +451,14 @@ CREATE TABLE `product_images` (
 --
 
 INSERT INTO `product_images` (`id`, `product_id`, `image_url`, `created_at`, `updated_at`) VALUES
-(1, 1, 'https://via.placeholder.com/640x480.png/002266?text=molestiae', '2025-06-23 19:15:08', '2025-06-23 19:15:08'),
-(2, 1, 'https://via.placeholder.com/640x480.png/005588?text=tempora', '2025-06-23 19:15:08', '2025-06-23 19:15:08'),
-(3, 1, 'https://via.placeholder.com/640x480.png/00aa00?text=necessitatibus', '2025-06-23 19:15:08', '2025-06-23 19:15:08'),
-(4, 1, 'https://via.placeholder.com/640x480.png/0088cc?text=est', '2025-06-23 19:15:08', '2025-06-23 19:15:08'),
-(5, 1, 'https://via.placeholder.com/640x480.png/007733?text=quia', '2025-06-23 19:15:08', '2025-06-23 19:15:08'),
-(6, 1, 'https://via.placeholder.com/640x480.png/0099ee?text=et', '2025-06-23 19:15:08', '2025-06-23 19:15:08'),
-(7, 1, 'https://via.placeholder.com/640x480.png/001177?text=officia', '2025-06-23 19:15:08', '2025-06-23 19:15:08'),
-(8, 1, 'https://via.placeholder.com/640x480.png/00aaff?text=facere', '2025-06-23 19:15:08', '2025-06-23 19:15:08'),
-(9, 1, 'https://via.placeholder.com/640x480.png/00bbcc?text=doloribus', '2025-06-23 19:15:08', '2025-06-23 19:15:08'),
-(10, 1, 'https://via.placeholder.com/640x480.png/0099aa?text=qui', '2025-06-23 19:15:08', '2025-06-23 19:15:08');
+(1, 1, '132909f048482d8d984a069b76f58788 (2).webp', '2025-06-23 19:15:08', '2025-06-23 19:15:08'),
+(2, 1, 'c.webp', '2025-06-23 19:15:08', '2025-06-23 19:15:08'),
+(3, 1, '98c357b90681f99d05ce605e8283a4d0.webp', '2025-06-23 19:15:08', '2025-06-23 19:15:08'),
+(4, 1, '7aad8b5f3d542bff9d067d80d396edaa.webp', '2025-06-23 19:15:08', '2025-06-23 19:15:08'),
+(5, 1, 'f117457327883af148b472362e1536e0.webp', '2025-06-23 19:15:08', '2025-06-23 19:15:08'),
+(6, 1, 'afe044f6a738557701937803f8fd8709.webp', '2025-06-23 19:15:08', '2025-06-23 19:15:08'),
+(7, 1, 'e25f6b1aa248d785c1bca0c1bfeb36e8', '2025-06-23 19:15:08', '2025-06-23 19:15:08'),
+(8, 1, '46ae1e959d8fbbb4e735fe4a4fa19c17.webp', '2025-06-23 19:15:08', '2025-06-23 19:15:08');
 
 -- --------------------------------------------------------
 
@@ -514,7 +512,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('S7qoCk9jKdLb9XhtPU10AvqLagJkHGlSR8UChEDQ', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiWjRqYTZUZllvakNiSnp2YW9LcFRuTXRCcXRhZ1V5TUtjNWxZWERjTCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wcm9kdWN0cz9jYXRlZ29yaWVzJTVCMCU1RD0yIjt9fQ==', 1751180527);
+('S7qoCk9jKdLb9XhtPU10AvqLagJkHGlSR8UChEDQ', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiWjRqYTZUZllvakNiSnp2YW9LcFRuTXRCcXRhZ1V5TUtjNWxZWERjTCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzk6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wcm9kdWN0cy8xL2RldGFpbCI7fX0=', 1751185610);
 
 -- --------------------------------------------------------
 
