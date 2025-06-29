@@ -15,7 +15,11 @@ class CartsController extends Controller
      */
     public function index()
     {
-        return view('cart');
+        $categories = DB::table('categories')->get();
+        $productList = DB::table('products')->get();
+        $userId = auth()->check() ? auth()->id() : 1;
+        $cartList = \App\Models\carts::with('product')->where('user_id', $userId)->get();
+        return view('cart', compact('categories', 'productList', 'cartList'));
     }
 
     /**

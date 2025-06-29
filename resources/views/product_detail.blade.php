@@ -56,11 +56,16 @@
                     <div class="bg-light border rounded p-3 mb-3 d-flex align-items-center justify-content-between">
                         <div>
                             <span class="badge bg-danger">FLASH SALE</span>
-                            <span class="fs-2 fw-bold text-danger ms-2">{{ $product->price }}₫</span>
+                            <span class="fs-2 fw-bold text-danger ms-2">
+                                ₫{{ $product->price }}
+                            </span>
                             @if(!empty($product->price_old) && $product->price_old > $product->price)
-                            <span class="text-muted text-decoration-line-through ms-2">{{ $product->price_old }}₫</span>
-                            <span
-                                class="badge bg-warning text-dark ms-2">-{{ round((($product->price_old - $product->price) / $product->price_old) * 100) }}%</span>
+                            <span class="text-muted text-decoration-line-through ms-2">
+                                ₫{{ $product->price_old}}
+                            </span>
+                            <span class="badge bg-warning text-dark ms-2">
+                                -{{ round((($product->price_old - $product->price) / $product->price_old) * 100) }}%
+                            </span>
                             @endif
                         </div>
                         <div class="d-flex align-items-center gap-2">
@@ -96,11 +101,17 @@
                     </div>
                 </div>
                 <!-- Nút mua -->
-                <div class="mt-4 d-flex gap-3">
-                    <input type="number" value="1" min="1" class="form-control w-auto" style="max-width: 80px;">
-                    <button class="btn btn-warning px-4 fw-bold">Mua ngay</button>
-                    <button class="btn btn-danger px-4 fw-bold">Thêm vào giỏ hàng <i
-                            class="fa fa-cart-plus ms-2"></i></button>
+                <div class="mt-4 d-flex gap-3 align-items-center">
+                    <input id="add-to-cart-qty" type="number" value="1" min="1" class="form-control w-auto"
+                        style="max-width: 80px; font-family: 'Lato';">
+                    <button id="buy-now-btn" class="btn btn-warning px-4 fw-bold">Mua ngay</button>
+                    <button id="add-to-cart-btn" class="btn btn-danger px-4 fw-bold">
+                        Thêm vào giỏ hàng <i class="fa fa-cart-plus ms-2"></i>
+                    </button>
+                </div>
+                <div id="add-to-cart-alert" class="alert alert-success mt-3 d-none" role="alert"
+                    style="font-family: 'Lato';">
+                    Đã thêm vào giỏ hàng!
                 </div>
             </div>
         </div>
@@ -139,6 +150,84 @@ document.addEventListener('DOMContentLoaded', function() {
             behavior: 'smooth'
         });
     };
+
+    const addToCartBtn = document.getElementById('add-to-cart-btn');
+    const qtyInput = document.getElementById('add-to-cart-qty');
+    const alertBox = document.getElementById('add-to-cart-alert');
+    addToCartBtn.addEventListener('click', function() {
+        const productId = {
+            {
+                $product - > id
+            }
+        };
+        const quantity = parseInt(qtyInput.value) || 1;
+        fetch('/api/cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                        'content'),
+                    ...(localStorage.getItem('token') ? {
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    } : {})
+                },
+                body: JSON.stringify({
+                    product_id: productId,
+                    quantity: quantity
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    alertBox.classList.remove('d-none');
+                    setTimeout(() => alertBox.classList.add('d-none'), 2000);
+                    updateCartCount();
+                } else {
+                    alertBox.classList.remove('alert-success');
+                    alertBox.classList.add('alert-danger');
+                    alertBox.textContent = data.message || 'Có lỗi xảy ra!';
+                    alertBox.classList.remove('d-none');
+                    setTimeout(() => {
+                        alertBox.classList.add('d-none');
+                        alertBox.classList.remove('alert-danger');
+                        alertBox.classList.add('alert-success');
+                        alertBox.textContent = 'Đã thêm vào giỏ hàng!';
+                    }, 2500);
+                }
+            })
+            .catch(() => {
+                alertBox.classList.remove('alert-success');
+                alertBox.classList.add('alert-danger');
+                alertBox.textContent = 'Có lỗi xảy ra!';
+                alertBox.classList.remove('d-none');
+                setTimeout(() => {
+                    alertBox.classList.add('d-none');
+                    alertBox.classList.remove('alert-danger');
+                    alertBox.classList.add('alert-success');
+                    alertBox.textContent = 'Đã thêm vào giỏ hàng!';
+                }, 2500);
+            });
+    });
+
+    function updateCartCount() {
+        fetch('/api/cart', {
+                headers: {
+                    'Accept': 'application/json',
+                    ...(localStorage.getItem('token') ? {
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    } : {})
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success && data.data && data.data.summary) {
+                    const count = data.data.summary.total_quantity || 0;
+                    const badge = document.querySelector('.cart-count-badge');
+                    if (badge) badge.textContent = count;
+                }
+            });
+    }
 });
 </script>
 <style>

@@ -9,12 +9,9 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\productImagesController;
 use App\Http\Controllers\ReviewsController;
 use App\Http\Controllers\ShippingController;
-use App\Http\Middleware\CheckAge;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\SearchController;
-use Symfony\Component\HttpKernel\Debug\VirtualRequestStack;
-use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\ProductDetailController;
 use Illuminate\Support\Facades\Auth;
@@ -33,8 +30,10 @@ Route::get('/account', function () {
 });
 
 Route::get('/checkout', function () {
-    return "Page Checkout";
-});
+    $categories = \DB::table('categories')->get();
+    $cartList = session('cartList') ?? collect(); // hoặc lấy từ DB nếu có user
+    return view('checkout', compact('categories', 'cartList'));
+})->name('checkout');
 
 
 Route::get('/product-details', function () {
