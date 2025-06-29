@@ -147,13 +147,20 @@
                                 </button>
                                 <div class="d-flex align-items-center justify-content-center mb-1" style="gap: 0.5rem;">
                                     <div class="product-card__price text-danger" style="font-size:1.1rem;">
-                                        <span class="product-card__price-currency">₫</span>{{ number_format($product->price, 0, ',', '.') }}
+                                        <small> <span
+                                                class="product-card__price-currency">₫</span>{{ $product->price}}</small>
+                                        <small
+                                            style="font-family: 'Latp', sans-serif; font-size: 16; color: gray; text-decoration:line-through">
+                                            <span
+                                                class="product-card__price-currency">₫</span>{{ $product->price_old}}</small>
                                     </div>
-                                    <i class="fa fa-shopping-cart text-warning" aria-hidden="true" style="font-size:1.2rem;"></i>
+                                    <i class="fa fa-shopping-cart text-warning" aria-hidden="true"
+                                        style="font-size:1.2rem;"></i>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-center gap-2 mb-1">
                                     <span class="badge bg-warning text-dark" style="font-size:0.8rem;">
-                                        <i class="fa fa-star text-warning me-1" aria-hidden="true"></i>{{ rand(45,50)/10 }}
+                                        <i class="fa fa-star text-warning me-1"
+                                            aria-hidden="true"></i>{{ rand(45,50)/10 }}
                                     </span>
                                     <span class="text-muted small">Đã bán {{ round(rand(100, 5000)/100, 1) }}k</span>
                                 </div>
@@ -171,17 +178,16 @@
                     </div>
                     @endforeach
                 </div>
-
-                <!-- Pagination -->
                 <div class="d-flex justify-content-center mt-4">
                     {{ $products->appends(request()->query())->links() }}
                 </div>
                 @else
                 <div class="text-center py-5">
-                    <img src="{{ asset('assets/images/search-not-found.png') }}" alt="Không tìm thấy"
-                        style="width:100px; height:100px;">
-                    <h5 class="text-muted mt-3">Không tìm thấy kết quả nào</h5>
-                    <p class="text-muted small">Hãy thử sử dụng các từ khóa chung chung hơn</p>
+                    <img src="{{ asset('assets/images/undraw_document-search_2o7x.png') }}" alt="Không tìm thấy"
+                        style="width:200px; height:200px;">
+                    <h5 class="text-muted mt-3" style="font-family: Lato, sans-serif;">Không tìm thấy kết quả nào</h5>
+                    <p class="text-muted small" style="font-family: Lato, sans-serif;">Hãy thử sử dụng các từ khóa chung
+                        chung hơn</p>
                 </div>
                 @endif
             </main>

@@ -288,6 +288,20 @@
     color: #666;
 }
 
+.product-card__price-new {
+    color: #ee4d2d;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-right: 0.5rem;
+}
+
+.product-card__price-old {
+    color: #888;
+    font-size: 1rem;
+    text-decoration: line-through;
+    font-weight: normal;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .cart-container {

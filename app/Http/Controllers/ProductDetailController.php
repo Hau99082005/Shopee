@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProductDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductDetailController extends Controller
 {
@@ -11,7 +13,8 @@ class ProductDetailController extends Controller
      */
     public function index()
     {
-        //
+        $details = ProductDetail::all();
+        return response()->json($details);
     }
 
     /**
@@ -27,7 +30,21 @@ class ProductDetailController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'name' => 'required|string',
+            'image' => 'nullable|string',
+            'price' => 'required|numeric',
+            'price_old' => 'nullable|numeric',
+            'color' => 'nullable|string',
+            'size' => 'nullable|string',
+            'material' => 'nullable|string',
+            'origin' => 'nullable|string',
+            'warranty' => 'nullable|string',
+            'description' => 'nullable|string',
+        ]);
+        $detail = ProductDetail::create($validated);
+        return response()->json($detail, 201);
     }
 
     /**
@@ -35,7 +52,10 @@ class ProductDetailController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $product = \App\Models\Product::with(['detail', 'category'])->findOrFail($id);
+        $images = \App\Models\product_images::where('product_id', $id)->get();
+        $categories = DB::table('categories')->get();
+        return view('product_detail', compact('product', 'images', 'categories'));
     }
 
     /**
@@ -51,7 +71,21 @@ class ProductDetailController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $detail = ProductDetail::findOrFail($id);
+        $validated = $request->validate([
+            'name' => 'sometimes|string',
+            'image' => 'sometimes|string',
+            'price' => 'sometimes|numeric',
+            'price_old' => 'sometimes|numeric',
+            'color' => 'sometimes|string',
+            'size' => 'sometimes|string',
+            'material' => 'sometimes|string',
+            'origin' => 'sometimes|string',
+            'warranty' => 'sometimes|string',
+            'description' => 'sometimes|string',
+        ]);
+        $detail->update($validated);
+        return response()->json($detail);
     }
 
     /**
@@ -59,6 +93,8 @@ class ProductDetailController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $detail = ProductDetail::findOrFail($id);
+        $detail->delete();
+        return response()->json(['message' => 'Deleted'], 204);
     }
 }

@@ -82,8 +82,8 @@
                     </div>
                     <nav class="d-flex gap-3 small mt-1 header-main-nav">
                         @foreach((collect($categoryList)->random(5, count($categoryList))) as $category)
-                            <a href="{{ route('products', ['categories[]' => $category->id]) }}"
-                               class="text-white text-decoration-none">{{ $category->name }}</a>
+                        <a href="{{ route('products', ['categories[]' => $category->id]) }}"
+                            class="text-white text-decoration-none">{{ $category->name }}</a>
                         @endforeach
                     </nav>
                 </div>
@@ -118,42 +118,12 @@
                         <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="8"></button>
                     </div>
                     <div class="carousel-inner h-100 rounded-1">
-                        <div class="carousel-item active h-100">
-                            <img src="{{ asset('assets/images/banner.jpg') }}" class="d-block w-100 h-100"
-                                style="object-fit: cover" alt="Banner 1">
+                        @foreach ($bannerList as $key => $banners)
+                        <div class="carousel-item {{ $key == 0 ? 'active' : '' }} h-100">
+                            <img src="{{ asset('assets/images/'.$banners->image) }}" class="d-block w-100 h-100"
+                                style="object-fit: cover" alt="{{ $banners->title }}">
                         </div>
-                        <div class="carousel-item h-100">
-                            <img src="{{ asset('assets/images/banner1.png') }}" class="d-block w-100 h-100"
-                                style="object-fit: cover" alt="Banner 2">
-                        </div>
-                        <div class="carousel-item h-100">
-                            <img src="{{ asset('assets/images/banner3.jpg') }}" class="d-block w-100 h-100"
-                                style="object-fit: cover" alt="Banner 3">
-                        </div>
-                        <div class="carousel-item h-100">
-                            <img src="{{ asset('assets/images/banner4.jpg') }}" class="d-block w-100 h-100"
-                                style="object-fit: cover" alt="Banner 4">
-                        </div>
-                        <div class="carousel-item h-100">
-                            <img src="{{ asset('assets/images/banner5.jpg') }}" class="d-block w-100 h-100"
-                                style="object-fit: cover" alt="Banner 5">
-                        </div>
-                        <div class="carousel-item h-100">
-                            <img src="{{ asset('assets/images/banner7.png') }}" class="d-block w-100 h-100"
-                                style="object-fit: cover" alt="Banner 7">
-                        </div>
-                        <div class="carousel-item h-100">
-                            <img src="{{ asset('assets/images/banner8.jpg') }}" class="d-block w-100 h-100"
-                                style="object-fit: cover" alt="Banner 8">
-                        </div>
-                        <div class="carousel-item h-100">
-                            <img src="{{ asset('assets/images/banner8.jpg') }}" class="d-block w-100 h-100"
-                                style="object-fit: cover" alt="Banner 8">
-                        </div>
-                        <div class="carousel-item h-100">
-                            <img src="{{ asset('assets/images/banner9.jpg') }}" class="d-block w-100 h-100"
-                                style="object-fit: cover" alt="Banner 9">
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -366,7 +336,7 @@
             <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-2">
                 @foreach ($productList as $products)
                 <div class="col mb-2">
-                    <a href="#" class="suggestion-card h-100">
+                    <a href="{{ route('products.detail', ['id' => $products->id]) }}" class="suggestion-card h-100">
                         <div class="suggestion-card__image-wrapper">
                             <div class="suggestion-card__fav-badge">Yêu thích</div>
                             <div class="suggestion-card__discount-badge">

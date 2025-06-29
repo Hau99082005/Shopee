@@ -1,27 +1,103 @@
 @extends('layouts.app')
-@section('title', $product->name)
+@section('title', $product->name ?? 'Chi tiết sản phẩm')
+
 @section('content')
-<div class="container py-4">
-    <div class="row">
+<div class="container-xl py-4">
+    <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb bg-white px-3 py-2 rounded">
+            <li class="breadcrumb-item"><a href="/"
+                    style="color: black; text-decoration: none; font-family: 'Lato', sans-serif;">Shopee</a></li>
+            <li class="breadcrumb-item">
+                <a href="{{ route('products', ['categories[]' => $product->category->id ?? '']) }}"
+                   style="color: black; text-decoration: none; font-family: 'Lato', sans-serif;">
+                   {{ $product->category->name ?? 'Danh mục' }}
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">{{ $product->name }}</li>
+        </ol>
+    </nav>
+    <div class="row g-4">
         <div class="col-md-5">
-            <img src="{{ asset('assets/images/' . $product->image) }}" class="img-fluid rounded" alt="{{ $product->name }}">
+            <div class="border rounded bg-white p-3">
+                <div class="mb-3 text-center">
+                    <img src="{{ asset('assets/images/' . ($product->image ?? 'logo1.jpg')) }}"
+                        alt="{{ $product->name }}" class="img-fluid main-img"
+                        style="max-height: 350px; object-fit: contain;">
+                </div>
+                <div class="d-flex flex-wrap gap-2 justify-content-center">
+                    @foreach($images as $img)
+                    <img src="{{ asset('assets/images/' . $img->image_url) }}" alt="thumb" class="img-thumbnail"
+                        style="width: 60px; height: 60px; object-fit: cover;">
+                    @endforeach
+                </div>
+            </div>
         </div>
         <div class="col-md-7">
-            <h2 class="mb-3">{{ $product->name }}</h2>
-            <h4 class="text-danger mb-3">₫{{ number_format($product->price, 0, ',', '.') }}</h4>
-            <ul class="list-group mb-3">
-                <li class="list-group-item"><strong>Màu sắc:</strong> {{ $detail->color }}</li>
-                <li class="list-group-item"><strong>Kích cỡ:</strong> {{ $detail->size }}</li>
-                <li class="list-group-item"><strong>Chất liệu:</strong> {{ $detail->material }}</li>
-                <li class="list-group-item"><strong>Xuất xứ:</strong> {{ $detail->origin }}</li>
-                <li class="list-group-item"><strong>Bảo hành:</strong> {{ $detail->warranty }}</li>
-            </ul>
-            <div class="mb-3">
-                <strong>Mô tả sản phẩm:</strong>
-                <p>{{ $detail->description }}</p>
+            <div class="border rounded bg-white p-4 h-100 d-flex flex-column justify-content-between">
+                <div>
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                        <span class="badge bg-danger">Yêu Thích</span>
+                        <span class="fw-bold fs-5">{{ $product->name }}</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-3 mb-2">
+                        <span class="text-warning"><i class="fa fa-star"></i> 4.7</span>
+                        <span class="text-muted">|</span>
+                        <span>4,2k Đánh Giá</span>
+                        <span class="text-muted">|</span>
+                        <span>8,5k Đã Bán</span>
+                    </div>
+                    <div class="bg-light border rounded p-3 mb-3 d-flex align-items-center justify-content-between">
+                        <div>
+                            <span class="badge bg-danger">FLASH SALE</span>
+                            <span class="fs-2 fw-bold text-danger ms-2">{{ $product->price }}₫</span>
+                            @if(!empty($product->price_old) && $product->price_old > $product->price)
+                            <span class="text-muted text-decoration-line-through ms-2">{{ $product->price_old }}₫</span>
+                            <span
+                                class="badge bg-warning text-dark ms-2">-{{ round((($product->price_old - $product->price) / $product->price_old) * 100) }}%</span>
+                            @endif
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="text-danger fw-bold">KẾT THÚC TRONG</span>
+                            <span class="bg-dark text-white px-2 py-1 rounded">02</span>:
+                            <span class="bg-dark text-white px-2 py-1 rounded">03</span>:
+                            <span class="bg-dark text-white px-2 py-1 rounded">21</span>
+                        </div>
+                    </div>
+                    <!-- Vận chuyển, voucher -->
+                    <div class="mb-3">
+                        <span class="me-3"><i class="fa fa-truck text-success"></i> Nhận từ 30 Th06 - 2 Th07, phí giao
+                            ₫0</span>
+                        <span class="badge bg-info text-dark">Voucher SIÊU RẺ</span>
+                    </div>
+                    <!-- Chọn màu sắc, size, chất liệu, xuất xứ, bảo hành -->
+                    <ul class="list-unstyled mb-3">
+                        @if(!empty($product->detail->color))<li><b>Màu sắc:</b> {{ $product->detail->color }}</li>@endif
+                        @if(!empty($product->detail->size))<li><b>Kích thước:</b> {{ $product->detail->size }}</li>
+                        @endif
+                        @if(!empty($product->detail->material))<li><b>Chất liệu:</b> {{ $product->detail->material }}
+                        </li>@endif
+                        @if(!empty($product->detail->origin))<li><b>Xuất xứ:</b> {{ $product->detail->origin }}</li>
+                        @endif
+                        @if(!empty($product->detail->warranty))<li><b>Bảo hành:</b> {{ $product->detail->warranty }}
+                        </li>@endif
+                    </ul>
+                    <!-- Mô tả -->
+                    <div class="mb-3">
+                        <b>Mô tả sản phẩm:</b>
+                        <div class="border rounded p-2 bg-light mt-1" style="white-space: pre-line;">
+                            {{ $product->detail->description ?? $product->description }}
+                        </div>
+                    </div>
+                </div>
+                <!-- Nút mua -->
+                <div class="mt-4 d-flex gap-3">
+                    <input type="number" value="1" min="1" class="form-control w-auto" style="max-width: 80px;">
+                    <button class="btn btn-warning px-4 fw-bold">Mua ngay</button>
+                    <button class="btn btn-danger px-4 fw-bold">Thêm vào giỏ hàng <i
+                            class="fa fa-cart-plus ms-2"></i></button>
+                </div>
             </div>
-            <a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart me-1"></i> Thêm vào giỏ hàng</a>
         </div>
     </div>
 </div>
-@endsection 
+@endsection

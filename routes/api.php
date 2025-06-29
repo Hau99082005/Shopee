@@ -1,12 +1,16 @@
 <?php
 
+use App\Http\Controllers\Api\BannerController;
 use App\Http\Controllers\CartsController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductDetailController;
 use App\Http\Controllers\ReviewsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
+Route::resource('banners', BannerController::class);
+Route::resource('product_details', ProductDetailController::class);
 Route::resource('users', UserController::class);
 Route::resource('carts', CartsController::class);
 Route::resource('products', ProductController::class);

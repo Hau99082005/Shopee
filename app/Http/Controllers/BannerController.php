@@ -11,9 +11,10 @@ class BannerController extends Controller
     // Lấy danh sách banner
     public function index()
     {
-        return response()->json(Banner::all());
-    }
+        $bannerList = Banner::all();
+        return view('welcome', compact('bannerList'));
 
+    }
     // Thêm banner mới (có upload ảnh)
     public function store(Request $request)
     {

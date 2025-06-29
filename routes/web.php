@@ -21,7 +21,8 @@ use App\Http\Controllers\ProductDetailController;
 Route::get('/', function () {
     $productList = DB::table('products')->get();
     $categoryList = DB::table('categories')->get();
-    return view('welcome', compact('productList', 'categoryList'));
+    $bannerList = DB::table('banners')->get();
+    return view('welcome', compact('productList', 'categoryList', 'bannerList'));
 })->name('welcome');
 
 
@@ -35,8 +36,11 @@ Route::get('/checkout', function () {
 
 
 Route::get('/product-details', function () {
-    return "Page product-details";
-});
+    $categories = DB::table('categories')->get();
+    return view('product_detail', compact('categories')); 
+},);
+
+Route::get('/product-details', [ProductDetailController::class, 'product_details'])->name('product_details');
 
 Route::get('/products',[ProductController::class, 'products'])->name('products');
 Route::get('/cart',[CartsController::class, 'index'])->name('cart');
