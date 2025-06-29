@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Shopee Việt Nam | Mua Và Bán Trên Ứng dụng di động và website')
+
 @section('content')
 <main class="container-xl mt-4">
     <section class="row g-2 mb-3">
@@ -55,35 +57,35 @@
         <button id="scrollLeft"
             class="btn btn-outline-secondary rounded-circle position-absolute top-50 start-0 translate-middle-y z-3 d-flex align-items-center justify-content-center shadow-sm fs-5"
             style="width: 40px; height: 40px; font-weight: bold;">
-            &lt;
-        </button>
-        <button id="scrollRight"
-            class="btn btn-outline-secondary rounded-circle position-absolute top-50 end-0 translate-middle-y z-3 d-flex align-items-center justify-content-center shadow-sm fs-5"
-            style="width: 40px; height: 40px; font-weight: bold;">
-            &gt;
-        </button>
-        <div class="px-5">
-            <div id="categoryScrollContainer" class="d-flex flex-nowrap"
-                style="scroll-behavior: smooth; overflow-x: auto; -ms-overflow-style: none; scrollbar-width: none;">
-                <div class="d-flex flex-column flex-shrink-0" style="gap: 1rem;">
-                    @foreach ($categories->chunk(ceil($categories->count() / 2)) as $chunk)
-                    <div class="d-flex flex-nowrap" style="gap: 1rem;">
-                        @foreach ($chunk as $category)
-                        <div class="text-center flex-shrink-0" style="width: 100px;">
-                            <a href="{{ route('products', ['categories[]' => $category->id]) }}"
-                                class="category-item text-decoration-none">
-                                <img src="{{ asset('assets/images/' . $category->image) }}"
-                                    class="img-fluid rounded-circle mx-auto d-block mb-1 border"
-                                    style="width:70px; height:70px; object-fit:cover;" alt="{{ $category->name }}">
-                                <div class="category-item-title small text-dark">{{ $category->name }}</div>
-                            </a>
+            < </button>
+                <button id="scrollRight"
+                    class="btn btn-outline-secondary rounded-circle position-absolute top-50 end-0 translate-middle-y z-3 d-flex align-items-center justify-content-center shadow-sm fs-5"
+                    style="width: 40px; height: 40px; font-weight: bold;">
+                    >
+                </button>
+                <div class="px-5">
+                    <div id="categoryScrollContainer" class="d-flex flex-nowrap"
+                        style="scroll-behavior: smooth; overflow-x: auto; -ms-overflow-style: none; scrollbar-width: none;">
+                        <div class="d-flex flex-column flex-shrink-0" style="gap: 1rem;">
+                            @foreach ($categories->chunk(ceil($categories->count() / 2)) as $chunk)
+                            <div class="d-flex flex-nowrap" style="gap: 1rem;">
+                                @foreach ($chunk as $category)
+                                <div class="text-center flex-shrink-0" style="width: 100px;">
+                                    <a href="{{ route('products', ['categories[]' => $category->id]) }}"
+                                        class="category-item text-decoration-none">
+                                        <img src="{{ asset('assets/images/' . $category->image) }}"
+                                            class="img-fluid rounded-circle mx-auto d-block mb-1 border"
+                                            style="width:70px; height:70px; object-fit:cover;"
+                                            alt="{{ $category->name }}">
+                                        <div class="category-item-title small text-dark">{{ $category->name }}</div>
+                                    </a>
+                                </div>
+                                @endforeach
+                            </div>
+                            @endforeach
                         </div>
-                        @endforeach
                     </div>
-                    @endforeach
                 </div>
-            </div>
-        </div>
     </section>
 
     <script>
@@ -103,12 +105,10 @@
     });
     </script>
 
-
     <section class="shopee-section">
         <div class="shopee-section-header align-items-baseline">
             <div class="d-flex align-items-center">
                 <h2 class="shopee-section-title me-2" style="color: #d0011b; font-weight: 700;">
-                    <img src="{{asset('assets/images/flash-sale.png')}}" alt="Flash Sale" height="24" class="me-1">
                     FLASH SALE
                 </h2>
                 <div id="countdown" class="countdown d-flex gap-1 text-center">
@@ -134,7 +134,7 @@
                     }
                     @endphp
                     <div class="swiper-slide d-flex justify-content-center align-items-stretch">
-                        <a href="#"
+                        <a href="{{ route('products.detail', ['id' => $products->id]) }}"
                             class="product-card text-decoration-none shadow-sm bg-white rounded-4 p-3 d-flex flex-column align-items-center"
                             style="min-width:180px; max-width:210px; margin:0 auto; transition:box-shadow 0.2s;">
 
@@ -252,66 +252,6 @@
             @endforeach
         </div>
     </div>
-
-    <div class="bg-light border-top py-3">
-        <div class="container-xl">
-            <div class="d-flex justify-content-between small text-muted">
-                <p class="mb-0">© 2025 Shopee. Tất cả các quyền được bảo lưu.</p>
-                <p class="mb-0">Quốc gia & Khu vực:
-                    <a href="#" class="text-decoration-none text-muted">Singapore</a> |
-                    <a href="#" class="text-decoration-none text-muted">Indonesia</a> |
-                    <a href="#" class="text-decoration-none text-muted">Thái Lan</a> |
-                    <a href="#" class="text-decoration-none text-muted">Malaysia</a> |
-                    <a href="#" class="text-decoration-none text-muted">Việt Nam</a> |
-                    <a href="#" class="text-decoration-none text-muted">Philippines</a> |
-                    <a href="#" class="text-decoration-none text-muted">Brazil</a> |
-                    <a href="#" class="text-decoration-none text-muted">México</a> |
-                    <a href="#" class="text-decoration-none text-muted">Colombia</a> |
-                    <a href="#" class="text-decoration-none text-muted">Chile</a> |
-                    <a href="#" class="text-decoration-none text-muted">Đài Loan</a>
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <div class="footer-bottom py-5">
-        <div class="container-xl small text-center text-muted">
-            <div class="footer-policy-link-list mb-4" style="text-decoration: none;">
-                <a href="#" style="text-decoration: none; color: black; font-size: 14px; font-family: 'Lato';
-                    font-weight: lighter;">CHÍNH
-                    SÁCH BẢO MẬT</a>
-                <a href="#" style="text-decoration: none; color: black; font-size: 14px; font-family: 'Lato';
-                    font-weight: lighter;">QUY CHẾ HOẠT ĐỘNG</a>
-                <a href="#" style="text-decoration: none; color: black; font-size: 14px; font-family: 'Lato';
-                    font-weight: lighter;">CHÍNH SÁCH VẬN CHUYỂN</a>
-                <a href="#" style="text-decoration: none; color: black; font-size: 14px; font-family: 'Lato';
-                    font-weight: lighter;">CHÍNH SÁCH TRẢ HÀNG VÀ HOÀN TIỀN</a>
-            </div>
-
-            <div class="d-flex justify-content-center align-items-center mb-4">
-                <a href="#" class="mx-3">
-                    <img src="assets/images/download.png" alt="Đã đăng ký" style="height: 48px;">
-                </a>
-                <a href="#" class="mx-3">
-                    <img src="assets/images/download.png" alt="Đã đăng ký" style="height: 48px;">
-                </a>
-                <a href="#" class="mx-3">
-                    <img src="assets/images/download.png" alt="Đã thông báo" style="height: 48px;">
-                </a>
-            </div>
-
-            <p class="mb-1">Công ty TNHH Shopee</p>
-            <p class="mb-1">Địa chỉ: Tầng 4-5-6, Tòa nhà Capital Place, số 29 đường Liễu Giai, Phường Ngọc Khánh,
-                Quận Ba Đình, Thành phố Hà Nội, Việt Nam. Tổng đài hỗ trợ: 19001221 - Email: cskh@hotro.shopee.vn
-            </p>
-            <p class="mb-1">Chịu Trách Nhiệm Quản Lý Nội Dung: Nguyễn Đức Trí - Điện thoại liên hệ: 024 73081221
-                (ext 4678)</p>
-            <p class="mb-1">Mã số doanh nghiệp: 0106773786 do Sở Kế hoạch & Đầu tư TP Hà Nội cấp lần đầu ngày
-                10/02/2015</p>
-            <p class="mb-0">© 2015 - Bản quyền thuộc về Công ty TNHH Shopee</p>
-        </div>
-    </div>
-    </footer>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const searchInput = document.getElementById('search-input');
@@ -354,6 +294,24 @@
         }
     });
     </script>
-    </body>
+</main>
+@endsection
 
-    </html>
+@push('scripts')
+<script>
+const container = document.getElementById('categoryScrollContainer');
+document.getElementById('scrollLeft').addEventListener('click', () => {
+    container.scrollBy({
+        left: -400,
+        behavior: 'smooth'
+    });
+});
+
+document.getElementById('scrollRight').addEventListener('click', () => {
+    container.scrollBy({
+        left: 400,
+        behavior: 'smooth'
+    });
+});
+</script>
+@endpush
