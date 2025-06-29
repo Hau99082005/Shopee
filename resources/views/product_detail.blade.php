@@ -27,8 +27,9 @@
                 <div class="d-flex align-items-center justify-content-center pt-2" style="gap: 8px;">
                     <button id="thumbLeft" class="btn btn-light p-1 border" style="height: 40px; width: 32px;"><i
                             class="fa fa-chevron-left"></i></button>
-                    <div id="thumbsContainer" class="d-flex gap-2" style="overflow-x: auto; scroll-behavior: smooth; max-width: 320px; scrollbar-width: none; -ms-overflow-style: none;">
-                        @foreach($images as $img)
+                    <div id="thumbsContainer" class="d-flex gap-2"
+                        style="overflow-x: auto; scroll-behavior: smooth; max-width: 320px; scrollbar-width: none; -ms-overflow-style: none;">
+                        @foreach($product_images as $img)
                         <img src="{{ asset('assets/images/' . $img->image_url) }}" alt="thumb" class="img-thumbnail"
                             style="width: 60px; height: 60px; object-fit: cover; cursor:pointer;">
                         @endforeach
@@ -64,9 +65,8 @@
                         </div>
                         <div class="d-flex align-items-center gap-2">
                             <span class="text-danger fw-bold">KẾT THÚC TRONG</span>
-                            <span class="bg-dark text-white px-2 py-1 rounded">02</span>:
-                            <span class="bg-dark text-white px-2 py-1 rounded">03</span>:
-                            <span class="bg-dark text-white px-2 py-1 rounded">21</span>
+                            <span id="countdown" class="text-white px-2 py-1 rounded"
+                                style="background: orangered">02:03:21</span>
                         </div>
                     </div>
                     <!-- Vận chuyển, voucher -->
@@ -108,6 +108,24 @@
 </div>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Đồng hồ đếm ngược Flash Sale
+    let duration = 2 * 60 * 60 + 3 * 60 + 21; // 2 giờ 3 phút 21 giây
+    const countdownEl = document.getElementById('countdown');
+
+    function updateCountdown() {
+        let h = Math.floor(duration / 3600);
+        let m = Math.floor((duration % 3600) / 60);
+        let s = duration % 60;
+        countdownEl.textContent =
+            (h < 10 ? '0' : '') + h + ':' +
+            (m < 10 ? '0' : '') + m + ':' +
+            (s < 10 ? '0' : '') + s;
+        if (duration > 0) duration--;
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // Slider ảnh nhỏ
     const container = document.getElementById('thumbsContainer');
     document.getElementById('thumbLeft').onclick = function() {
         container.scrollBy({

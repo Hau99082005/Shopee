@@ -17,12 +17,14 @@ use Symfony\Component\HttpKernel\Debug\VirtualRequestStack;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\ProductDetailController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 Route::get('/', function () {
     $productList = DB::table('products')->get();
-    $categoryList = DB::table('categories')->get();
+    $categories = DB::table('categories')->get();
     $bannerList = DB::table('banners')->get();
-    return view('welcome', compact('productList', 'categoryList', 'bannerList'));
+    return view('welcome', compact('productList', 'categories', 'bannerList'));
 })->name('welcome');
 
 
@@ -53,6 +55,18 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
 
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/profile', function() {
+    return view('profile');
+})->middleware('auth')->name('profile');
+
+Route::put('/profile', function(Request $request) {
+    $user = Auth::user();
+    $user->update($request->only(['name', 'email', 'phone', 'address']));
+    return redirect()->back()->with('success', 'Cập nhật thông tin thành công!');
+})->middleware('auth')->name('profile.update');
+
 Route::put('/put', function() {
     return 'Method PUT';
 });
@@ -64,15 +78,15 @@ Route::post('/post', function () {
 
 Route::get('/admin', function() {
     return view('admin.admin');
-});
+})->middleware('auth', 'check.admin');
 
 Route::get('/admin-analytics', function() {
     return view('admin.analytics');
-});
+})->middleware('auth', 'check.admin');
 
 Route::get('/admin-customers', function() {
     return view('admin.customers');
-});
+})->middleware('auth', 'check.admin');
 
 Route::get('/admin-login', function() {
     return view('admin.login');
@@ -80,11 +94,11 @@ Route::get('/admin-login', function() {
 
 Route::get('/admin-orders', function() {
     return view('admin.login');
-});
+})->middleware('auth', 'check.admin');
 
 Route::get('/admin-products', function() {
     return view('admin.products');
-});
+})->middleware('auth', 'check.admin');
 
 Route::resource('orders', OrderController::class);
 Route::resource('order_items', OrderItemController::class);

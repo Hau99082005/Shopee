@@ -247,10 +247,26 @@
             <div class="form-box">
                 <h3 style="color: black; text-align: left; font-family: 'Lato'; font-size: 25px; font-weight: bold;">
                     Đăng ký</h3>
-                <form action="/register" method="POST">
-                    <input type="hidden" name="_token" value="csrf-token">
+                
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul class="mb-0">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                
+                <form action="{{ route('register') }}" method="POST">
+                    @csrf
+                    <input type="text" name="name" class="form-control" placeholder="Họ và tên" required>
+                    <input type="email" name="email" class="form-control" placeholder="Email" required>
                     <input type="text" name="phone" class="form-control" placeholder="Số điện thoại" required>
-                    <button type="submit" class="btn-primary">Tiếp Theo</button>
+                    <input type="password" name="password" class="form-control" placeholder="Mật khẩu" required>
+                    <input type="password" name="password_confirmation" class="form-control" placeholder="Xác nhận mật khẩu" required>
+                    <textarea name="address" class="form-control" placeholder="Địa chỉ (tùy chọn)" rows="3"></textarea>
+                    <button type="submit" class="btn-primary">ĐĂNG KÝ</button>
                 </form>
 
                 <div class="divider">

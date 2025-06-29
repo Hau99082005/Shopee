@@ -53,9 +53,9 @@ class ProductDetailController extends Controller
     public function show(string $id)
     {
         $product = \App\Models\Product::with(['detail', 'category'])->findOrFail($id);
-        $images = \App\Models\product_images::where('product_id', $id)->get();
+        $product_images = \App\Models\product_images::where('product_id', $id)->get();
         $categories = DB::table('categories')->get();
-        return view('product_detail', compact('product', 'images', 'categories'));
+        return view('product_detail', compact('product', 'product_images', 'categories'));
     }
 
     /**

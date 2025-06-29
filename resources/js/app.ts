@@ -86,5 +86,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const timerInterval = setInterval(updateCountdown, 1000);
         updateCountdown();
     }
+    document.querySelectorAll('[data-bs-toggle="dropdown"]').forEach(function (dropdownToggleEl) {
+        new bootstrap.Dropdown(dropdownToggleEl);
+    });
 }); 
 

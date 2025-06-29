@@ -25,18 +25,23 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
+            'phone' => 'required|string|max:15|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+            'address' => 'nullable|string|max:500',
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'phone' => $request->phone,
             'password' => Hash::make($request->password),
+            'address' => $request->address,
+            'role' => 'customer', // Default role
         ]);
 
         Auth::login($user);
 
-        return redirect('/');
+        return redirect('/')->with('success', 'Đăng ký thành công! Chào mừng bạn đến với Shopee.');
     }
 
     public function login(Request $request)
@@ -49,11 +54,20 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/');
+            return redirect()->intended('/')->with('success', 'Đăng nhập thành công!');
         }
 
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'email' => 'Email hoặc mật khẩu không đúng.',
         ])->onlyInput('email');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/')->with('success', 'Đăng xuất thành công!');
     }
 }

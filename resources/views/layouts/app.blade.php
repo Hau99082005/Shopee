@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="vi">
 
+@php use Illuminate\Support\Facades\Auth; @endphp
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Shopee Clone')</title>
-
-    <!-- Bootstrap CSS -->
+    <title>@yield('title', 'Shopee Việt Nam | Mua Bán trên ứng dụng di động Hoặc Website')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
@@ -16,18 +16,12 @@
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="manifest" href="{{ asset('site.webmanifest') }}">
-
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Custom CSS -->
     @vite(['resources/css/app.css'])
-
     @stack('styles')
 </head>
 
 <body>
-    <!-- Header -->
     <header class="bg-primary text-white sticky-top shadow-sm">
         <div class="container-xl px-4 header-top-nav">
             <div class="d-flex justify-content-between py-1">
@@ -65,11 +59,44 @@
                             <li><a class="dropdown-item" href="#" style="color: black;">English</a></li>
                         </ul>
                     </div>
+                    @if(Auth::check())
+                    <div class="dropdown">
+                        <a href="#" class="d-flex align-items-center gap-2 text-white text-decoration-none dropdown-toggle"
+                           data-bs-toggle="dropdown" aria-expanded="false" style="font-family: 'Lato'; font-size: 16px; font-weight: 500;">
+                            <img src="{{ asset('assets/images/default-avatar.png') }}"
+                                 onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name) }}&background=fb5533&color=fff&size=32';"
+                                 alt="avatar" class="rounded-circle" width="32" height="32">
+                            <span>{{ Auth::user()->name }}</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow">
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center gap-2" href="{{ route('profile') }}">
+                                    <i class="fa fa-user-circle"></i> Tài khoản của tôi
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center gap-2" href="#">
+                                    <i class="fa fa-shopping-bag"></i> Đơn mua
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item d-flex align-items-center gap-2">
+                                        <i class="fa fa-sign-out-alt"></i> Đăng xuất
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                    @else
                     <a href="{{ route('login') }}" class="px-2 fw-bold text-white text-decoration-none"
                         style="font-family: 'Lato';font-size: 16px; font-weight: lighter;">Đăng nhập</a>
                     |
                     <a href="{{ route('register') }}" class="ps-2 fw-bold text-white text-decoration-none"
                         style="font-family: 'Lato';font-size: 16px; font-weight: lighter;">Đăng ký</a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -82,12 +109,16 @@
                 </div>
                 <div class="col">
                     <div class="bg-white rounded p-1 d-flex position-relative">
-                        <input type="text" class="form-control" id="search-input" placeholder="Tìm sản phẩm...">
+                        <input type="text" class="form-control form-control-lg border-0"
+                            placeholder="Shopee bao ship 0Đ - Đăng ký ngay!"
+                            style="box-shadow: none; font-size: 16px; font-family: 'Lato';" id="search-input">
                         <a href='#' class="btn btn-primary px-4" type="button"
                             style="background-color: #fb5533; border-color: #fb5533;">
                             <i class="fa fa-search text-white"></i>
                         </a>
-                        <div id="search-results" class="autocomplete-dropdown" style="position:absolute;top:100%;left:0;right:0;z-index:1000;background:white;border-radius:0 0 8px 8px;box-shadow:0 4px 16px rgba(0,0,0,0.08);"></div>
+                        <div id="search-results" class="autocomplete-dropdown"
+                            style="position:absolute;top:100%;left:0;right:0;z-index:1000;background:white;border-radius:0 0 8px 8px;box-shadow:0 4px 16px rgba(0,0,0,0.08);">
+                        </div>
                     </div>
                     <nav class="d-flex gap-3 small mt-1 header-main-nav">
                         @foreach((collect($categories)->random(5, count($categories))) as $category)
@@ -109,14 +140,27 @@
             </div>
         </div>
     </header>
-
-
-    <!-- Main Content -->
     <main class="py-4">
+        @if(session('success'))
+        <div class="container-xl">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+        @endif
+
+        @if(session('error'))
+        <div class="container-xl">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+        @endif
+
         @yield('content')
     </main>
-
-    <!-- Footer -->
     <footer class="mt-5">
         <div class="footer-top-border"></div>
         <div class="bg-light pt-5 pb-4">
@@ -317,10 +361,9 @@
         </div>
     </footer>
 
-    <!-- Bootstrap JS -->
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Custom JS -->
     @vite(['resources/js/app.ts'])
 
     @stack('scripts')
@@ -341,7 +384,8 @@
                 .then(res => res.json())
                 .then(data => {
                     if (!Array.isArray(data) || data.length === 0) {
-                        resultsDiv.innerHTML = '<div class="p-2 text-muted">Không tìm thấy sản phẩm.</div>';
+                        resultsDiv.innerHTML =
+                            '<div class="p-2 text-muted">Không tìm thấy sản phẩm.</div>';
                     } else {
                         resultsDiv.innerHTML = data.map(item =>
                             `<div class="autocomplete-item" onclick="window.location='/products/${item.id}/detail'">

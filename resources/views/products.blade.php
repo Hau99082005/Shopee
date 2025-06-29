@@ -6,7 +6,6 @@
 <div class="shopee-search-page-layout">
     <div class="container-fluid mt-3">
         <div class="row">
-            <!-- Sidebar Filters -->
             <aside class="col-lg-2 col-md-3">
                 <div class="sidebar-filters">
                     <div class="filter-header d-flex align-items-center mb-3">
@@ -38,7 +37,7 @@
                             </ul>
                         </div>
 
-                        <!-- Rating Filter -->
+
                         <div class="filter-group mb-4">
                             <label class="form-label fw-bold">Đánh giá</label>
                             <div class="form-check">
@@ -52,10 +51,10 @@
                                     </div>
                                 </label>
                             </div>
-                            <!-- Add other ratings similarly -->
+
                         </div>
 
-                        <!-- Price Range -->
+
                         <div class="filter-group mb-4">
                             <label class="form-label fw-bold">Khoảng giá</label>
                             <div class="row g-2 align-items-center">
@@ -77,9 +76,8 @@
                 </div>
             </aside>
 
-            <!-- Main Content -->
             <main class="col-lg-10 col-md-9">
-                <!-- Results Header -->
+
                 <div class="shopee-section mb-3">
                     <div class="sort-bar d-flex justify-content-between align-items-center p-3">
                         <div class="d-flex align-items-center">
@@ -125,13 +123,11 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Products Grid -->
                 @if(isset($products) && $products->count() > 0)
                 <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-3">
                     @foreach($products as $product)
                     <div class="col">
-                        <a href="#"
+                        <a href="{{ route('products.detail', ['id' => $product->id]) }}"
                             class="product-card text-decoration-none shadow-sm h-100 d-flex flex-column align-items-center position-relative">
                             <div class="product-card__image-wrapper mb-2"
                                 style="width:100%; aspect-ratio:1/1; overflow:hidden; border-radius:12px; background:#fafafa;">

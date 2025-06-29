@@ -129,7 +129,7 @@
         <div class="row h-100">
             <div class="col-md-7 d-none d-md-flex login-bg-left">
                 <div class="text-center text-white">
-                    <img src="{{ asset('assets/images/images.png') }}" alt="Shopee Logo" width="100%" height="auto">
+                    <img src="{{ asset('assets/images/shopee_logo.png') }}" alt="Shopee Logo" width="100%" height="auto">
                     <h2>Nền tảng thương mại điện tử</h2>
                     <p>yêu thích ở Đông Nam Á & Đài Loan</p>
                 </div>
@@ -140,6 +140,17 @@
                         <h4 class="mb-0 fw-bold" style="font-family: 'Lato';">Đăng nhập</h4>
                         <a href="#" class="btn btn-sm btn-outline-danger" style="font-family: 'Lato';">QR</a>
                     </div>
+                    
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul class="mb-0">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    
                     <form action="{{ route('login') }}" method="POST">
                         @csrf
                         <div class="mb-3">

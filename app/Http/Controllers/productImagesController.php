@@ -12,8 +12,7 @@ class productImagesController extends Controller
      */
     public function index()
     {
-        //
-        $product_images =  product_images::all();
+        $product_images = product_images::all();
         return response()->json($product_images);
     }
 
@@ -30,7 +29,12 @@ class productImagesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'image_url' => 'required|string',
+        ]);
+        $image = product_images::create($validated);
+        return response()->json($image, 201);
     }
 
     /**
@@ -38,7 +42,8 @@ class productImagesController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $image = product_images::findOrFail($id);
+        return response()->json($image);
     }
 
     /**
@@ -54,7 +59,12 @@ class productImagesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $image = product_images::findOrFail($id);
+        $validated = $request->validate([
+            'image_url' => 'sometimes|string',
+        ]);
+        $image->update($validated);
+        return response()->json($image);
     }
 
     /**
@@ -62,6 +72,8 @@ class productImagesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $image = product_images::findOrFail($id);
+        $image->delete();
+        return response()->json(['message' => 'Deleted'], 204);
     }
 }
