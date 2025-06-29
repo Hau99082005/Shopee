@@ -81,12 +81,10 @@
                         </div>
                     </div>
                     <nav class="d-flex gap-3 small mt-1 header-main-nav">
-                        <a href="#" class="text-white text-decoration-none">Tất Tay Freeship</a>
-                        <a href="#" class="text-white text-decoration-none">Đồ Chơi</a>
-                        <a href="#" class="text-white text-decoration-none">Balo</a>
-                        <a href="#" class="text-white text-decoration-none">Điện Thoại</a>
-                        <a href="#" class="text-white text-decoration-none">Dép</a>
-                        <a href="#" class="text-white text-decoration-none">Váy</a>
+                        @foreach((collect($categoryList)->random(5, count($categoryList))) as $category)
+                            <a href="{{ route('products', ['categories[]' => $category->id]) }}"
+                               class="text-white text-decoration-none">{{ $category->name }}</a>
+                        @endforeach
                     </nav>
                 </div>
                 <div class="col-auto">
@@ -173,7 +171,7 @@
 
         <section class="bg-white rounded d-flex justify-content-around p-3 text-center">
             @foreach((collect($categoryList)->random(6, count($categoryList))) as $category)
-            <a href="#" class="text-decoration-none text-dark">
+            <a href="{{ route('products', ['categories[]' => $category->id]) }}" class="text-decoration-none text-dark">
                 <img src="{{ asset('assets/images/' . $category->image) }}" alt="{{$category->name}}"
                     style="width: 45px; height: 45px; object-fit: contain;">
                 <div style="font-size: 0.8rem;" class="mt-2">{{ $category->name }}</div>
@@ -181,7 +179,7 @@
             @endforeach
         </section>
 
-    <!-- danh mục -->
+        <!-- danh mục -->
         <section class="shopee-section bg-white py-4 rounded shadow-sm position-relative">
             <div class="shopee-section-header mb-3 px-3">
                 <h2 class="shopee-section-title text-lg fw-semibold text-dark">Danh Mục</h2>
@@ -203,22 +201,23 @@
 
             <!-- Danh mục chia 2 dòng trượt ngang -->
             <div class="px-5">
-                <div id="categoryScrollContainer" class="d-flex flex-nowrap" style="scroll-behavior: smooth; overflow-x: auto; -ms-overflow-style: none; scrollbar-width: none;">
+                <div id="categoryScrollContainer" class="d-flex flex-nowrap"
+                    style="scroll-behavior: smooth; overflow-x: auto; -ms-overflow-style: none; scrollbar-width: none;">
                     <div class="d-flex flex-column flex-shrink-0" style="gap: 1rem;">
                         @foreach ($categoryList->chunk(ceil($categoryList->count() / 2)) as $chunk)
-                            <div class="d-flex flex-nowrap" style="gap: 1rem;">
-                                @foreach ($chunk as $category)
-                                    <div class="text-center flex-shrink-0" style="width: 100px;">
-                                        <a href="#" class="category-item text-decoration-none">
-                                            <img src="{{ asset('assets/images/' . $category->image) }}"
-                                                class="img-fluid rounded-circle mx-auto d-block mb-1 border"
-                                                style="width:70px; height:70px; object-fit:cover;"
-                                                alt="{{ $category->name }}">
-                                            <div class="category-item-title small text-dark">{{ $category->name }}</div>
-                                        </a>
-                                    </div>
-                                @endforeach
+                        <div class="d-flex flex-nowrap" style="gap: 1rem;">
+                            @foreach ($chunk as $category)
+                            <div class="text-center flex-shrink-0" style="width: 100px;">
+                                <a href="{{ route('products', ['categories[]' => $category->id]) }}"
+                                    class="category-item text-decoration-none">
+                                    <img src="{{ asset('assets/images/' . $category->image) }}"
+                                        class="img-fluid rounded-circle mx-auto d-block mb-1 border"
+                                        style="width:70px; height:70px; object-fit:cover;" alt="{{ $category->name }}">
+                                    <div class="category-item-title small text-dark">{{ $category->name }}</div>
+                                </a>
                             </div>
+                            @endforeach
+                        </div>
                         @endforeach
                     </div>
                 </div>
@@ -227,20 +226,20 @@
 
         <!-- JavaScript để điều khiển scroll của phần danh mục -->
         <script>
-            const container = document.getElementById('categoryScrollContainer');
-            document.getElementById('scrollLeft').addEventListener('click', () => {
-                container.scrollBy({
-                    left: -400,
-                    behavior: 'smooth'
-                });
+        const container = document.getElementById('categoryScrollContainer');
+        document.getElementById('scrollLeft').addEventListener('click', () => {
+            container.scrollBy({
+                left: -400,
+                behavior: 'smooth'
             });
+        });
 
-            document.getElementById('scrollRight').addEventListener('click', () => {
-                container.scrollBy({
-                    left: 400,
-                    behavior: 'smooth'
-                });
+        document.getElementById('scrollRight').addEventListener('click', () => {
+            container.scrollBy({
+                left: 400,
+                behavior: 'smooth'
             });
+        });
         </script>
 
 
@@ -346,7 +345,8 @@
                         <div class="row row-cols-4 g-0">
                             @foreach ((collect($categoryList)->random(min(8,count($categoryList)))) as $category)
                             <div class="col">
-                                <a href="#" class="shopee-mall__item p-2">
+                                <a href="{{ route('products', ['categories[]' => $category->id]) }}"
+                                    class="shopee-mall__item p-2">
                                     <img src="{{ asset('assets/images/' . $category->image) }}"
                                         alt="{{ $category->name }}">
                                     <span class="shopee-mall__item-text">{{ $category->name }}</span>
