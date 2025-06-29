@@ -12,9 +12,16 @@ use App\Http\Controllers\ShippingController;
 use App\Http\Middleware\CheckAge;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\SearchController;
+use Symfony\Component\HttpKernel\Debug\VirtualRequestStack;
+use App\Models\Category;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\ProductDetailController;
 
 Route::get('/', function () {
-    return view('welcome');
+    $productList = DB::table('products')->get();
+    $categoryList = DB::table('categories')->get();
+    return view('welcome', compact('productList', 'categoryList'));
 })->name('welcome');
 
 
@@ -33,6 +40,7 @@ Route::get('/product-details', function () {
 
 Route::get('/products',[ProductController::class, 'products'])->name('products');
 Route::get('/cart',[CartsController::class, 'index'])->name('cart');
+Route::get('/reviews', [ReviewsController::class, 'reviews'])->name('reviews');
 Route::post('/cart/add',[CartsController::class, 'addToCart'])->name('cart.add');
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -50,19 +58,35 @@ Route::post('/post', function () {
     return "Method post"; 
 });
 
-Route::prefix('admin')->group(function() {
-    Route::get('posts/{post}/comments/{comment}', function($postId, $commentId) {
-        return "postId: $postId - commentId: $commentId";
-    });
-    Route::get('user/{name?}', function($name = 'Hau') {
-       return $name;
-    });
-})->middleware(CheckAge::class);
+Route::get('/admin', function() {
+    return view('admin.admin');
+});
 
-Route::resource('categories', CategoryController::class);
+Route::get('/admin-analytics', function() {
+    return view('admin.analytics');
+});
+
+Route::get('/admin-customers', function() {
+    return view('admin.customers');
+});
+
+Route::get('/admin-login', function() {
+    return view('admin.login');
+});
+
+Route::get('/admin-orders', function() {
+    return view('admin.login');
+});
+
+Route::get('/admin-products', function() {
+    return view('admin.products');
+});
+
 Route::resource('orders', OrderController::class);
 Route::resource('order_items', OrderItemController::class);
 Route::resource('payments', paymentsController::class);
 Route::resource('product_images', productImagesController::class);
-Route::resource('reviews', ReviewsController::class);
 Route::resource('shipping', ShippingController::class);
+Route::resource('categories', CategoryController::class);
+Route::get('/search', [SearchController::class, 'search'])->name('search');
+Route::get('/products/{id}/detail', [ProductDetailController::class, 'show'])->name('products.detail');

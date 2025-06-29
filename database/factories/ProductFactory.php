@@ -39,13 +39,14 @@ class ProductFactory extends Factory
             'Tủ lạnh Samsung Side by Side'
         ];
 
-        $categories = [1, 2, 3, 4, 5]; // Assuming we have 5 categories
+        $categories = [1, 2, 3, 4, 5]; 
 
         return [
             'name' => $this->faker->randomElement($productNames),
             'image' => 'products/product-' . $this->faker->numberBetween(1, 5) . '.jpg',
             'description' => $this->faker->realText(200),
             'price' => $this->faker->randomFloat(0, 10000, 9999999),
+            'price_old' => $this->faker->randomFloat(0,10000,9999999),
             'stock' => $this->faker->numberBetween(10, 500),
             'seller_id' => 1,
             'category_id' => $this->faker->randomElement($categories),

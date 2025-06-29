@@ -30,12 +30,17 @@ class Product extends Model
     public function category() {
         return $this->belongsTo(Category::class);
     }
+    
     public function orderItems() {
         return $this->hasMany(OrderItems::class);
     }
     
     public function carts() {
         return $this->hasMany(carts::class);
+    }
+    
+    public function detail() {
+        return $this->hasOne(ProductDetail::class);
     }
     
     // Kiểm tra xem sản phẩm còn hàng không

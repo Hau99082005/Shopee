@@ -14,7 +14,9 @@ class ProductController extends Controller
     public function index()
     {
         //
-        return view('products');
+        $productList = Product::all();
+        return view('welcome', compact('productList'));
+       
     }
 
     /**
@@ -114,5 +116,121 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    // API Methods
+    public function apiIndex()
+    {
+        $products = Product::with(['category', 'detail'])->paginate(10);
+        return response()->json([
+            'success' => true,
+            'data' => $products
+        ]);
+    }
+
+    public function apiShow($id)
+    {
+        $product = Product::with(['category', 'detail'])->find($id);
+        if (!$product) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Sản phẩm không tồn tại'
+            ], 404);
+        }
+        return response()->json([
+            'success' => true,
+            'data' => $product
+        ]);
+    }
+
+    public function apiStore(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'image' => 'required|string',
+            'description' => 'nullable|string',
+            'price' => 'required|numeric|min:0',
+            'price_old' => 'nullable|numeric|min:0',
+            'stock' => 'required|integer|min:0',
+            'seller_id' => 'required|exists:users,id',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+
+        $product = Product::create($request->all());
+        return response()->json([
+            'success' => true,
+            'message' => 'Sản phẩm đã được tạo thành công',
+            'data' => $product
+        ], 201);
+    }
+
+    public function apiUpdate(Request $request, $id)
+    {
+        $product = Product::find($id);
+        if (!$product) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Sản phẩm không tồn tại'
+            ], 404);
+        }
+
+        $request->validate([
+            'name' => 'sometimes|required|string|max:255',
+            'image' => 'sometimes|required|string',
+            'description' => 'nullable|string',
+            'price' => 'sometimes|required|numeric|min:0',
+            'price_old' => 'nullable|numeric|min:0',
+            'stock' => 'sometimes|required|integer|min:0',
+            'category_id' => 'sometimes|required|exists:categories,id',
+        ]);
+
+        $product->update($request->all());
+        return response()->json([
+            'success' => true,
+            'message' => 'Sản phẩm đã được cập nhật thành công',
+            'data' => $product
+        ]);
+    }
+
+    public function apiDestroy($id)
+    {
+        $product = Product::find($id);
+        if (!$product) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Sản phẩm không tồn tại'
+            ], 404);
+        }
+
+        $product->delete();
+        return response()->json([
+            'success' => true,
+            'message' => 'Sản phẩm đã được xóa thành công'
+        ]);
+    }
+
+    public function apiSearch($keyword)
+    {
+        $products = Product::with(['category', 'detail'])
+            ->where('name', 'like', "%{$keyword}%")
+            ->orWhere('description', 'like', "%{$keyword}%")
+            ->paginate(10);
+
+        return response()->json([
+            'success' => true,
+            'data' => $products
+        ]);
+    }
+
+    public function apiGetByCategory($categoryId)
+    {
+        $products = Product::with(['category', 'detail'])
+            ->where('category_id', $categoryId)
+            ->paginate(10);
+
+        return response()->json([
+            'success' => true,
+            'data' => $products
+        ]);
     }
 }
