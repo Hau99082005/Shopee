@@ -82,16 +82,12 @@
                 </div>
                 <div class="col">
                     <div class="bg-white rounded p-1 d-flex position-relative">
-                        <input type="text" class="form-control form-control-lg border-0"
-                            placeholder="Shopee bao ship 0Đ - Đăng ký ngay!"
-                            style="box-shadow: none; font-size: 16px; font-family: 'Lato';" id="search-input">
+                        <input type="text" class="form-control" id="search-input" placeholder="Tìm sản phẩm...">
                         <a href='#' class="btn btn-primary px-4" type="button"
                             style="background-color: #fb5533; border-color: #fb5533;">
                             <i class="fa fa-search text-white"></i>
                         </a>
-                        <div id="search-results"
-                            style="position:absolute; top:100%; left:0; right:0; background:white; z-index:1000; border-radius:0 0 8px 8px; box-shadow:0 4px 16px rgba(0,0,0,0.08);">
-                        </div>
+                        <div id="search-results" class="autocomplete-dropdown" style="position:absolute;top:100%;left:0;right:0;z-index:1000;background:white;border-radius:0 0 8px 8px;box-shadow:0 4px 16px rgba(0,0,0,0.08);"></div>
                     </div>
                     <nav class="d-flex gap-3 small mt-1 header-main-nav">
                         @foreach((collect($categories)->random(5, count($categories))) as $category)
@@ -333,51 +329,41 @@
     document.addEventListener('DOMContentLoaded', function() {
         const searchInput = document.getElementById('search-input');
         const resultsDiv = document.getElementById('search-results');
-        const suggestionsDiv = document.getElementById('search-suggestions');
 
-        function showResults(keyword) {
+        searchInput.addEventListener('input', function() {
+            const keyword = this.value.trim();
             if (keyword.length < 1) {
                 resultsDiv.innerHTML = '';
                 resultsDiv.style.display = 'none';
-                suggestionsDiv.style.display = 'block';
                 return;
             }
             fetch(`/search?q=${encodeURIComponent(keyword)}`)
                 .then(res => res.json())
                 .then(data => {
                     if (!Array.isArray(data) || data.length === 0) {
-                        resultsDiv.innerHTML = '<p style="padding:8px">Không tìm thấy sản phẩm.</p>';
+                        resultsDiv.innerHTML = '<div class="p-2 text-muted">Không tìm thấy sản phẩm.</div>';
                     } else {
                         resultsDiv.innerHTML = data.map(item =>
-                            `<div style="padding:8px; border-bottom:1px solid #eee; cursor:pointer;" onclick="window.location='/products?search='+encodeURIComponent(item.name)"><strong>${item.name}</strong><br><span>${item.description ? item.description.substring(0, 60) : ''}</span></div>`
+                            `<div class="autocomplete-item" onclick="window.location='/products/${item.id}/detail'">
+                                <img src="/assets/images/${item.image}" alt="${item.name}">
+                                <div class="info">
+                                    <div class="name">${item.name}</div>
+                                    <div class="desc">${item.description ? item.description.substring(0, 50) : ''}</div>
+                                </div>
+                            </div>`
                         ).join('');
                     }
                     resultsDiv.style.display = 'block';
-                    suggestionsDiv.style.display = 'none';
-                    console.log('DATA:', data);
                 });
-        }
-        if (searchInput) {
-            searchInput.addEventListener('focus', function() {
-                if (!this.value) suggestionsDiv.style.display = 'block';
-            });
-            searchInput.addEventListener('blur', function() {
-                setTimeout(() => {
-                    suggestionsDiv.style.display = 'none';
-                    resultsDiv.style.display = 'none';
-                }, 200);
-            });
-            searchInput.addEventListener('input', function() {
-                showResults(this.value.trim());
-            });
-            // Khi click vào gợi ý
-            Array.from(suggestionsDiv.children).forEach(function(li) {
-                li.onclick = function() {
-                    searchInput.value = this.textContent;
-                    showResults(this.textContent);
-                };
-            });
-        }
+        });
+
+        // Ẩn dropdown khi click ra ngoài
+        document.addEventListener('click', function(e) {
+            if (!searchInput.contains(e.target) && !resultsDiv.contains(e.target)) {
+                resultsDiv.innerHTML = '';
+                resultsDiv.style.display = 'none';
+            }
+        });
     });
     </script>
     @endpush

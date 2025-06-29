@@ -68,13 +68,12 @@ class SearchController extends Controller
      */
     public function search(Request $request)
     {
-        $keyword = $request->input('q');
-        if (!$keyword) {
-            return response()->json(['error' => 'Missing search keyword'], 400);
-        }
-        $products = Product::where('name', 'like', "%$keyword%")
-            ->orWhere('description', 'like', "%$keyword%")
-            ->get();
+        $query = $request->input('q');
+        $products = Product::where('name', 'like', "%$query%")
+            ->orWhere('description', 'like', "%$query%")
+            ->limit(10)
+            ->get(['id', 'name', 'image', 'description']);
+
         return response()->json($products);
     }
 }
