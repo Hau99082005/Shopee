@@ -16,9 +16,74 @@
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="manifest" href="{{ asset('site.webmanifest') }}">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <script src="/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     @vite(['resources/css/app.css'])
     @stack('styles')
+    <style>
+    .autocomplete-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 9999;
+        background: white;
+        border-radius: 0 0 8px 8px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+        max-height: 400px;
+        overflow-y: auto;
+        border: 1px solid #eee;
+    }
+
+    .autocomplete-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 12px;
+        cursor: pointer;
+        border-bottom: 1px solid #f3f3f3;
+        transition: background 0.2s;
+    }
+
+    .autocomplete-item:last-child {
+        border-bottom: none;
+    }
+
+    .autocomplete-item:hover {
+        background: #f5f5f5;
+        text-decoration: none;
+    }
+
+    .autocomplete-item img {
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+        border-radius: 4px;
+    }
+
+    .autocomplete-item .info {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .autocomplete-item .name {
+        font-weight: 500;
+        color: #222;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .autocomplete-item .desc {
+        font-size: 13px;
+        color: #888;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    </style>
 </head>
 
 <body>
@@ -61,13 +126,15 @@
                     </div>
                     @if(Auth::check())
                     <div class="dropdown">
-                        <a href="#" class="d-flex align-items-center gap-2 text-white text-decoration-none dropdown-toggle"
-                           data-bs-toggle="dropdown" aria-expanded="false" style="font-family: 'Lato'; font-size: 16px; font-weight: 500;">
+                        <button type="button"
+                            class="d-flex align-items-center gap-2 text-white text-decoration-none dropdown-toggle"
+                            data-bs-toggle="dropdown" aria-expanded="false"
+                            style="font-family: 'Lato'; font-size: 16px; font-weight: 500; background: none; border: none; padding: 0;">
                             <img src="{{ asset('assets/images/default-avatar.png') }}"
-                                 onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name) }}&background=fb5533&color=fff&size=32';"
-                                 alt="avatar" class="rounded-circle" width="32" height="32">
+                                onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name) }}&background=fb5533&color=fff&size=32';"
+                                alt="avatar" class="rounded-circle" width="32" height="32">
                             <span>{{ Auth::user()->name }}</span>
-                        </a>
+                        </button>
                         <ul class="dropdown-menu dropdown-menu-end shadow">
                             <li>
                                 <a class="dropdown-item d-flex align-items-center gap-2" href="{{ route('profile') }}">
@@ -79,7 +146,9 @@
                                     <i class="fa fa-shopping-bag"></i> Đơn mua
                                 </a>
                             </li>
-                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
                             <li>
                                 <form action="{{ route('logout') }}" method="POST" class="d-inline">
                                     @csrf
@@ -127,19 +196,23 @@
                         @endforeach
                     </nav>
                 </div>
+                @php
+                $cartCount = isset($cartList) ? $cartList->sum('quantity') : 0;
+                @endphp
                 <div class="col-auto">
                     <a href="{{ route('cart') }}" class="text-white fs-3 position-relative">
                         <i class="fa fa-shopping-cart"></i>
-                        <span
+                        <span id="cart-count-badge"
                             class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-white text-primary"
                             style="font-size: 16px; font-family: 'Lato';">
-                            3
+                            {{ $cartCount }}
                         </span>
                     </a>
                 </div>
             </div>
         </div>
     </header>
+
     <main class="py-4">
         @if(session('success'))
         <div class="container-xl">
@@ -161,6 +234,7 @@
 
         @yield('content')
     </main>
+
     <footer class="mt-5">
         <div class="footer-top-border"></div>
         <div class="bg-light pt-5 pb-4">
@@ -234,7 +308,7 @@
                                         alt="American Express"></div>
                                 <div class="footer-payment-logo"><img
                                         src="https://down-vn.img.susercontent.com/file/5e3f0bee86058637ff23cfdf2e14ca09"
-                                        alt="Trả góp"></div>
+                                        alt="Trà góp"></div>
                                 <div class="footer-payment-logo"><img
                                         src="https://down-vn.img.susercontent.com/file/9263fa8c83628f5deff55e2a90758b06"
                                         alt="ShopeePay"></div>
@@ -361,11 +435,8 @@
         </div>
     </footer>
 
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
     @vite(['resources/js/app.ts'])
-
     @stack('scripts')
     @push('scripts')
     <script>
@@ -388,13 +459,13 @@
                             '<div class="p-2 text-muted">Không tìm thấy sản phẩm.</div>';
                     } else {
                         resultsDiv.innerHTML = data.map(item =>
-                            `<div class="autocomplete-item" onclick="window.location='/products/${item.id}/detail'">
-                                <img src="/assets/images/${item.image}" alt="${item.name}">
-                                <div class="info">
-                                    <div class="name">${item.name}</div>
-                                    <div class="desc">${item.description ? item.description.substring(0, 50) : ''}</div>
-                                </div>
-                            </div>`
+                            `<a class="autocomplete-item" href="/products/${item.id}/detail" style="display:flex;align-items:center;text-decoration:none;color:inherit;">
+                                    <img src="/assets/images/${item.image}" alt="${item.name}">
+                                    <div class="info">
+                                        <div class="name">${item.name}</div>
+                                        <div class="desc">${item.description ? item.description.substring(0, 50) : ''}</div>
+                                    </div>
+                                </a>`
                         ).join('');
                     }
                     resultsDiv.style.display = 'block';
@@ -408,6 +479,21 @@
                 resultsDiv.style.display = 'none';
             }
         });
+    });
+    </script>
+    <script>
+    function updateCartCount() {
+        fetch('/api/cart')
+            .then(res => res.json())
+            .then(data => {
+                if (data.success && data.data && data.data.summary) {
+                    document.getElementById('cart-count-badge').textContent = data.data.summary.total_quantity;
+                }
+            });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        updateCartCount();
     });
     </script>
     @endpush
