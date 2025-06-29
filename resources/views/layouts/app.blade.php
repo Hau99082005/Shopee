@@ -9,6 +9,13 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="manifest" href="{{ asset('site.webmanifest') }}">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -70,39 +77,27 @@
             <div class="row align-items-center g-4">
                 <div class="col-auto">
                     <a href="/">
-                        <img src="{{ asset('assets/images/images.png') }}" alt="Shopee Logo" style="height: 48px;">
+                        <img src="{{ asset('assets/images/logo1.jpg') }}" alt="Shopee Logo" style="height: 48px;">
                     </a>
                 </div>
                 <div class="col">
                     <div class="bg-white rounded p-1 d-flex position-relative">
-                        <form class="d-flex position-relative" method="GET" action="{{ route('products') }}">
-                            <input type="text" class="form-control form-control-lg border-0"
-                                placeholder="Shopee bao ship 0Đ - Đăng ký ngay!"
-                                style="box-shadow: none; font-size: 16px; font-family: 'Lato';"
-                                value="{{ request('search') }}" name="search" id="search-input" autocomplete="off">
-                            <button class="btn btn-primary px-4" type="button"
-                                style="background-color: #fb5533; border-color: #fb5533;">
-                                <i class="fa fa-search text-white"></i>
-                            </button>
-                            <div id="search-results" style="position:absolute; top:100%; left:0; right:0; background:white; z-index:1000; border-radius:0 0 8px 8px; box-shadow:0 4px 16px rgba(0,0,0,0.08);"></div>
-                            <ul id="search-suggestions" style="display:none; position:absolute; top:100%; left:0; right:0; background:white; z-index:999; border-radius:0 0 8px 8px; box-shadow:0 4px 16px rgba(0,0,0,0.08); list-style:none; margin:0; padding:0;">
-                                <li style="padding:8px; cursor:pointer;" onclick="document.getElementById('search-input').value='Bàn gaming Secretlab Titan'">Bàn gaming Secretlab Titan</li>
-                                <li style="padding:8px; cursor:pointer;" onclick="document.getElementById('search-input').value='Loa Bluetooth JBL Flip'">Loa Bluetooth JBL Flip</li>
-                                <li style="padding:8px; cursor:pointer;" onclick="document.getElementById('search-input').value='Laptop Dell Inspiron 15'">Laptop Dell Inspiron 15</li>
-                                <li style="padding:8px; cursor:pointer;" onclick="document.getElementById('search-input').value='Ghế gaming DXRacer'">Ghế gaming DXRacer</li>
-                                <li style="padding:8px; cursor:pointer;" onclick="document.getElementById('search-input').value='Tủ lạnh Samsung Side by Side'">Tủ lạnh Samsung Side by Side</li>
-                                <li style="padding:8px; cursor:pointer;" onclick="document.getElementById('search-input').value='Card đồ họa RTX 4080'">Card đồ họa RTX 4080</li>
-                                <li style="padding:8px; cursor:pointer;" onclick="document.getElementById('search-input').value='Camera Canon EOS R5'">Camera Canon EOS R5</li>
-                            </ul>
-                        </form>
+                        <input type="text" class="form-control form-control-lg border-0"
+                            placeholder="Shopee bao ship 0Đ - Đăng ký ngay!"
+                            style="box-shadow: none; font-size: 16px; font-family: 'Lato';" id="search-input">
+                        <a href='#' class="btn btn-primary px-4" type="button"
+                            style="background-color: #fb5533; border-color: #fb5533;">
+                            <i class="fa fa-search text-white"></i>
+                        </a>
+                        <div id="search-results"
+                            style="position:absolute; top:100%; left:0; right:0; background:white; z-index:1000; border-radius:0 0 8px 8px; box-shadow:0 4px 16px rgba(0,0,0,0.08);">
+                        </div>
                     </div>
                     <nav class="d-flex gap-3 small mt-1 header-main-nav">
-                        <a href="#" class="text-white text-decoration-none">Tất Tay Freeship</a>
-                        <a href="#" class="text-white text-decoration-none">Đồ Chơi</a>
-                        <a href="#" class="text-white text-decoration-none">Balo</a>
-                        <a href="#" class="text-white text-decoration-none">Điện Thoại</a>
-                        <a href="#" class="text-white text-decoration-none">Dép</a>
-                        <a href="#" class="text-white text-decoration-none">Váy</a>
+                        @foreach((collect($categories)->random(5, count($categories))) as $category)
+                        <a href="{{ route('products', ['categories[]' => $category->id]) }}"
+                            class="text-white text-decoration-none">{{ $category->name }}</a>
+                        @endforeach
                     </nav>
                 </div>
                 <div class="col-auto">
@@ -118,7 +113,6 @@
             </div>
         </div>
     </header>
-
 
 
     <!-- Main Content -->
@@ -340,6 +334,7 @@
         const searchInput = document.getElementById('search-input');
         const resultsDiv = document.getElementById('search-results');
         const suggestionsDiv = document.getElementById('search-suggestions');
+
         function showResults(keyword) {
             if (keyword.length < 1) {
                 resultsDiv.innerHTML = '';
@@ -353,7 +348,7 @@
                     if (!Array.isArray(data) || data.length === 0) {
                         resultsDiv.innerHTML = '<p style="padding:8px">Không tìm thấy sản phẩm.</p>';
                     } else {
-                        resultsDiv.innerHTML = data.map(item => 
+                        resultsDiv.innerHTML = data.map(item =>
                             `<div style="padding:8px; border-bottom:1px solid #eee; cursor:pointer;" onclick="window.location='/products?search='+encodeURIComponent(item.name)"><strong>${item.name}</strong><br><span>${item.description ? item.description.substring(0, 60) : ''}</span></div>`
                         ).join('');
                     }
@@ -367,7 +362,10 @@
                 if (!this.value) suggestionsDiv.style.display = 'block';
             });
             searchInput.addEventListener('blur', function() {
-                setTimeout(() => { suggestionsDiv.style.display = 'none'; resultsDiv.style.display = 'none'; }, 200);
+                setTimeout(() => {
+                    suggestionsDiv.style.display = 'none';
+                    resultsDiv.style.display = 'none';
+                }, 200);
             });
             searchInput.addEventListener('input', function() {
                 showResults(this.value.trim());
