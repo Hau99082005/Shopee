@@ -83,6 +83,21 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
+
+    /* Dropdown mở khi hover */
+    .dropdown:hover .dropdown-menu {
+        display: block;
+        margin-top: 0;
+    }
+
+    .dropdown-toggle::after {
+        transition: transform 0.2s;
+    }
+
+    .dropdown.show .dropdown-toggle::after,
+    .dropdown:hover .dropdown-toggle::after {
+        transform: rotate(180deg);
+    }
     </style>
 </head>
 
@@ -128,7 +143,7 @@
                     <div class="dropdown">
                         <button type="button"
                             class="d-flex align-items-center gap-2 text-white text-decoration-none dropdown-toggle"
-                            data-bs-toggle="dropdown" aria-expanded="false"
+                            aria-expanded="false"
                             style="font-family: 'Lato'; font-size: 16px; font-weight: 500; background: none; border: none; padding: 0;">
                             <img src="{{ asset('assets/images/default-avatar.png') }}"
                                 onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name) }}&background=fb5533&color=fff&size=32';"
@@ -137,12 +152,14 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end shadow">
                             <li>
-                                <a class="dropdown-item d-flex align-items-center gap-2" href="{{ route('profile') }}">
+                                <a class="dropdown-item d-flex align-items-center gap-2" href="{{ route('profile') }}"
+                                    style="color: black; font-family: 'Lato', sans-serif; font-size: 14px;">
                                     <i class="fa fa-user-circle"></i> Tài khoản của tôi
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item d-flex align-items-center gap-2" href="#">
+                                <a style="color: black; font-family: 'Lato', sans-serif; font-size: 14px;"
+                                    class="dropdown-item d-flex align-items-center gap-2" href="#">
                                     <i class="fa fa-shopping-bag"></i> Đơn mua
                                 </a>
                             </li>
