@@ -89,7 +89,7 @@
                                 <td class="text-center text-danger">₫{{ $item->product->price}}</td>
                                 <td class="text-center">{{ $item->quantity ?? 1 }}</td>
                                 <td class="text-center text-danger fw-bold">
-                                    ₫{{ $item->product->price  * $item->quantity  }}
+                                    ₫{{ $item->product->price  * $item->quantity ?? '' }}
                                 </td>
                             </tr>
                             @endforeach

@@ -45,7 +45,7 @@ Route::get('/product-details', function () {
 Route::get('/product-details', [ProductDetailController::class, 'product_details'])->name('product_details');
 
 Route::get('/products',[ProductController::class, 'products'])->name('products');
-Route::get('/cart',[CartsController::class, 'index'])->name('cart');
+Route::get('/cart',[CartsController::class, 'index'])->middleware('auth')->name('cart');
 Route::get('/reviews', [ReviewsController::class, 'reviews'])->name('reviews');
 Route::post('/cart/add',[CartsController::class, 'addToCart'])->name('cart.add');
 
