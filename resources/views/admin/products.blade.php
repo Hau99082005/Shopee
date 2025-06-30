@@ -1,146 +1,107 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('admin.admin')
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Mua sắm trực tuyến trên Shopee Việt Nam - Nền tảng thương mại điện tử hàng đầu.">
-    <meta name="keywords" content="Shopee, mua sắm, trực tuyến, thời trang, điện tử, gia dụng">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
-    <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
-    <link rel="manifest" href="{{ asset('site.webmanifest') }}">
-    <title>Admin - Quản Lý Shopee</title>
-    @vite(['resources/css/app.css', 'resources/js/app.ts','resources/js/main.js'])
-</head>
+@section('title', 'Quản lý Sản phẩm')
 
-<body>
-    <div class="container">
-        <div class="sidebar">
-            <div class="logo-details">
-                <i class="uil uil-shopping-cart"></i>
-                <span class="logo_name">Shopee Admin</span>
-            </div>
-            <ul class="nav-links">
-                <li><a href="admin.html"><i class="uil uil-grid-alt"></i><span class="links_name">Dashboard</span></a>
-                </li>
-                <li><a href="products.html" class="active"><i class="uil uil-box"></i><span
-                            class="links_name">Products</span></a></li>
-                <li><a href="orders.html"><i class="uil uil-shopping-bag"></i><span class="links_name">Orders</span></a>
-                </li>
-                <li><a href="analytics.html"><i class="uil uil-chart"></i><span class="links_name">Analytics</span></a>
-                </li>
-                <li><a href="customers.html"><i class="uil uil-users-alt"></i><span
-                            class="links_name">Customers</span></a></li>
-                <li><a href="#" onclick="openLogoutModal()"><i class="uil uil-signout"></i><span
-                            class="links_name">Logout</span></a></li>
-            </ul>
-        </div>
-        <div class="main-content">
-            <div class="header">
-                <div class="search">
-                    <input type="text" placeholder="Search products...">
-                    <i class="uil uil-search"></i>
-                </div>
-                <div class="user">
-                    <i class="uil uil-lock auth-icon" data-tooltip="Authentication" onclick="openModal()"></i>
-                    <i class="uil uil-palette customize-icon" data-tooltip="Customize"
-                        onclick="openCustomizeModal()"></i>
-                    <i class="uil uil-moon mode-toggle" onclick="toggleDarkMode()"></i>
-                    <img src="https://via.placeholder.com/40" alt="User">
-                </div>
-            </div>
-            <div class="content">
-                <div class="table-header">
-                    <h2>Products</h2>
-                    <button class="action-btn" onclick="openAddProductModal()">Add Product</button>
-                </div>
-                <table class="sortable">
-                    <thead>
+@push('styles')
+{{-- Thêm CSS cho trang này nếu cần --}}
+<style>
+    .table-actions {
+        white-space: nowrap;
+    }
+    .table-actions .btn {
+        margin: 0 2px;
+    }
+</style>
+@endpush
+
+@section('content')
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Quản lý Sản phẩm</h1>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">
+            <i class="fas fa-plus me-2"></i>Thêm Sản phẩm
+        </button>
+    </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover" id="productsTable" width="100%" cellspacing="0">
+                    <thead class="table-dark">
                         <tr>
-                            <th data-sort="number">ID</th>
-                            <th data-sort="string">Product Name</th>
-                            <th data-sort="number">Price</th>
-                            <th data-sort="number">Stock</th>
-                            <th>Actions</th>
+                            <th>ID</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Giá</th>
+                            <th>Tồn kho</th>
+                            <th class="text-center">Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
+                        {{-- Dữ liệu mẫu - bạn sẽ thay thế bằng vòng lặp @foreach sau này --}}
                         <tr>
                             <td>1</td>
                             <td>Wireless Mouse</td>
                             <td>$29.99</td>
                             <td>150</td>
-                            <td><button class="action-btn">Edit</button> <button
-                                    class="action-btn delete">Delete</button></td>
+                            <td class="text-center table-actions">
+                                <button class="btn btn-sm btn-info"><i class="fas fa-edit"></i> Sửa</button>
+                                <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Xóa</button>
+                            </td>
                         </tr>
                         <tr>
                             <td>2</td>
                             <td>Bluetooth Headphones</td>
                             <td>$59.99</td>
                             <td>80</td>
-                            <td><button class="action-btn">Edit</button> <button
-                                    class="action-btn delete">Delete</button></td>
+                            <td class="text-center table-actions">
+                                <button class="btn btn-sm btn-info"><i class="fas fa-edit"></i> Sửa</button>
+                                <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Xóa</button>
+                            </td>
                         </tr>
+                        {{-- Kết thúc dữ liệu mẫu --}}
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+</div>
 
-    <div class="modal" id="authModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">×</span>
-            <h2>Admin Authentication</h2>
-            <input type="text" placeholder="Username">
-            <input type="password" placeholder="Password">
-            <button onclick="alert('Authentication submitted!'); closeModal()">Login</button>
-        </div>
+<!-- Add Product Modal -->
+<div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addProductModalLabel">Thêm Sản phẩm mới</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="productName" class="form-label">Tên sản phẩm</label>
+            <input type="text" class="form-control" id="productName" placeholder="Ví dụ: Áo thun nam">
+          </div>
+          <div class="mb-3">
+            <label for="productPrice" class="form-label">Giá</label>
+            <input type="number" class="form-control" id="productPrice" placeholder="Ví dụ: 250000" step="1000">
+          </div>
+          <div class="mb-3">
+            <label for="productStock" class="form-label">Số lượng tồn kho</label>
+            <input type="number" class="form-control" id="productStock" placeholder="Ví dụ: 100">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+        <button type="button" class="btn btn-primary">Lưu sản phẩm</button>
+      </div>
     </div>
+  </div>
+</div>
+@endsection
 
-    <div class="modal" id="customizeModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeCustomizeModal()">×</span>
-            <h2>Customize Theme</h2>
-            <label for="themeColor">Theme Color:</label>
-            <input type="color" id="themeColor" value="#ee4d2d">
-            <label for="fontFamily">Font Family:</label>
-            <select id="fontFamily">
-                <option value="Roboto">Roboto</option>
-                <option value="Arial">Arial</option>
-                <option value="Open Sans">Open Sans</option>
-            </select>
-            <label for="animations">Enable Animations:</label>
-            <input type="checkbox" id="animations" checked>
-            <label for="sidebarState">Sidebar Default:</label>
-            <select id="sidebarState">
-                <option value="expanded">Expanded</option>
-                <option value="collapsed">Collapsed</option>
-            </select>
-            <button onclick="applyCustomizations()">Apply</button>
-        </div>
-    </div>
-
-    <div class="modal" id="addProductModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeAddProductModal()">×</span>
-            <h2>Add New Product</h2>
-            <input type="text" placeholder="Product Name">
-            <input type="number" placeholder="Price" step="0.01">
-            <input type="number" placeholder="Stock">
-            <button onclick="alert('Product added!'); closeAddProductModal()">Add</button>
-        </div>
-    </div>
-    <div class="modal" id="logoutModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeLogoutModal()">×</span>
-            <h2>Confirm Logout</h2>
-            <p>Bạn có chắc chắn muốn kết thúc phiên làm việc của mình không? Tất cả các thay đổi chưa lưu sẽ bị mất.</p>
-            <button onclick="logout()">Logout</button>
-            <button onclick="closeLogoutModal()">Cancel</button>
-        </div>
-    </div>
-
-</body>
-
-</html>
+@push('scripts')
+{{-- Thêm JS cho trang này nếu cần --}}
+<script>
+    // Có thể thêm JS để xử lý DataTables hoặc các tương tác khác ở đây
+</script>
+@endpush

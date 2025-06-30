@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\ProductDetailController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Http\Middleware\CheckAdmin;
 
 Route::get('/', function () {
     $productList = DB::table('products')->get();
@@ -91,29 +92,36 @@ Route::post('/post', function () {
     return "Method post"; 
 });
 
-Route::get('/admin', function() {
-    return view('admin.admin');
-})->middleware('auth', 'check.admin');
+// Admin routes
+Route::middleware(['auth', CheckAdmin::class])->group(function () {
+    Route::get('/admin', function () {
+        return view('admin.admin');
+    })->name('admin.dashboard');
 
-Route::get('/admin-analytics', function() {
-    return view('admin.analytics');
-})->middleware('auth', 'check.admin');
+    Route::get('/admin-analytics', function () {
+        return view('admin.analytics');
+    })->name('admin.analytics');
 
-Route::get('/admin-customers', function() {
-    return view('admin.customers');
-})->middleware('auth', 'check.admin');
+    Route::get('/admin-customers', function () {
+        return view('admin.customers');
+    })->name('admin.customers');
+
+    Route::get('/admin-orders', function () {
+        return view('admin.orders');
+    })->name('admin.orders');
+
+    Route::get('/admin-products', function () {
+        return view('admin.products');
+    })->name('admin.products');
+
+    Route::get('/admin-categories', function () {
+        return view('admin.categories');
+    })->name('admin.categories');
+});
 
 Route::get('/admin-login', function() {
     return view('admin.login');
 });
-
-Route::get('/admin-orders', function() {
-    return view('admin.login');
-})->middleware('auth', 'check.admin');
-
-Route::get('/admin-products', function() {
-    return view('admin.products');
-})->middleware('auth', 'check.admin');
 
 Route::resource('orders', OrderController::class);
 Route::resource('order_items', OrderItemController::class);
