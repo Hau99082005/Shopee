@@ -145,7 +145,7 @@
                             class="d-flex align-items-center gap-2 text-white text-decoration-none dropdown-toggle"
                             aria-expanded="false"
                             style="font-family: 'Lato'; font-size: 16px; font-weight: 500; background: none; border: none; padding: 0;">
-                            <img src="{{ asset('assets/images/default-avatar.png') }}"
+                            <img src="{{ Auth::user()->avatar ? asset(Auth::user()->avatar) : asset('assets/images/default-avatar.png') }}"
                                 onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name) }}&background=fb5533&color=fff&size=32';"
                                 alt="avatar" class="rounded-circle" width="32" height="32">
                             <span>{{ Auth::user()->name }}</span>
@@ -163,6 +163,14 @@
                                     <i class="fa fa-shopping-bag"></i> Đơn mua
                                 </a>
                             </li>
+                            @if(Auth::user() && Auth::user()->role == 'admin')
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center gap-2 text-black" href="/admin"
+                                    style="font-family: 'Lato', sans-serif; font-size: 14px;">
+                                    <i class="fa fa-user-shield"></i> Admin
+                                </a>
+                            </li>
+                            @endif
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

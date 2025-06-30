@@ -65,6 +65,11 @@ Route::put('/profile', function(Request $request) {
     $user = Auth::user();
     $data = $request->only(['name', 'email', 'phone', 'address']);
 
+    // Validate avatar
+    $request->validate([
+        'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:1024',
+    ]);
+
     // Xử lý upload avatar nếu có
     if ($request->hasFile('avatar')) {
         $file = $request->file('avatar');
@@ -80,6 +85,8 @@ Route::put('/profile', function(Request $request) {
     }
 
     $user->update($data);
+    // Reload lại user từ database để lấy avatar mới
+    Auth::setUser($user->fresh());
     return redirect()->back()->with('success', 'Cập nhật thông tin thành công!');
 })->middleware('auth')->name('profile.update');
 
@@ -131,3 +138,9 @@ Route::resource('shipping', ShippingController::class);
 Route::resource('categories', CategoryController::class);
 Route::get('/search', [SearchController::class, 'search'])->name('search');
 Route::get('/products/{id}/detail', [ProductDetailController::class, 'show'])->name('products.detail');
+
+// Checkout routes
+Route::middleware('auth')->group(function () {
+    Route::get('/checkout', [OrderController::class, 'showCheckout'])->name('checkout');
+    Route::post('/checkout', [OrderController::class, 'processCheckout'])->name('checkout.process');
+});

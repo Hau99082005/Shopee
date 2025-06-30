@@ -138,7 +138,7 @@
         <div class="col-lg-3">
             <div class="shopee-profile-sidebar p-0">
                 <div class="d-flex flex-column align-items-center py-4 border-bottom">
-                    <img src="{{ Auth::user()->avatar ?? asset('assets/images/default-avatar.png') }}"
+                    <img src="{{ Auth::user()->avatar ? asset(Auth::user()->avatar) : asset('assets/images/default-avatar.png') }}"
                         class="profile-avatar" alt="avatar">
                     <div class="profile-name">{{ Auth::user()->name }}</div>
                     <div class="profile-edit-link"
@@ -187,7 +187,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="avatar-upload">
-                                <img src="{{ Auth::user()->avatar ?? asset('assets/images/default-avatar.png') }}"
+                                <img src="{{ Auth::user()->avatar ? asset(Auth::user()->avatar) : asset('assets/images/default-avatar.png') }}"
                                     alt="avatar">
                                 <label for="avatar">Chọn Ảnh
                                     <input type="file" id="avatar" name="avatar" accept="image/*" style="display:none;">

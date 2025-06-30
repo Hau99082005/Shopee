@@ -68,10 +68,25 @@ class UserController extends Controller
             'name' => 'sometimes|required|string|max:255',
             'email' => 'sometimes|required|email|unique:users,email,' . $id,
             'password' => 'sometimes|required|string|min:6',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:1024', // validate avatar
         ]);
 
         if (isset($validatedData['password'])) {
             $validatedData['password'] = bcrypt($validatedData['password']);
+        }
+
+        // Xử lý upload avatar
+        if ($request->hasFile('avatar')) {
+            $file = $request->file('avatar');
+            $filename = 'avatar_' . $user->id . '_' . time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('assets/images/avatars'), $filename);
+
+            // Xóa avatar cũ nếu có và không phải avatar mặc định
+            if ($user->avatar && file_exists(public_path($user->avatar)) && !str_contains($user->avatar, 'default-avatar.png')) {
+                @unlink(public_path($user->avatar));
+            }
+
+            $validatedData['avatar'] = 'assets/images/avatars/' . $filename;
         }
 
         $user->update($validatedData);
