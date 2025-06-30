@@ -62,7 +62,23 @@ Route::get('/profile', function() {
 
 Route::put('/profile', function(Request $request) {
     $user = Auth::user();
-    $user->update($request->only(['name', 'email', 'phone', 'address']));
+    $data = $request->only(['name', 'email', 'phone', 'address']);
+
+    // Xử lý upload avatar nếu có
+    if ($request->hasFile('avatar')) {
+        $file = $request->file('avatar');
+        $filename = 'avatar_' . $user->id . '_' . time() . '.' . $file->getClientOriginalExtension();
+        $file->move(public_path('assets/images/avatars'), $filename);
+
+        // Xóa avatar cũ nếu có và không phải avatar mặc định
+        if ($user->avatar && file_exists(public_path($user->avatar)) && !str_contains($user->avatar, 'default-avatar.png')) {
+            @unlink(public_path($user->avatar));
+        }
+
+        $data['avatar'] = 'assets/images/avatars/' . $filename;
+    }
+
+    $user->update($data);
     return redirect()->back()->with('success', 'Cập nhật thông tin thành công!');
 })->middleware('auth')->name('profile.update');
 

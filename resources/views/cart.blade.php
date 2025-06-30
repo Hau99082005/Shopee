@@ -111,7 +111,7 @@
         <div class="px-4 py-4 bg-white d-flex align-items-center justify-content-end border-top">
             <span class="me-3 text-muted">Tổng cộng (<span class="selected-count">0</span> sản phẩm):</span>
             <span class="price text-danger fw-bold fs-4 me-3">₫0</span>
-            <button class="btn btn-danger btn-lg fw-bold px-5 rounded-pill">Mua hàng</button>
+            <a href="/checkout" class="btn btn-danger btn-lg fw-bold px-5 rounded-pill">Mua hàng</a>
         </div>
     </div>
 
