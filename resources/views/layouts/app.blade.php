@@ -476,13 +476,15 @@
                             '<div class="p-2 text-muted">Không tìm thấy sản phẩm.</div>';
                     } else {
                         resultsDiv.innerHTML = data.map(item =>
-                            `<a class="autocomplete-item" href="/products/${item.id}/detail" style="display:flex;align-items:center;text-decoration:none;color:inherit;">
-                                    <img src="/assets/images/${item.image}" alt="${item.name}">
-                                    <div class="info">
-                                        <div class="name">${item.name}</div>
-                                        <div class="desc">${item.description ? item.description.substring(0, 50) : ''}</div>
+                            `<a href="/products/${item.id}/detail" style="text-decoration:none; color:inherit;">
+                                <div style="padding:8px; border-bottom:1px solid #eee; cursor:pointer; display:flex; align-items:center;">
+                                    <img src="/assets/images/${item.image}" alt="${item.name}" style="width:48px;height:48px;object-fit:cover;margin-right:12px;">
+                                    <div>
+                                        <div style="font-weight:500; color:#222; font-family:'Lato',sans-serif; font-size:16px;">${item.name}</div>
+                                        <div style="font-size:13px;color:#888; font-family:'Lato',sans-serif;">${item.description ? item.description.substring(0, 60) : ''}</div>
                                     </div>
-                                </a>`
+                                </div>
+                            </a>`
                         ).join('');
                     }
                     resultsDiv.style.display = 'block';
