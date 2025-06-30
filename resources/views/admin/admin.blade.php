@@ -1,225 +1,233 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Mua sắm trực tuyến trên Shopee Việt Nam - Nền tảng thương mại điện tử hàng đầu.">
-    <meta name="keywords" content="Shopee, mua sắm, trực tuyến, thời trang, điện tử, gia dụng">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
-    <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
-    <link rel="manifest" href="{{ asset('site.webmanifest') }}">
-    <title>Admin - Quản Lý Shopee</title>
-    @vite(['resources/css/app.css', 'resources/js/app.ts','resources/js/main.js'])
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@yield('title', 'Admin Dashboard - Shopee')</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    @stack('styles')
+
+    <style>
+        :root {
+            --shopee-orange: #ee4d2d;
+            --sidebar-bg: #2c3e50;
+            --sidebar-text: #ecf0f1;
+            --sidebar-hover: #34495e;
+            --sidebar-active: var(--shopee-orange);
+            --content-bg: #f4f6f9;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--content-bg);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        #sidebar {
+            width: 260px;
+            min-width: 260px;
+            background: var(--sidebar-bg);
+            color: var(--sidebar-text);
+            transition: all 0.3s;
+        }
+
+        #sidebar.collapsed {
+            margin-left: -260px;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            background: #233140;
+            text-align: center;
+        }
+
+        .sidebar-header .shopee-logo {
+            color: var(--shopee-orange);
+            font-weight: 700;
+            font-size: 1.8rem;
+            text-decoration: none;
+        }
+        
+        .sidebar-header .shopee-logo i {
+            margin-right: 8px;
+        }
+
+        #sidebar .list-unstyled a {
+            padding: 15px 20px;
+            font-size: 1.1em;
+            display: block;
+            color: var(--sidebar-text);
+            border-left: 4px solid transparent;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        #sidebar .list-unstyled a:hover {
+            background: var(--sidebar-hover);
+            color: #fff;
+        }
+        
+        #sidebar .list-unstyled a.active {
+            background: var(--sidebar-hover);
+            color: #fff;
+            border-left: 4px solid var(--sidebar-active);
+        }
+
+        #sidebar .list-unstyled a i {
+            width: 25px;
+            text-align: center;
+            margin-right: 10px;
+        }
+
+        #content {
+            width: 100%;
+            padding: 0;
+            min-height: 100vh;
+            transition: all 0.3s;
+        }
+
+        .navbar {
+            padding: 1rem 1.5rem;
+            background: #fff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        #sidebarCollapse {
+            background: transparent;
+            border: none;
+            color: #333;
+            font-size: 1.5rem;
+        }
+
+        .main-content {
+            padding: 24px;
+        }
+        
+        .card {
+            border: none;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+        }
+
+        .user-dropdown .dropdown-toggle::after {
+            display: none;
+        }
+        
+        .user-dropdown .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+    </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="sidebar">
-            <div class="logo-details">
-                <i class="uil uil-shopping-cart"></i>
-                <span class="logo_name">Shopee Admin</span>
-            </div>
-            <ul class="nav-links">
-                <li><a href="/admin" class="active"><i class="uil uil-grid-alt"></i><span
-                            class="links_name">Dashboard</span></a></li>
-                <li><a href="/admin-products"><i class="uil uil-box"></i><span class="links_name">Products</span></a>
-                </li>
-                <li><a href="/admin-orders"><i class="uil uil-shopping-bag"></i><span
-                            class="links_name">Orders</span></a>
-                </li>
-                <li><a href="/admin-analytics"><i class="uil uil-chart"></i><span
-                            class="links_name">Analytics</span></a>
-                </li>
-                <li><a href="/admin-customers"><i class="uil uil-users-alt"></i><span
-                            class="links_name">Customers</span></a></li>
-                <li><a href="#" onclick="openLogoutModal()"><i class="uil uil-signout"></i><span
-                            class="links_name">Logout</span></a></li>
-            </ul>
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <a href="/admin" class="shopee-logo"><i class="fas fa-shopping-bag"></i>Shopee</a>
         </div>
-        <div class="main-content">
-            <div class="header">
-                <div class="search">
-                    <input type="text" placeholder="Search...">
-                    <i class="uil uil-search"></i>
-                </div>
-                <div class="user">
-                    <i class="uil uil-lock auth-icon" data-tooltip="Authentication" onclick="openModal()"></i>
-                    <i class="uil uil-palette customize-icon" data-tooltip="Customize"
-                        onclick="openCustomizeModal()"></i>
-                    <i class="uil uil-moon mode-toggle" onclick="toggleDarkMode()"></i>
-                    <img src="https://via.placeholder.com/40" alt="User">
-                </div>
-            </div>
-            <div class="content">
-                <h2>Dashboard Overview</h2>
-                <div class="cards">
-                    <div class="card">
-                        <div class="box">
-                            <h1>1,234</h1>
-                            <h3>Orders</h3>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="box">
-                            <h1>5,678</h1>
-                            <h3>Products</h3>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="box">
-                            <h1>890</h1>
-                            <h3>Customers</h3>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="box">
-                            <h1>$12,345</h1>
-                            <h3>Revenue</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="charts">
-                    <div class="chart-container">
-                        <h3>Sales Overview</h3>
-                        <canvas id="salesChart"></canvas>
-                    </div>
-                    <div class="chart-container">
-                        <h3>Order Status</h3>
-                        <canvas id="orderChart"></canvas>
-                    </div>
-                </div>
-                <div class="tables">
-                    <div class="table-header">
-                        <h2>Recent Products</h2>
-                    </div>
-                    <table class="sortable">
-                        <thead>
-                            <tr>
-                                <th data-sort="number">ID</th>
-                                <th data-sort="string">Product Name</th>
-                                <th data-sort="number">Price</th>
-                                <th data-sort="number">Stock</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Wireless Mouse</td>
-                                <td>$29.99</td>
-                                <td>150</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Bluetooth Headphones</td>
-                                <td>$59.99</td>
-                                <td>80</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="table-header">
-                        <h2>Recent Orders</h2>
-                    </div>
-                    <table class="sortable">
-                        <thead>
-                            <tr>
-                                <th data-sort="number">Order ID</th>
-                                <th data-sort="string">Customer</th>
-                                <th data-sort="number">Total</th>
-                                <th data-sort="string">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>001</td>
-                                <td>Nguyen Van A</td>
-                                <td>$89.99</td>
-                                <td><span class="status pending">Pending</span></td>
-                            </tr>
-                            <tr>
-                                <td>002</td>
-                                <td>Tran Thi B</td>
-                                <td>$149.99</td>
-                                <td><span class="status shipped">Shipped</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="table-header">
-                        <h2>Recent Customers</h2>
-                    </div>
-                    <table class="sortable">
-                        <thead>
-                            <tr>
-                                <th data-sort="number">ID</th>
-                                <th data-sort="string">Name</th>
-                                <th data-sort="string">Email</th>
-                                <th data-sort="number">Orders</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Nguyen Van A</td>
-                                <td>a@example.com</td>
-                                <td>5</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Tran Thi B</td>
-                                <td>b@example.com</td>
-                                <td>3</td>
-                            </tr>
-                        </tbody>
-                    </table>
+
+        <ul class="list-unstyled components">
+            <li>
+                <a href="/admin" class="{{ Request::is('admin') ? 'active' : '' }}">
+                    <i class="fas fa-tachometer-alt"></i>Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="/admin-analytics" class="{{ Request::is('admin-analytics') ? 'active' : '' }}">
+                    <i class="fas fa-chart-line"></i>Analytics
+                </a>
+            </li>
+            <li>
+                <a href="/admin-products" class="{{ Request::is('admin-products') ? 'active' : '' }}">
+                    <i class="fas fa-box"></i>Products
+                </a>
+            </li>
+            <li>
+                <a href="/admin-categories" class="{{ Request::is('admin-categories') ? 'active' : '' }}">
+                    <i class="fas fa-list"></i>Categories
+                </a>
+            </li>
+            <li>
+                <a href="/admin-orders" class="{{ Request::is('admin-orders') ? 'active' : '' }}">
+                    <i class="fas fa-shopping-cart"></i>Orders
+                </a>
+            </li>
+            <li>
+                <a href="/admin-customers" class="{{ Request::is('admin-customers') ? 'active' : '' }}">
+                    <i class="fas fa-users"></i>Customers
+                </a>
+            </li>
+        </ul>
+        
+        <ul class="list-unstyled CTAs">
+            <li>
+                <a href="{{ route('logout') }}" 
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();" 
+                   class="logout-link">
+                    <i class="fas fa-sign-out-alt"></i>Logout
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </li>
+        </ul>
+    </nav>
+
+    <div id="content">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <button type="button" id="sidebarCollapse" class="btn">
+                    <i class="fas fa-align-left"></i>
+                </button>
+
+                <form class="d-flex ms-auto me-3">
+                    <input class="form-control me-2" type="search" placeholder="Search..." aria-label="Search">
+                    <button class="btn btn-outline-danger" type="submit">Search</button>
+                </form>
+                
+                <div class="dropdown user-dropdown">
+                    <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name ?? 'Admin') }}&background=ee4d2d&color=fff" alt="avatar" class="user-avatar">
+                        <span class="d-none d-sm-inline mx-2 text-dark">{{ Auth::user()->name ?? 'Admin' }}</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownUser">
+                        <li><a class="dropdown-item" href="{{ route('profile') }}"><i class="fas fa-user-cog me-2"></i>Profile</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="{{ route('logout') }}" 
+                               onclick="event.preventDefault(); document.getElementById('logout-form-2').submit();">
+                                <i class="fas fa-sign-out-alt me-2"></i>Logout
+                            </a>
+                            <form id="logout-form-2" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </div>
+        </nav>
+
+        <main class="main-content">
+            @yield('content')
+        </main>
     </div>
 
-    <div class="modal" id="authModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">×</span>
-            <h2>Admin Authentication</h2>
-            <input type="text" placeholder="Username">
-            <input type="password" placeholder="Password">
-            <button onclick="alert('Authentication submitted!'); closeModal()">Login</button>
-        </div>
-    </div>
-
-    <div class="modal" id="customizeModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeCustomizeModal()">×</span>
-            <h2>Customize Theme</h2>
-            <label for="themeColor">Theme Color:</label>
-            <input type="color" id="themeColor" value="#ee4d2d">
-            <label for="fontFamily">Font Family:</label>
-            <select id="fontFamily">
-                <option value="Roboto">Roboto</option>
-                <option value="Arial">Arial</option>
-                <option value="Open Sans">Open Sans</option>
-            </select>
-            <label for="animations">Enable Animations:</label>
-            <input type="checkbox" id="animations" checked>
-            <label for="sidebarState">Sidebar Default:</label>
-            <select id="sidebarState">
-                <option value="expanded">Expanded</option>
-                <option value="collapsed">Collapsed</option>
-            </select>
-            <button onclick="applyCustomizations()">Apply</button>
-        </div>
-    </div>
-
-    <div class="modal" id="logoutModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeLogoutModal()">×</span>
-            <h2>Confirm Logout</h2>
-            <p>Bạn có chắc chắn muốn kết thúc phiên làm việc của mình không? Tất cả các thay đổi chưa lưu sẽ bị mất.</p>
-            <button onclick="logout()">Logout</button>
-            <button onclick="closeLogoutModal()">Cancel</button>
-        </div>
-    </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('sidebarCollapse').addEventListener('click', function () {
+                document.getElementById('sidebar').classList.toggle('collapsed');
+            });
+        });
+    </script>
+    @stack('scripts')
 </body>
 
 </html>
