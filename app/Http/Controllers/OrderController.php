@@ -17,8 +17,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
-        return Order::all();
+        $user = auth()->user();
+        $orders = \App\Models\Order::where('user_id', $user->id)->orderByDesc('created_at')->get();
+        return view('orders.index', compact('orders'));
     }
 
     /**
@@ -113,7 +114,7 @@ class OrderController extends Controller
             // Xóa giỏ hàng
             carts::where('user_id', $user->id)->delete();
             DB::commit();
-            return redirect()->route('orders.show', $order->id)->with('success', 'Đặt hàng thành công!');
+            return redirect()->route('orders.success');
         } catch (\Exception $e) {
             DB::rollBack();
             return back()->with('error', 'Có lỗi xảy ra khi đặt hàng!<br>' . $e->getMessage());

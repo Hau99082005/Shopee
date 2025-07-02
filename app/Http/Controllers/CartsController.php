@@ -178,7 +178,7 @@ class CartsController extends Controller
                             'updated_at' => $product->updated_at
                         ],
                         'total_price' => $totalPrice,
-                        'formatted_total_price' => number_format($totalPrice, 0, ',', '.') . ' VNĐ',
+                        'formatted_total_price' => $totalPrice . ' VNĐ',
                         'is_available' => $product->isInStock($totalQuantity),
                         'created_at' => $firstItem->created_at,
                         'updated_at' => $firstItem->updated_at
@@ -199,7 +199,7 @@ class CartsController extends Controller
                     'summary' => [
                         'total_items' => $totalItems,
                         'total_amount' => $totalAmount,
-                        'formatted_total_amount' => number_format($totalAmount, 0, ',', '.') . ' VNĐ',
+                        'formatted_total_amount' => $totalAmount. ' VNĐ',
                         'total_quantity' => $totalQuantity,
                         'has_unavailable_items' => $cartItems->where('is_available', false)->count() > 0
                     ]
@@ -347,7 +347,7 @@ class CartsController extends Controller
                         'category_id' => $cart->product->category_id
                     ],
                     'total_price' => $totalPrice,
-                    'formatted_total_price' => number_format($totalPrice, 0, ',', '.') . ' VNĐ',
+                    'formatted_total_price' => $totalPrice . ' VNĐ',
                     'is_available' => $isAvailable,
                     'created_at' => $cart->created_at,
                     'updated_at' => $cart->updated_at
@@ -556,7 +556,7 @@ class CartsController extends Controller
                     'action_used' => $action,
                     'product_name' => $cart->product->name,
                     'total_price' => $totalPrice,
-                    'formatted_total_price' => number_format($totalPrice, 0, ',', '.') . ' VNĐ'
+                    'formatted_total_price' => $totalPrice . ' VNĐ'
                 ]
             ];
 

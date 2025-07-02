@@ -31,7 +31,7 @@ Route::get('/account', function () {
 });
 
 Route::get('/checkout', function () {
-    $categories = \DB::table('categories')->get();
+    $categories = DB::table('categories')->get();
     $cartList = session('cartList') ?? collect(); // hoặc lấy từ DB nếu có user
     return view('checkout', compact('categories', 'cartList'));
 })->name('checkout');
@@ -130,6 +130,10 @@ Route::get('/admin-login', function() {
     return view('admin.login');
 });
 
+Route::get('/orders/success', function () {
+    return view('orders.success');
+})->name('orders.success');
+
 Route::resource('orders', OrderController::class);
 Route::resource('order_items', OrderItemController::class);
 Route::resource('payments', paymentsController::class);
@@ -138,6 +142,7 @@ Route::resource('shipping', ShippingController::class);
 Route::resource('categories', CategoryController::class);
 Route::get('/search', [SearchController::class, 'search'])->name('search');
 Route::get('/products/{id}/detail', [ProductDetailController::class, 'show'])->name('products.detail');
+Route::resource('admin-products', App\Http\Controllers\AdminProductController::class)->except(['show']);
 
 // Checkout routes
 Route::middleware('auth')->group(function () {
