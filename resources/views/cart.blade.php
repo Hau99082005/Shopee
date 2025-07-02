@@ -34,7 +34,7 @@
         <div class="text-center py-5 text-muted">
             <i class="fas fa-shopping-cart fa-3x mb-3" style="color: #ccc;"></i>
             <p class="fs-5">Giỏ hàng của bạn đang trống.</p>
-            <a href="{{ route('home') }}" class="btn btn-outline-danger mt-3">Mua sắm ngay</a>
+            <a href="{{ route('welcome') }}" class="btn btn-outline-danger mt-3">Mua sắm ngay</a>
         </div>
         @else
         @if(isset($cartList))

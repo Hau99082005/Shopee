@@ -155,51 +155,33 @@ document.addEventListener('DOMContentLoaded', function() {
     const qtyInput = document.getElementById('add-to-cart-qty');
     const alertBox = document.getElementById('add-to-cart-alert');
     addToCartBtn.addEventListener('click', function() {
-        const productId = {
-            {
-                $product - > id
-            }
-        };
+        const productId = {{ $product->id }};
         const quantity = parseInt(qtyInput.value) || 1;
         fetch('/api/cart', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
-                        'content'),
-                    ...(localStorage.getItem('token') ? {
-                        'Authorization': 'Bearer ' + localStorage.getItem('token')
-                    } : {})
-                },
-                body: JSON.stringify({
-                    product_id: productId,
-                    quantity: quantity
-                })
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                ...(localStorage.getItem('token') ? {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                } : {})
+            },
+            body: JSON.stringify({
+                product_id: productId,
+                quantity: quantity
             })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    alertBox.classList.remove('d-none');
-                    setTimeout(() => alertBox.classList.add('d-none'), 2000);
-                    updateCartCount();
-                } else {
-                    alertBox.classList.remove('alert-success');
-                    alertBox.classList.add('alert-danger');
-                    alertBox.textContent = data.message || 'Có lỗi xảy ra!';
-                    alertBox.classList.remove('d-none');
-                    setTimeout(() => {
-                        alertBox.classList.add('d-none');
-                        alertBox.classList.remove('alert-danger');
-                        alertBox.classList.add('alert-success');
-                        alertBox.textContent = 'Đã thêm vào giỏ hàng!';
-                    }, 2500);
-                }
-            })
-            .catch(() => {
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                alertBox.classList.remove('d-none');
+                setTimeout(() => alertBox.classList.add('d-none'), 2000);
+                updateCartCount();
+            } else {
                 alertBox.classList.remove('alert-success');
                 alertBox.classList.add('alert-danger');
-                alertBox.textContent = 'Có lỗi xảy ra!';
+                alertBox.textContent = data.message || 'Có lỗi xảy ra!';
                 alertBox.classList.remove('d-none');
                 setTimeout(() => {
                     alertBox.classList.add('d-none');
@@ -207,26 +189,39 @@ document.addEventListener('DOMContentLoaded', function() {
                     alertBox.classList.add('alert-success');
                     alertBox.textContent = 'Đã thêm vào giỏ hàng!';
                 }, 2500);
-            });
+            }
+        })
+        .catch(() => {
+            alertBox.classList.remove('alert-success');
+            alertBox.classList.add('alert-danger');
+            alertBox.textContent = 'Có lỗi xảy ra!';
+            alertBox.classList.remove('d-none');
+            setTimeout(() => {
+                alertBox.classList.add('d-none');
+                alertBox.classList.remove('alert-danger');
+                alertBox.classList.add('alert-success');
+                alertBox.textContent = 'Đã thêm vào giỏ hàng!';
+            }, 2500);
+        });
     });
 
     function updateCartCount() {
         fetch('/api/cart', {
-                headers: {
-                    'Accept': 'application/json',
-                    ...(localStorage.getItem('token') ? {
-                        'Authorization': 'Bearer ' + localStorage.getItem('token')
-                    } : {})
-                }
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success && data.data && data.data.summary) {
-                    const count = data.data.summary.total_quantity || 0;
-                    const badge = document.querySelector('.cart-count-badge');
-                    if (badge) badge.textContent = count;
-                }
-            });
+            headers: {
+                'Accept': 'application/json',
+                ...(localStorage.getItem('token') ? {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                } : {})
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success && data.data && data.data.summary) {
+                const count = data.data.summary.total_quantity || 0;
+                const badge = document.getElementById('cart-count-badge');
+                if (badge) badge.textContent = count;
+            }
+        });
     }
 });
 </script>

@@ -9,6 +9,9 @@ class Order extends Model
 {
     //
     use HasFactory;
+    protected $fillable = [
+        'user_id', 'total_price', 'status', 'shipping_address'
+    ];
     public function orderItems() {
         return $this->hasMany(OrderItems::class);
     }
