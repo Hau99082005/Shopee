@@ -147,6 +147,7 @@ Route::resource('categories', CategoryController::class);
 Route::get('/search', [SearchController::class, 'search'])->name('search');
 Route::get('/products/{id}/detail', [ProductDetailController::class, 'show'])->name('products.detail');
 Route::resource('admin-products', App\Http\Controllers\AdminProductController::class)->except(['show']);
+Route::get('admin-analytics', [App\Http\Controllers\AdminAnalyticsController::class, 'index'])->name('admin-analytics.index');
 
 // Checkout routes
 Route::middleware('auth')->group(function () {
