@@ -126,6 +126,8 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
     })->name('admin.categories');
 
     Route::resource('admin-categories', App\Http\Controllers\AdminCategoryController::class)->except(['show']);
+    Route::resource('admin-orders', App\Http\Controllers\AdminOrderController::class)->except(['show', 'create', 'store', 'edit', 'update']);
+    Route::resource('admin-customers', App\Http\Controllers\AdminCustomerController::class)->only(['index']);
 });
 
 Route::get('/admin-login', function() {

@@ -2,7 +2,7 @@
 @section('content')
 <style>
     body {
-        background: linear-gradient(120deg, #fff 60%, #ffe0b2 100%);
+        background: #fff6e9;
     }
     .success-container {
         min-height: 80vh;
@@ -12,93 +12,71 @@
         background: transparent;
     }
     .success-card {
-        background: rgba(255,255,255,0.95);
-        border-radius: 32px;
-        box-shadow: 0 8px 40px rgba(255,87,34,0.15), 0 2px 8px rgba(0,0,0,0.06);
-        padding: 64px 40px 48px 40px;
+        background: #fff;
+        border-radius: 24px;
+        box-shadow: 0 4px 24px rgba(255,87,34,0.08);
+        padding: 48px 32px 36px 32px;
         text-align: center;
-        max-width: 480px;
+        max-width: 420px;
         width: 100%;
         position: relative;
-        animation: fadeInUp 0.7s cubic-bezier(.39,.575,.565,1.000);
+        margin: 0 auto;
     }
     .success-icon {
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 28px;
+        margin-bottom: 22px;
     }
     .success-icon .icon-bg {
-        background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        background: #ff9800;
         border-radius: 50%;
-        width: 90px;
-        height: 90px;
+        width: 70px;
+        height: 70px;
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 4px 24px rgba(67,233,123,0.15);
-        animation: pop 0.7s cubic-bezier(.39,.575,.565,1.000);
+        box-shadow: 0 2px 12px rgba(255,152,0,0.10);
     }
     .success-icon i {
-        font-size: 3.2rem;
+        font-size: 2.2rem;
         color: #fff;
-        text-shadow: 0 2px 8px rgba(67,233,123,0.18);
     }
     .success-title {
-        font-size: 2.3rem;
-        font-weight: 800;
-        background: linear-gradient(90deg, #ff9800 0%, #ff5722 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        margin-bottom: 16px;
-        letter-spacing: 1px;
+        font-size: 1.7rem;
+        font-weight: 700;
+        color: #ff5722;
+        margin-bottom: 12px;
+        letter-spacing: 0.5px;
     }
     .success-message {
-        font-size: 1.15rem;
+        font-size: 1.05rem;
         color: #444;
-        margin-bottom: 38px;
+        margin-bottom: 28px;
         font-family: 'Segoe UI', 'Roboto', sans-serif;
     }
     .success-btn {
         display: inline-block;
-        margin: 0 10px;
-        padding: 16px 38px;
-        border-radius: 32px;
-        font-weight: 700;
-        font-size: 1.15rem;
-        background: linear-gradient(90deg, #ff9800 0%, #ff5722 100%);
+        margin: 0 8px;
+        padding: 12px 28px;
+        border-radius: 24px;
+        font-weight: 600;
+        font-size: 1rem;
+        background: #ff9800;
         color: #fff;
         border: none;
-        box-shadow: 0 2px 12px rgba(255,152,0,0.10);
+        box-shadow: 0 2px 8px rgba(255,152,0,0.08);
         transition: background 0.2s, transform 0.1s;
         text-decoration: none;
-        letter-spacing: 0.5px;
+        letter-spacing: 0.3px;
     }
     .success-btn:hover {
-        background: linear-gradient(90deg, #ff5722 0%, #ff9800 100%);
-        transform: translateY(-2px) scale(1.04);
-    }
-    @keyframes fadeInUp {
-        from { opacity: 0; transform: translateY(40px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes pop {
-        0% { transform: scale(0.7); }
-        80% { transform: scale(1.15); }
-        100% { transform: scale(1); }
-    }
-    /* Confetti */
-    .confetti {
-        position: absolute;
-        left: 0; top: 0; width: 100%; height: 100%;
-        pointer-events: none;
-        z-index: 2;
+        background: #ff5722;
+        transform: translateY(-2px) scale(1.03);
     }
 </style>
 <div class="success-container">
     <div class="success-card">
-        <canvas class="confetti"></canvas>
         <div class="success-icon">
             <span class="icon-bg">
                 <i class="fas fa-check"></i>
@@ -114,47 +92,4 @@
         <a href="{{ route('orders.index') }}" class="success-btn">Xem đơn hàng</a>
     </div>
 </div>
-<script>
-// Confetti effect
-(function() {
-    const canvas = document.querySelector('.confetti');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    let W = canvas.width = 420, H = canvas.height = 320;
-    let particles = [];
-    for(let i=0;i<32;i++) {
-        particles.push({
-            x: Math.random()*W,
-            y: Math.random()*-H,
-            r: 6+Math.random()*8,
-            d: 10+Math.random()*20,
-            color: `hsl(${Math.random()*360},90%,60%)`,
-            tilt: Math.random()*10-10
-        });
-    }
-    function draw() {
-        ctx.clearRect(0,0,W,H);
-        for(let i=0;i<particles.length;i++) {
-            let p = particles[i];
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI*2, false);
-            ctx.fillStyle = p.color;
-            ctx.fill();
-        }
-        update();
-    }
-    function update() {
-        for(let i=0;i<particles.length;i++) {
-            let p = particles[i];
-            p.y += Math.cos(p.d) + 2 + p.r/2;
-            p.x += Math.sin(0.5) * 2;
-            if(p.y > H) {
-                p.x = Math.random()*W;
-                p.y = Math.random()*-20;
-            }
-        }
-    }
-    setInterval(draw, 30);
-})();
-</script>
 @endsection 
