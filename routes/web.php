@@ -124,6 +124,8 @@ Route::middleware(['auth', CheckAdmin::class])->group(function () {
     Route::get('/admin-categories', function () {
         return view('admin.categories');
     })->name('admin.categories');
+
+    Route::resource('admin-categories', App\Http\Controllers\AdminCategoryController::class)->except(['show']);
 });
 
 Route::get('/admin-login', function() {
